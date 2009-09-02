@@ -1,0 +1,15 @@
+
+<div id="battalion">
+
+<% @battalions.each do |battalion| %>
+ <h1><%=h battalion.name %><br /></h1>
+    <%=h battalion.unit %>, <%=h battalion.installation %> <br />
+
+    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion %> <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_path(battalion) %><%= link_to image_tag("../images/buttons/delete.png", :border=>0), battalion, :confirm => 'Are you sure?', :method => :delete %>
+
+<% end %>
+
+
+</div>
+<br />
+<%= link_to 'New battalion', new_battalion_path %>

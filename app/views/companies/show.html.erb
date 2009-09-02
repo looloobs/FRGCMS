@@ -1,0 +1,62 @@
+<div id="company_show">
+
+<h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
+
+<div id="battalion_show_team">
+  <b>Commander:</b> <%=h @cc.name %><br />
+  <b>1SG:</b> <%=h @fs.name %><br />
+  <b>FRG Leader:</b> <%=h @frg.name %><br />
+</div>
+</div>
+<% content_for :column do -%>
+<div id="company_show_sidebar">
+<p>
+	<%= link_to "Email to Company", battalion_company_path(@company) %><br />
+	<%= link_to "Email to Spouses", battalion_company_path(@company) %><br />
+	<%= link_to "Email to All Family", battalion_company_path(@company) %><br />
+
+</p>
+<br />
+</div>
+<% end -%>
+
+<% content_for :dashboard do -%>
+	<table id="hor-minimalist-b" summary="Company Roster">
+	    <thead>
+	    	<tr>
+	        	<th scope="col">Rank</th>
+	            <th scope="col">Name</th>
+	            <th scope="col">Cell</th>
+	            <th scope="col">Spouse</th>
+				<th scope="col">Spouse Cell</th>
+				<th scope="col">Spouse Email</th>
+				<th scope="col">NOK Name</th>
+				<th scope="col">NOK Rel.</th>
+				<th scope="col">NOK Email</th>
+				<th scope="col">Info</th>
+				<th scope="col">Edit</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	<% @soldiers.each do |soldier| %>
+			  <tr>
+			    <td><%=h soldier.rank %></td>
+			    <td><%=h soldier.name %></td>
+			    <td><%=h soldier.cellphone %></td>
+			    <td><%=h soldier.spousename %></td>
+			    <td><%=h soldier.spousecellphone %></td>
+			    <td><%=h soldier.spouseemail %></td>
+			    <td><%=h soldier.nokname %></td>
+			    <td><%=h soldier.nokrelationship %></td>
+			    <td><%=h soldier.nokemail %></td>
+			    <td><%= link_to image_tag("../images/buttons/info.png", :border=>0), soldier %></td>
+			    <td><%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %></td>
+			  </tr>
+			<% end %>
+	    </tbody>
+	</table>
+	
+	
+<% end -%>
+<p>
+

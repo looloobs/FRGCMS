@@ -1,0 +1,130 @@
+<h1>New soldier</h1>
+
+<% form_for([:battalion, :company, @soldier]) do |f| %>
+  <%= f.error_messages %>
+
+<%= hidden_field_tag('soldier[battalion_id]', @battalion.id) %>
+<p>
+<%= hidden_field_tag('soldier[company_id]', @company.id) %>
+
+<div class="form_bg">
+<p>
+    <%= f.label (:rank, "Rank:") %>
+	<%= f.select(:rank, [["Please Select", ""], ["PV1", "PV1"], ["PV2", "PV2"], ["PFC","PFC"], ["SPC", "SPC"], ["CPL", "CPL"], ["SGT", "SGT"], ["SSG", "SSG"], ["SFC", "SFC"], ["MSG", "MSG"], ["1SG", "1SG"], ["SGM", "SGM"], ["CSM", "CSM"], ["WO1", "WO1"], ["CW2", "CW2"], ["CW3", "CW3"], ["CW4", "CW4"], ["CW5", "CW5"], ["2LT", "2LT"], ["1LT", "1LT"], ["CPT", "CPT"], ["MAJ", "MAJ"], ["LTC", "LTC"], ["COL", "COL"]]) %> 
+      	 	 	 	 	 	 	 	 	 	 	 	
+
+	<%= f.label (:name, "Name:") %>
+    <%= f.text_field :name %>
+
+
+    <%= f.label (:maritalstatus, "Marital Status:") %>
+    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]]) %>
+</p>
+</div>
+<h2>Edit Address, Phone & E-Mail</h2>
+<div class="form_bg">
+  <p>
+    <%= f.label (:address, "Address:") %>
+    <%= f.text_field :address %>
+ </p>
+<p>
+    <%= f.label (:city, "City:") %>
+    <%= f.text_field :city %>, 
+
+    <%= f.label (:state, "State:") %>
+    <%= f.text_field :state, :size => 2 %>
+
+    <%= f.label (:zip, "Zip:") %>
+    <%= f.text_field :zip, :size => 5 %>
+  </p>
+  <p>
+    <%= f.label (:cellphone, "Cell Phone:") %>
+    <%= f.text_field :cellphone, :size => 15 %>
+
+    <%= f.label (:addphone, "Additional Phone:") %>
+    <%= f.text_field :addphone, :size => 15 %>
+  </p>
+  <p>
+    <%= f.label (:email, "E-Mail:") %>
+    <%= f.text_field :email %>
+  </p>
+</div>
+<h2>Edit Spouse Information</h2>
+<div class="form_bg">
+  <p>
+    <%= f.label (:spousename, "Spouse Name:") %>
+    <%= f.text_field :spousename %>
+  </p>
+  <p>
+    <%= f.label (:spousecellphone, "Spouse Cell Phone:") %>
+    <%= f.text_field :spousecellphone, :size => 15 %>
+
+    <%= f.label (:spouseaddphone, "Spouse Additional Phone:") %>
+    <%= f.text_field :spouseaddphone, :size => 15 %>
+  </p>
+  <p>
+    <%= f.label (:spouseemail, "Spouse E-Mail:") %>
+    <%= f.text_field :spouseemail %>
+  </p>
+*Address Only if Different
+  <p>
+    <%= f.label (:spouseaddress, "Spouse Address:") %>
+    <%= f.text_field :spouseaddress %>
+  </p>
+  <p>
+    <%= f.label (:spousecity, "City:") %>
+    <%= f.text_field :spousecity %>, 
+
+    <%= f.label (:spousestate, "State:") %>
+    <%= f.text_field :spousestate, :size => 2 %>
+
+    <%= f.label (:spousezip, "Zip Code:") %>
+    <%= f.text_field :spousezip, :size => 5 %>
+  </p>
+
+  <p>
+    <%= f.label (:children, "Children:") %><br />
+    <%= f.text_area :children %>
+  </p>
+</div>
+<h2>Edit Next of Kin Information</h2>
+<div class="form_bg">
+  <p>
+    <%= f.label (:nokname, "Next of Kin Name(s):") %>
+    <%= f.text_field :nokname %>
+
+    <%= f.label (:nokrelationship, "Relationship to Soldier") %>
+    <%= f.text_field :nokrelationship %>
+  </p>
+  <p>
+    <%= f.label (:nokaddress, "Next of Kin Address:") %>
+    <%= f.text_field :nokaddress %>
+  </p>
+  <p>
+    <%= f.label (:nokcity, "City:" )%>
+    <%= f.text_field :nokcity %>,
+
+    <%= f.label (:nokstate, "State:") %>
+    <%= f.text_field :nokstate, :size => 2 %>
+
+    <%= f.label (:nokzip, "Zip Code:") %>
+    <%= f.text_field :nokzip, :size => 5 %>
+  </p>
+  <p>
+    <%= f.label (:nokcellphone, "Cell Phone:") %>
+    <%= f.text_field :nokcellphone, :size => 15 %>
+
+    <%= f.label (:nokaddphone, "Additional Phone:") %>
+    <%= f.text_field :nokaddphone, :size => 15 %>
+  </p>
+  <p>
+    <%= f.label (:nokemail, "Next of Kin Email:") %>
+    <%= f.text_field :nokemail %>
+  </p>
+</div>
+<p>
+  <%= f.submit 'Create'%>
+</p>
+</div>
+
+<% end %>

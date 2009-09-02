@@ -1,0 +1,2 @@
+module BattalionsHelper
+end

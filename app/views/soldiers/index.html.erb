@@ -1,0 +1,37 @@
+<h1>Listing soldiers</h1>
+
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Cell</th>
+    <th>Spouse</th>
+    <th>Spouse Email</th>
+    <th>NOK Name</th>
+    <th>NOK Relationship</th>
+    <th>NOK Cell Phone</th>
+    <th>NOK Email</th>
+  </tr>
+
+<% @soldiers.each do |soldier| %>
+  <tr>
+    <td><%=h soldier.rank %></td>
+    <td><%=h soldier.name %></td>
+    <td><%=h soldier.cellphone %></td>
+    <td><%=h soldier.spousename %></td>
+    <td><%=h soldier.spousecellphone %></td>
+    <td><%=h soldier.spouseemail %></td>
+    <td><%=h soldier.nokname %></td>
+    <td><%=h soldier.nokrelationship %></td>
+    <td><%=h soldier.nokcellphone %></td>
+    <td><%=h soldier.nokemail %></td>
+    <td><%= link_to 'Show', soldier %></td>
+    <td><%= link_to 'Edit', edit_soldier_path(soldier) %></td>
+    <td><%= link_to 'Destroy', soldier, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New soldier', new_soldier_path %>

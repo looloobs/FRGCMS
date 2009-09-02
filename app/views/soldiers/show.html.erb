@@ -1,0 +1,50 @@
+<div id="soldier">
+<h1>Soldier</h1>	
+		<div id="soldier_info">
+		<b><%=h @soldier.rank %> <%=h @soldier.name %></b><br />
+		   <%=h @soldier.maritalstatus %><br />
+
+
+		  <%=h @soldier.address %><br />
+		  <%=h @soldier.city %>, <%=h @soldier.state %> <%=h @soldier.zip %><br />
+
+		  <%=h @soldier.cellphone %> (cell)<br />
+		  <%=h @soldier.addphone %><br />
+
+		  <%=h @soldier.email %><br />
+
+		  <%=h @soldier.children %><br />
+		</div>
+<h1>Next of Kin</h1>
+	<div id="soldier_nok">
+  		<%=h @soldier.spousename %><br />
+
+  		<%=h @soldier.spouseaddress %><br />
+
+  		<%=h @soldier.spousecity %>, <%=h @soldier.spousestate %> <%=h @soldier.spousezip %><br />
+
+  		<%=h @soldier.spousecellphone %> (cell)<br />
+  		<%=h @soldier.spouseaddphone %><br />
+
+  		<%=h @soldier.spouseemail %><br />
+	</div>
+<h1>Additional Contact</h1>
+<div id="soldier_add">
+  <%=h @soldier.nokname %><br />
+
+  <%=h @soldier.nokrelationship %><br />
+
+  <%=h @soldier.nokaddress %><br />
+  <%=h @soldier.nokcity %>, <%=h @soldier.nokstate %> <%=h @soldier.nokzip %><br />
+
+  <%=h @soldier.nokcellphone %> (cell)<br />
+  <%=h @soldier.nokaddphone %><br />
+
+  <%=h @soldier.nokemail %><br />
+</div>
+
+<div id="soldier_other">
+	<h1>Other Info</h1><br />
+	Anniversary: 5/14/90
+</div>
+</div>

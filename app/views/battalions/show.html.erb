@@ -1,0 +1,31 @@
+<div id="battalion_show">
+<h1><%= @battalion.name %><br />
+<h2><%= @battalion.unit %>, <%= @battalion.installation %> </h2></h1><br />
+<div id="battalion_show_team">
+Battalion Commander: LTC <%= @bc.name %><br />
+Command Sergeant Major: CSM <%= @sm.name %><br />
+FRSA: <%= @frsa.name %><br />
+</div>
+<br />
+
+<% content_for :column do -%>
+<div id="battalion_show_sidebar">
+<p>
+	<% @company.each do |c| %>
+	  <tr>
+	    <td><%= link_to c.name, battalion_company_path(@company) %></td><br />
+
+	  </tr>
+	<% end %>
+</p>
+<br />
+</div>
+<% end -%>
+
+<% content_for :dashboard do -%>
+	*** This area will be used to give updates on the battalion. ***<br />
+	Examples:<br />
+	-Chaos company added two new spouses.<br />
+	-Chaos company SSG Smith had an anniversary. <br />
+<% end -%>
+</div>

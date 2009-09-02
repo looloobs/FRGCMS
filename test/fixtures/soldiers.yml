@@ -1,0 +1,65 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  battalion_id: 1
+  company_id: 1
+  rank: MyString
+  maritalstatus: MyString
+  name: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  cellphone: MyString
+  addphone: MyString
+  email: MyString
+  spousename: MyString
+  spouseaddress: MyString
+  spousecity: MyString
+  spousestate: MyString
+  spousezip: MyString
+  spousecellphone: MyString
+  spouseaddphone: MyString
+  spouseemail: MyString
+  children: MyText
+  nokname: MyString
+  nokrelationship: MyString
+  nokaddress: MyString
+  nokcity: MyString
+  nokstate: MyString
+  nokzip: MyString
+  nokcellphone: MyString
+  nokaddphone: MyString
+  nokemail: MyString
+
+two:
+  battalion_id: 1
+  company_id: 1
+  rank: MyString
+  maritalstatus: MyString
+  name: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  cellphone: MyString
+  addphone: MyString
+  email: MyString
+  spousename: MyString
+  spouseaddress: MyString
+  spousecity: MyString
+  spousestate: MyString
+  spousezip: MyString
+  spousecellphone: MyString
+  spouseaddphone: MyString
+  spouseemail: MyString
+  children: MyText
+  nokname: MyString
+  nokrelationship: MyString
+  nokaddress: MyString
+  nokcity: MyString
+  nokstate: MyString
+  nokzip: MyString
+  nokcellphone: MyString
+  nokaddphone: MyString
+  nokemail: MyString

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  installation_id: 1
+  battalion_id: 1
+  name: MyString
+  nickname: MyString
+
+two:
+  installation_id: 1
+  battalion_id: 1
+  name: MyString
+  nickname: MyString

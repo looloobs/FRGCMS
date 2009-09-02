@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  unit: MyString
+  name: MyString
+  installation: MyString
+
+two:
+  unit: MyString
+  name: MyString
+  installation: MyString
