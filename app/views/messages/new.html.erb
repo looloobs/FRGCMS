@@ -1,0 +1,10 @@
+<h1>New message</h1>
+<% form_for [@user, @message] do |f| %>
+	
+To:	<%= f.text_field :to_email %><br /> 
+Subject:<%= f.text_field :subject %><br />   
+Message:	<%= f.text_area :body %><br />
+
+    <%= f.submit "Submit" %>
+<% end %>
+ 

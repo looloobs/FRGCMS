@@ -16,15 +16,9 @@
 <% @soldiers.each do |soldier| %>
   <tr>
     <td><%=h soldier.rank %></td>
-    <td><%=h soldier.name %></td>
-    <td><%=h soldier.cellphone %></td>
-    <td><%=h soldier.spousename %></td>
-    <td><%=h soldier.spousecellphone %></td>
-    <td><%=h soldier.spouseemail %></td>
-    <td><%=h soldier.nokname %></td>
-    <td><%=h soldier.nokrelationship %></td>
-    <td><%=h soldier.nokcellphone %></td>
-    <td><%=h soldier.nokemail %></td>
+    <td><%=h soldier.firstname %></td>
+    <td><%=h soldier.lastname %></td>
+ 
     <td><%= link_to 'Show', soldier %></td>
     <td><%= link_to 'Edit', edit_soldier_path(soldier) %></td>
     <td><%= link_to 'Destroy', soldier, :confirm => 'Are you sure?', :method => :delete %></td>

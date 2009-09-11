@@ -8,7 +8,7 @@
 <p>Username: <%=h @user.login %></p>
 <p>Email: <%=h @user.email %></p>
 <p>Battlion: <%=h @user.battalion.name %></p>
-<p>Company: <%=h @user.company.name %></p>
+
 <p>Position: <%=h @user.position %></p>
 
 <p>Password: <%= link_to '(change)', user_profile_password_settings_path(current_user) %></p>

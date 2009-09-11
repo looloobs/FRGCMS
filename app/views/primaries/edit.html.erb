@@ -1,0 +1,68 @@
+<h1>Editing primary</h1>
+
+<% form_for(@primary) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :relationship %><br />
+    <%= f.text_field :relationship %>
+  </p>
+  <p>
+    <%= f.label :firstname %><br />
+    <%= f.text_field :firstname %>
+  </p>
+  <p>
+    <%= f.label :lastname %><br />
+    <%= f.text_field :lastname %>
+  </p>
+  <p>
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :zip %><br />
+    <%= f.text_field :zip %>
+  </p>
+  <p>
+    <%= f.label :birth_date %><br />
+    <%= f.text_field :birth_date %>
+  </p>
+  <p>
+    <%= f.label :cellphone %><br />
+    <%= f.text_field :cellphone %>
+  </p>
+  <p>
+    <%= f.label :cellphonecarrier %><br />
+    <%= f.text_field :cellphonecarrier %>
+  </p>
+  <p>
+    <%= f.label :sms %><br />
+    <%= f.check_box :sms %>
+  </p>
+  <p>
+    <%= f.label :addphone %><br />
+    <%= f.text_field :addphone %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :soldier_id %><br />
+    <%= f.text_field :soldier_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @primary %> |
+<%= link_to 'Back', primaries_path %>

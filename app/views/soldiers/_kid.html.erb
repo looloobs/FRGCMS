@@ -1,0 +1,16 @@
+<div class="fields">
+	<h2>Children</h2>
+	<div class="form_bg">
+		      <p>
+		        <%= f.label (:firstname, "First Name:") %>
+			    <%= f.text_field :firstname %>
+
+				<%= f.label (:lastname, "Last Name:") %>
+			    <%= f.text_field :lastname %>
+
+			  	<%= f.label (:birth_date, "Birthday:") %>
+				<%= f.date_select (:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
+			  </p>
+			<%= remove_child_link "remove", f %>
+	</div>
+</div>

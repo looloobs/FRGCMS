@@ -1,0 +1,6 @@
+<% form_for [:current_user, @message] do |f| %>
+    <%= f.text_area :body %>
+    <%= f.text_field :subject %>
+    <%= f.text_field :to_email %>
+    <%= f.submit "Submit" %>
+<% end %>

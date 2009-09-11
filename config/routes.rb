@@ -1,4 +1,16 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :users, :has_many => [:messages]
+  
+  map.resources :messages
+
+  map.resources :kids
+
+  map.resources :additionals
+
+  map.resources :childrens
+
+  map.resources :primaries
+
   map.resources :soldiers
 
   map.resources :companies

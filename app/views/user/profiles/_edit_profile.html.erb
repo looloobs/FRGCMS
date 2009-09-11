@@ -1,5 +1,6 @@
 <%= f.text_field :name, :size => 60 %>
 <%= f.text_field :email, :size => 60 %>
+<%= f.text_field :login, :size => 60 %>
 <%= f.label :battalion_id %><br />
 <%= f.collection_select(:battalion_id, @battalion, :id, :unit, {:prompt => true}) %><br />
 <%= f.label :company_id %><br />

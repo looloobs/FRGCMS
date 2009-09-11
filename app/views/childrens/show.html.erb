@@ -1,0 +1,23 @@
+<p>
+  <b>Firstname:</b>
+  <%=h @children.firstname %>
+</p>
+
+<p>
+  <b>Lastname:</b>
+  <%=h @children.lastname %>
+</p>
+
+<p>
+  <b>Birth date:</b>
+  <%=h @children.birth_date %>
+</p>
+
+<p>
+  <b>Soldier:</b>
+  <%=h @children.soldier_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_children_path(@children) %> |
+<%= link_to 'Back', childrens_path %>

@@ -1,0 +1,46 @@
+<h1>Listing primaries</h1>
+
+<table>
+  <tr>
+    <th>Relationship</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Birth date</th>
+    <th>Cellphone</th>
+    <th>Cellphonecarrier</th>
+    <th>Sms</th>
+    <th>Addphone</th>
+    <th>Email</th>
+    <th>Soldier</th>
+  </tr>
+
+<% @primaries.each do |primary| %>
+  <tr>
+    <td><%=h primary.relationship %></td>
+    <td><%=h primary.firstname %></td>
+    <td><%=h primary.lastname %></td>
+    <td><%=h primary.address %></td>
+    <td><%=h primary.city %></td>
+    <td><%=h primary.state %></td>
+    <td><%=h primary.zip %></td>
+    <td><%=h primary.birth_date %></td>
+    <td><%=h primary.cellphone %></td>
+    <td><%=h primary.cellphonecarrier %></td>
+    <td><%=h primary.sms %></td>
+    <td><%=h primary.addphone %></td>
+    <td><%=h primary.email %></td>
+    <td><%=h primary.soldier_id %></td>
+    <td><%= link_to 'Show', primary %></td>
+    <td><%= link_to 'Edit', edit_primary_path(primary) %></td>
+    <td><%= link_to 'Destroy', primary, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New primary', new_primary_path %>

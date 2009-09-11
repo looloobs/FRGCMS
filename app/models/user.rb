@@ -3,6 +3,8 @@ require 'digest/sha1'
 class User < ActiveRecord::Base  
   belongs_to :battalion
   belongs_to :company
+  belongs_to :soldier
+  has_many :messages
   
 	include Authentication
   include Authentication::ByCookieToken

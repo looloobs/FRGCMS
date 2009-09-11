@@ -1,0 +1,27 @@
+<h1>Listing messages</h1>
+
+<table>
+  <tr>
+    <th>Body</th>
+    <th>Subject</th>
+    <th>User</th>
+    <th>To email</th>
+    <th>From email</th>
+  </tr>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%=h message.body %></td>
+    <td><%=h message.subject %></td>
+    <td><%=h message.user_id %></td>
+    <td><%=h message.to_email %></td>
+    <td><%=h message.from_email %></td>
+    <td><%= link_to "Show", user_message_path(current_user, message) %></td>
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New message', new_message_path %>

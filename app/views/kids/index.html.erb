@@ -1,0 +1,26 @@
+<h1>Listing kids</h1>
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Birth date</th>
+    <th>Soldier</th>
+  </tr>
+
+<% @kids.each do |kid| %>
+  <tr>
+    <td><%=h kid.firstname %></td>
+    <td><%=h kid.lastname %></td>
+    <td><%=h kid.birth_date %></td>
+    <td><%=h kid.soldier_id %></td>
+    <td><%= link_to 'Show', kid %></td>
+    <td><%= link_to 'Edit', edit_kid_path(kid) %></td>
+    <td><%= link_to 'Destroy', kid, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New kid', new_kid_path %>

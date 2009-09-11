@@ -9,12 +9,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090827203528) do
+ActiveRecord::Schema.define(:version => 20090910025436) do
+
+  create_table "additionals", :force => true do |t|
+    t.string   "relationship"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "cellphone"
+    t.string   "addphone"
+    t.string   "email"
+    t.integer  "soldier_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "battalions", :force => true do |t|
     t.string   "unit"
     t.string   "name"
     t.string   "installation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "childrens", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "birth_date"
+    t.integer  "soldier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,6 +75,15 @@ ActiveRecord::Schema.define(:version => 20090827203528) do
 
   add_index "invitations", ["token"], :name => "index_invitations_on_token", :unique => true
 
+  create_table "kids", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.date     "birth_date", :limit => 255
+    t.integer  "soldier_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "logged_exceptions", :force => true do |t|
     t.string   "exception_class"
     t.string   "controller_name"
@@ -59,6 +93,16 @@ ActiveRecord::Schema.define(:version => 20090827203528) do
     t.text     "environment"
     t.text     "request"
     t.datetime "created_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "user_id"
+    t.string   "to_email"
+    t.string   "from_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|
@@ -74,6 +118,25 @@ ActiveRecord::Schema.define(:version => 20090827203528) do
     t.integer "timestamp",  :null => false
     t.string  "server_url"
     t.string  "salt",       :null => false
+  end
+
+  create_table "primaries", :force => true do |t|
+    t.string   "relationship"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.date     "birth_date",       :limit => 255
+    t.string   "cellphone"
+    t.string   "cellphonecarrier"
+    t.boolean  "sms"
+    t.string   "addphone"
+    t.string   "email"
+    t.integer  "soldier_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|
@@ -93,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20090827203528) do
     t.integer  "company_id"
     t.string   "rank"
     t.string   "maritalstatus"
-    t.string   "name"
+    t.string   "firstname"
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -101,26 +164,13 @@ ActiveRecord::Schema.define(:version => 20090827203528) do
     t.string   "cellphone"
     t.string   "addphone"
     t.string   "email"
-    t.string   "spousename"
-    t.string   "spouseaddress"
-    t.string   "spousecity"
-    t.string   "spousestate"
-    t.string   "spousezip"
-    t.string   "spousecellphone"
-    t.string   "spouseaddphone"
-    t.string   "spouseemail"
-    t.text     "children"
-    t.string   "nokname"
-    t.string   "nokrelationship"
-    t.string   "nokaddress"
-    t.string   "nokcity"
-    t.string   "nokstate"
-    t.string   "nokzip"
-    t.string   "nokcellphone"
-    t.string   "nokaddphone"
-    t.string   "nokemail"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "lastname"
+    t.string   "cellphonecarrier"
+    t.date     "birth_date",       :limit => 255
+    t.date     "anni_date",        :limit => 255
+    t.boolean  "sms"
   end
 
   create_table "user_failures", :force => true do |t|

@@ -14,7 +14,9 @@ class SoldiersController < ApplicationController
   # GET /soldiers/1.xml
   def show
     @soldier = Soldier.find(params[:id])
-
+    @primarys = @soldier.primaries
+    @children = @soldier.kids
+    @addi = @soldier.additionals
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @soldier }
@@ -27,6 +29,8 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.new
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @soldier.primaries.build
+  
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @soldier }

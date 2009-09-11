@@ -1,6 +1,7 @@
 <% if logged_in? -%>
   <div id="user-bar-greeting">Logged in as: <%= link_to_current_user :content_method => :login %> | 
 		<%= link_to 'My Account', user_profile_path(current_user), { :title => "My account" } %> |
+		<%= link_to 'My Inbox', user_messages_path(current_user), { :title => "My account" } %> |
 		<% if_invites_available? do -%>
 			<%= link_to "Invite Friends (#{current_user.invitation_limit})", new_user_invitation_path %> |
 		<% end -%>

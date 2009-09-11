@@ -17,7 +17,7 @@ class BattalionsController < ApplicationController
     @company = @battalion.companies.sort
     @user = @battalion.users
     @bc= @user.find_by_position('Battalion Commander')
-    @sm= @user.find_by_position('Sergeant Major')
+    @sm= @user.find_by_position('Command Sergeant Major')
     @frsa= @user.find_by_position('FRSA')
     render :layout => "dashboard"
 

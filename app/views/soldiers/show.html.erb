@@ -1,7 +1,7 @@
 <div id="soldier">
 <h1>Soldier</h1>	
 		<div id="soldier_info">
-		<b><%=h @soldier.rank %> <%=h @soldier.name %></b><br />
+		<b><%=h @soldier.rank %> <%=h @soldier.firstname %><%=h @soldier.lastname %></b><br />
 		   <%=h @soldier.maritalstatus %><br />
 
 
@@ -13,38 +13,59 @@
 
 		  <%=h @soldier.email %><br />
 
-		  <%=h @soldier.children %><br />
 		</div>
 <h1>Next of Kin</h1>
 	<div id="soldier_nok">
-  		<%=h @soldier.spousename %><br />
-
-  		<%=h @soldier.spouseaddress %><br />
-
-  		<%=h @soldier.spousecity %>, <%=h @soldier.spousestate %> <%=h @soldier.spousezip %><br />
-
-  		<%=h @soldier.spousecellphone %> (cell)<br />
-  		<%=h @soldier.spouseaddphone %><br />
-
-  		<%=h @soldier.spouseemail %><br />
+		<% @primarys.each do |primary| %>
+		<%=h primary.relationship %><br />
+		<%=h primary.birth_date %>  <br />
+		<p>
+		<%=h primary.firstname %> <%=h primary.lastname %><br />
+		<%=h primary.address %><br />
+		<%=h primary.city %>, <%=h primary.state %> <%=h primary.zip %><br />
+		<%=h primary.state %><br />
+		</p>
+		<p>
+		<%=h primary.email %><br />
+		<%=h primary.cellphone %><br />
+		<%=h primary.cellphonecarrier %><br />
+		<%=h primary.addphone %><br />
+		</p>
+				
+		<% end %>
+  		
 	</div>
+<h1>Children</h1>
+	<div id="soldier_nok">
+		<% @children.each do |child| %>
+		<%=h child.firstname %>	
+		<%=h child.lastname %>	
+		<%=h child.birth_date %>	
+		<% end %>
+	 </div>
+
+
+
+
+  	<% @addi.each do |additional| %>
 <h1>Additional Contact</h1>
 <div id="soldier_add">
-  <%=h @soldier.nokname %><br />
+	<%=h additional.relationship %><br />
+	<p>
+	<%=h additional.firstname %> <%=h additional.lastname %><br />
+	<%=h additional.address %><br />
+	<%=h additional.city %>, <%=h additional.state %> <%=h additional.zip %><br />
+	<%=h additional.state %><br />
+	</p>
+	<p>
+	<%=h additional.email %><br />
+	<%=h additional.cellphone %><br />
+	<%=h additional.addphone %><br />
+	</p>
+	</div>
+	<% end %>
+	<% if @soldier.additionals.empty? %>
+	 
+	<% end %>
 
-  <%=h @soldier.nokrelationship %><br />
-
-  <%=h @soldier.nokaddress %><br />
-  <%=h @soldier.nokcity %>, <%=h @soldier.nokstate %> <%=h @soldier.nokzip %><br />
-
-  <%=h @soldier.nokcellphone %> (cell)<br />
-  <%=h @soldier.nokaddphone %><br />
-
-  <%=h @soldier.nokemail %><br />
-</div>
-
-<div id="soldier_other">
-	<h1>Other Info</h1><br />
-	Anniversary: 5/14/90
-</div>
 </div>

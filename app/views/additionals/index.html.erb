@@ -1,0 +1,40 @@
+<h1>Listing additionals</h1>
+
+<table>
+  <tr>
+    <th>Relationship</th>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Cellphone</th>
+    <th>Addphone</th>
+    <th>Email</th>
+    <th>Soldier</th>
+  </tr>
+
+<% @additionals.each do |additional| %>
+  <tr>
+    <td><%=h additional.relationship %></td>
+    <td><%=h additional.firstname %></td>
+    <td><%=h additional.lastname %></td>
+    <td><%=h additional.address %></td>
+    <td><%=h additional.city %></td>
+    <td><%=h additional.state %></td>
+    <td><%=h additional.zip %></td>
+    <td><%=h additional.cellphone %></td>
+    <td><%=h additional.addphone %></td>
+    <td><%=h additional.email %></td>
+    <td><%=h additional.soldier_id %></td>
+    <td><%= link_to 'Show', additional %></td>
+    <td><%= link_to 'Edit', edit_additional_path(additional) %></td>
+    <td><%= link_to 'Destroy', additional, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New additional', new_additional_path %>

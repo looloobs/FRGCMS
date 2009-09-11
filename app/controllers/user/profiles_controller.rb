@@ -3,6 +3,7 @@ class User::ProfilesController < ApplicationController
 	before_filter :login_prohibited, :only => [:new, :create]
    
   # This show action only allows users to view their own profile
+
   def show
     @user = current_user
     @battalion = Battalion.find(:all) 

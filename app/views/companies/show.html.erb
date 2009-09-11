@@ -21,18 +21,21 @@
 <% end -%>
 
 <% content_for :dashboard do -%>
+<%= link_to "Add A Soldier", new_battalion_company_soldier_path(@battalion, @company) %><br />
 	<table id="hor-minimalist-b" summary="Company Roster">
 	    <thead>
 	    	<tr>
 	        	<th scope="col">Rank</th>
 	            <th scope="col">Name</th>
 	            <th scope="col">Cell</th>
-	            <th scope="col">Spouse</th>
-				<th scope="col">Spouse Cell</th>
-				<th scope="col">Spouse Email</th>
-				<th scope="col">NOK Name</th>
-				<th scope="col">NOK Rel.</th>
+	            <th scope="col">NOK First Name</th>
+				<th scope="col">NOK Last Name</th>
+				<th scope="col">NOK Cell</th>
 				<th scope="col">NOK Email</th>
+				<th scope="col">Add. First Name</th>
+				<th scope="col">Add. Last Name</th>
+				<th scope="col">Add. Rel.</th>
+				<th scope="col">Add. Email</th>
 				<th scope="col">Info</th>
 				<th scope="col">Edit</th>
 	        </tr>
@@ -41,14 +44,20 @@
 	    	<% @soldiers.each do |soldier| %>
 			  <tr>
 			    <td><%=h soldier.rank %></td>
-			    <td><%=h soldier.name %></td>
+			    <td><%=h soldier.lastname %></td>
 			    <td><%=h soldier.cellphone %></td>
-			    <td><%=h soldier.spousename %></td>
-			    <td><%=h soldier.spousecellphone %></td>
-			    <td><%=h soldier.spouseemail %></td>
-			    <td><%=h soldier.nokname %></td>
-			    <td><%=h soldier.nokrelationship %></td>
-			    <td><%=h soldier.nokemail %></td>
+			   <% soldier.primaries.each do |primary| %>
+			 	<td><%=h primary.firstname %></td>
+				<td><%=h primary.lastname %></td>
+				<td><%=h primary.cellphone %></td>
+				<td><%=h primary.email %></td>
+				<% end %>
+				<% soldier.additionals.each do |additional| %>
+				<td><%=h additional.firstname %></td>
+				<td><%=h additional.lastname %></td>
+				<td><%=h additional.relationship %></td>
+				<td><%=h additional.email %></td>
+				<% end %>
 			    <td><%= link_to image_tag("../images/buttons/info.png", :border=>0), soldier %></td>
 			    <td><%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %></td>
 			  </tr>

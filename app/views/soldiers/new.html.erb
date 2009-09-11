@@ -1,4 +1,4 @@
-<h1>New soldier</h1>
+<h2>New soldier</h2>
 
 <% form_for([:battalion, :company, @soldier]) do |f| %>
   <%= f.error_messages %>
@@ -13,115 +13,114 @@
 	<%= f.select(:rank, [["Please Select", ""], ["PV1", "PV1"], ["PV2", "PV2"], ["PFC","PFC"], ["SPC", "SPC"], ["CPL", "CPL"], ["SGT", "SGT"], ["SSG", "SSG"], ["SFC", "SFC"], ["MSG", "MSG"], ["1SG", "1SG"], ["SGM", "SGM"], ["CSM", "CSM"], ["WO1", "WO1"], ["CW2", "CW2"], ["CW3", "CW3"], ["CW4", "CW4"], ["CW5", "CW5"], ["2LT", "2LT"], ["1LT", "1LT"], ["CPT", "CPT"], ["MAJ", "MAJ"], ["LTC", "LTC"], ["COL", "COL"]]) %> 
       	 	 	 	 	 	 	 	 	 	 	 	
 
-	<%= f.label (:name, "Name:") %>
-    <%= f.text_field :name %>
+	<%= f.label (:firstname, "First Name:") %>
+    <%= f.text_field :firstname %>
 
+	<%= f.label (:lastname, "Last Name:") %>
+    <%= f.text_field :lastname %>
 
     <%= f.label (:maritalstatus, "Marital Status:") %>
-    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]]) %>
+    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]]) %>	
+
+  	<%= f.label (:birth_date, "Birthday:") %>
+	<%= f.date_select (:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
+ 
+
+  	<%= f.label (:anni_date, "Anniversary:") %>
+	<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950) %>
+
+
 </p>
 </div>
 <h2>Edit Address, Phone & E-Mail</h2>
 <div class="form_bg">
-  <p>
-    <%= f.label (:address, "Address:") %>
+  	<%= f.label (:address, "Address:") %>
     <%= f.text_field :address %>
- </p>
-<p>
-    <%= f.label (:city, "City:") %>
-    <%= f.text_field :city %>, 
 
-    <%= f.label (:state, "State:") %>
-    <%= f.text_field :state, :size => 2 %>
+  	<%= f.label (:city, "City:") %>
+    <%= f.text_field :city %>
 
-    <%= f.label (:zip, "Zip:") %>
-    <%= f.text_field :zip, :size => 5 %>
-  </p>
-  <p>
-    <%= f.label (:cellphone, "Cell Phone:") %>
-    <%= f.text_field :cellphone, :size => 15 %>
+  	<%= f.label (:state, "State:") %>
+    <%= f.text_field :state %>
 
-    <%= f.label (:addphone, "Additional Phone:") %>
-    <%= f.text_field :addphone, :size => 15 %>
-  </p>
-  <p>
-    <%= f.label (:email, "E-Mail:") %>
+  	<%= f.label (:zip, "Zip:") %>
+    <%= f.text_field :zip %>
+
+  	<%= f.label (:email, "E-Mail:") %>
     <%= f.text_field :email %>
-  </p>
+
+  	<%= f.label (:cellphone, "Cell Phone:") %>
+    <%= f.text_field :cellphone %>
+
+  	<%= f.label (:cellphonecarrier, "Cell Phone Carrier:") %>
+    <%= f.text_field :cellphonecarrier %>
+
+  	<%= f.label (:sms, "SMS") %>
+    <%= f.check_box :sms %>
+
+  	<%= f.label (:addphone, "Additional Phone Number:") %>
+    <%= f.text_field :addphone %>
+
 </div>
-<h2>Edit Spouse Information</h2>
+<h2>Next of Kin Information</h2>
 <div class="form_bg">
-  <p>
-    <%= f.label (:spousename, "Spouse Name:") %>
-    <%= f.text_field :spousename %>
-  </p>
-  <p>
-    <%= f.label (:spousecellphone, "Spouse Cell Phone:") %>
-    <%= f.text_field :spousecellphone, :size => 15 %>
+  	
+	    <% f.fields_for :primaries do |primary_form| %>
+	      <p>
+	        <%= primary_form.label (:firstname, "First Name:") %>
+		    <%= primary_form.text_field :firstname %>
 
-    <%= f.label (:spouseaddphone, "Spouse Additional Phone:") %>
-    <%= f.text_field :spouseaddphone, :size => 15 %>
-  </p>
-  <p>
-    <%= f.label (:spouseemail, "Spouse E-Mail:") %>
-    <%= f.text_field :spouseemail %>
-  </p>
-*Address Only if Different
-  <p>
-    <%= f.label (:spouseaddress, "Spouse Address:") %>
-    <%= f.text_field :spouseaddress %>
-  </p>
-  <p>
-    <%= f.label (:spousecity, "City:") %>
-    <%= f.text_field :spousecity %>, 
+			<%= primary_form.label (:lastname, "Last Name:") %>
+		    <%= primary_form.text_field :lastname %>
+		
+			<%= primary_form.label (:relationship, "Relationship:") %>
+		    <%= primary_form.text_field :relationship %>
 
-    <%= f.label (:spousestate, "State:") %>
-    <%= f.text_field :spousestate, :size => 2 %>
+		  	<%= primary_form.label (:birth_date, "Birthday:") %>
+			<%= primary_form.date_select(:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
+		    
+		
+		 	<%= primary_form.label (:address, "Address:") %>
+		    <%= primary_form.text_field :address %>
 
-    <%= f.label (:spousezip, "Zip Code:") %>
-    <%= f.text_field :spousezip, :size => 5 %>
-  </p>
+		  	<%= primary_form.label (:city, "City:") %>
+		    <%= primary_form.text_field :city %>
 
-  <p>
-    <%= f.label (:children, "Children:") %><br />
-    <%= f.text_area :children %>
-  </p>
+		  	<%= primary_form.label (:state, "State:") %>
+		    <%= primary_form.text_field :state %>
+
+		  	<%= primary_form.label (:zip, "Zip:") %>
+		    <%= primary_form.text_field :zip %>
+
+		  	<%= primary_form.label (:email, "E-Mail:") %>
+		    <%= primary_form.text_field :email %>
+
+		  	<%= primary_form.label (:cellphone, "Cell Phone:") %>
+		    <%= primary_form.text_field :cellphone %>
+
+		  	<%= primary_form.label (:cellphonecarrier, "Cell Phone Carrier:") %>
+		    <%= primary_form.text_field :cellphonecarrier %>
+
+		  	<%= primary_form.label (:sms, "SMS") %>
+		    <%= primary_form.check_box :sms %>
+
+		  	<%= primary_form.label (:addphone, "Additional Phone Number:") %>
+		    <%= primary_form.text_field :addphone %>
+	      </p>
+	    <% end %>
+
+
 </div>
-<h2>Edit Next of Kin Information</h2>
-<div class="form_bg">
-  <p>
-    <%= f.label (:nokname, "Next of Kin Name(s):") %>
-    <%= f.text_field :nokname %>
+<% f.fields_for :kids do |kid_form| %>
+  <%= render :partial => 'kid', :locals => { :f => kid_form } %>
+<% end %>
+<p><%= add_child_link "New Child", f, :kids %></p>
 
-    <%= f.label (:nokrelationship, "Relationship to Soldier") %>
-    <%= f.text_field :nokrelationship %>
-  </p>
-  <p>
-    <%= f.label (:nokaddress, "Next of Kin Address:") %>
-    <%= f.text_field :nokaddress %>
-  </p>
-  <p>
-    <%= f.label (:nokcity, "City:" )%>
-    <%= f.text_field :nokcity %>,
+  <% f.fields_for :additionals do |additional_form| %>
+    <%= render :partial => 'additional', :locals => { :f => additional_form } %>
+  <% end %>
+  <p><%= add_child_link "New Additional", f, :additionals %></p>
 
-    <%= f.label (:nokstate, "State:") %>
-    <%= f.text_field :nokstate, :size => 2 %>
-
-    <%= f.label (:nokzip, "Zip Code:") %>
-    <%= f.text_field :nokzip, :size => 5 %>
-  </p>
-  <p>
-    <%= f.label (:nokcellphone, "Cell Phone:") %>
-    <%= f.text_field :nokcellphone, :size => 15 %>
-
-    <%= f.label (:nokaddphone, "Additional Phone:") %>
-    <%= f.text_field :nokaddphone, :size => 15 %>
-  </p>
-  <p>
-    <%= f.label (:nokemail, "Next of Kin Email:") %>
-    <%= f.text_field :nokemail %>
-  </p>
-</div>
 <p>
   <%= f.submit 'Create'%>
 </p>
