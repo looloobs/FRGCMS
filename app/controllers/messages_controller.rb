@@ -12,9 +12,28 @@ class MessagesController < ApplicationController
     end
   end
   def new
-    @users = User.find_by_login(params[:user_id])
-     @message = Message.new
+    @user = User.find_by_login(params[:user_id])
+    @primary= @user.company.primaries
+    @message = Message.new 
+   end
+   
+  def create
+    @user = User.find_by_login(params[:user_id])
+    @message = Message.new(params[:message])
+    #@user = User.find_by_login(params[:user_id])
+    #@primary= @user.company.primaries
 
+    respond_to do |format|
+      if @message.save
+            flash[:notice] = 'Message was sent.'
+            format.html { redirect_to user_messages_path(current_user)}
+            
+          else
+            format.html { render :action => "new" }
+          
+          end
+        end
+      end
 
    end
   # GET /messages/1
@@ -61,4 +80,4 @@ class MessagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-end
+

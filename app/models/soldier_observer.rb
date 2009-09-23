@@ -4,6 +4,7 @@ class SoldierObserver < ActiveRecord::Observer
     #SoldierMailer.deliver_welcome_soldier_email(soldier) 
   #end
 
+
   
 
 end 

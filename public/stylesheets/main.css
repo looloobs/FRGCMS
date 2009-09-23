@@ -1,3 +1,4 @@
+
 /* General styles */
 	body {
 		margin:0;
@@ -27,7 +28,10 @@
 		padding:0;
 	}
 	img {
-		margin:10px 0 5px;
+		margin:3px 0 5px;
+	}
+	.right{
+		float:right;
 	}
 	#wrap {
 	 	width:1000px;
@@ -35,13 +39,13 @@
 	}
 	/* Header styles */
 	#header {
-		background:#fff;
+		background:#000;
 		clear:both;
 		float:left;
 		width:100%;
 	}
 	#header {
-		border-bottom:4px solid #FFF91D;
+		border-bottom:4px solid #FFEF5C;
 	}
 	#header p,
 	#header h1,
@@ -94,6 +98,17 @@
 		margin-top:10px;
 		padding:5px;
 	}
+	#user-bar-greeting a {
+        color:white;
+        font-family: Arial, "MS Verdana", sans-serif;
+		text-decoration:none;
+	}
+	#user-bar-greeting a:hover {
+        background:#cdfcbf;
+        font-family: Arial, "MS Verdana", sans-serif;
+		text-decoration:none;
+		
+	}
 	#logo{
 		margin-top:25px;
 	}
@@ -109,7 +124,7 @@
 		background: #fff;
 		margin: 5px;
 		padding:5px;
-		width: 70%;
+		width: 900px;
 		border-collapse: collapse;
 		text-align: left;
 	}
@@ -132,8 +147,26 @@
 	{
 		color: #0fa812;
 	}
+	
+	/* Business Card Table */
+	#bc_box{
+		width:1000px;
+	}
+	#bc_focus{
+		padding:8px;
+		float:left;
+		margin:5px;
+		background:#fff;
+		width:190px;
+		height:90px;
+		border: 3px solid #cdfcbf;
+		font-family: Arial, "MS Verdana", sans-serif;
+		font-size:12px;
+	}
+	
 	/* form */
 	.form_bg {
+		width:600px;
 		background:#cdfcbf;
 		margin:12px;
 		padding:8px;

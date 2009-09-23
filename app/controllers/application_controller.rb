@@ -20,6 +20,11 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   filter_parameter_logging :password, :password_confirmation, :old_password
 
+
+    # - Some more application code ... -
+
+
+
   # Change to the location of your contact form
 	def contact_site
 		root_path
@@ -32,5 +37,7 @@ class ApplicationController < ActionController::Base
 	def in_beta?
 		APP_CONFIG['settings']['in_beta']
 	end
+	
+
 
 end

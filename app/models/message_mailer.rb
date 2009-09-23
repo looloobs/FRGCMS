@@ -1,7 +1,7 @@
 class MessageMailer < ActionMailer::Base
-  def receive(message)
-    logger.info("Got a mail about: #{message.subject}")
-    puts "Received a message with the subject '#{message.subject}'"
+        def receive(message)
+          logger.info("Got a mail about: #{message.subject}")
+          puts "Received a message with the subject '#{message.subject}'"
           user_id = find_user(message)
           create_message(message, user_id)
         end
@@ -22,5 +22,19 @@ class MessageMailer < ActionMailer::Base
                           :from_email => message.from,
                           :user_id => user_id)
         end
+        
+        
+        
+        user = User.find_by_login(login)
+        receipients = user.company.primaries
+        def send_email(message)
+          to 
+          from "laurenrothlisberger@gmail.com"  
+          subject "Soldier: Welcome to the Unit"  
+          sent_on Time.now 
+          body :message => message
+        end
 
-end
+  end
+  
+

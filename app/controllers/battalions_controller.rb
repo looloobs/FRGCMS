@@ -14,7 +14,7 @@ class BattalionsController < ApplicationController
   def show
     
     @battalion = Battalion.find(params[:id])
-    @company = @battalion.companies.sort
+    @company = @battalion.companies
     @user = @battalion.users
     @bc= @user.find_by_position('Battalion Commander')
     @sm= @user.find_by_position('Command Sergeant Major')

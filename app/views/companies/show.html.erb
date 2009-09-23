@@ -1,5 +1,5 @@
 <div id="company_show">
-
+<% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %>
 <h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
 
 <div id="battalion_show_team">
@@ -21,51 +21,32 @@
 <% end -%>
 
 <% content_for :dashboard do -%>
-<%= link_to "Add A Soldier", new_battalion_company_soldier_path(@battalion, @company) %><br />
-	<table id="hor-minimalist-b" summary="Company Roster">
-	    <thead>
-	    	<tr>
-	        	<th scope="col">Rank</th>
-	            <th scope="col">Name</th>
-	            <th scope="col">Cell</th>
-	            <th scope="col">NOK First Name</th>
-				<th scope="col">NOK Last Name</th>
-				<th scope="col">NOK Cell</th>
-				<th scope="col">NOK Email</th>
-				<th scope="col">Add. First Name</th>
-				<th scope="col">Add. Last Name</th>
-				<th scope="col">Add. Rel.</th>
-				<th scope="col">Add. Email</th>
-				<th scope="col">Info</th>
-				<th scope="col">Edit</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	    	<% @soldiers.each do |soldier| %>
-			  <tr>
-			    <td><%=h soldier.rank %></td>
-			    <td><%=h soldier.lastname %></td>
-			    <td><%=h soldier.cellphone %></td>
-			   <% soldier.primaries.each do |primary| %>
-			 	<td><%=h primary.firstname %></td>
-				<td><%=h primary.lastname %></td>
-				<td><%=h primary.cellphone %></td>
-				<td><%=h primary.email %></td>
-				<% end %>
-				<% soldier.additionals.each do |additional| %>
-				<td><%=h additional.firstname %></td>
-				<td><%=h additional.lastname %></td>
-				<td><%=h additional.relationship %></td>
-				<td><%=h additional.email %></td>
-				<% end %>
-			    <td><%= link_to image_tag("../images/buttons/info.png", :border=>0), soldier %></td>
-			    <td><%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %></td>
-			  </tr>
-			<% end %>
-	    </tbody>
-	</table>
-	
-	
+<%= link_to image_tag("../images/buttons/add_soldier.jpg", :border=>0), new_battalion_company_soldier_path(@battalion, @company) %><br />
+
+<div id="bc_box">
+	<% @soldiers.each do |soldier| %>
+	<div id="bc_focus">
+	   	<div class="right">
+	    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_company_soldier_path(@battalion, @company,soldier) %>
+	    <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %>
+		</div>
+	   <%=h soldier.rank %> <%=h soldier.lastname %><br />
+	   Cell: <%=h soldier.cellphone %><br />
+	   <% soldier.primaries.each do |primary| %>
+	   <p>
+	   <%=h primary.firstname %> <%=h primary.lastname %> (<%=h primary.relationship %>)<br />
+	    
+	   Cell:<%=h primary.cellphone %><br />
+	   E-Mail: <%=h primary.email %><br />
+	   </p>
+		<% end %>
+
+	</div>
+	<% end %>
+</div>
+
 <% end -%>
 <p>
-
+<% else %>	
+	  show nothing or public information
+<% end %>

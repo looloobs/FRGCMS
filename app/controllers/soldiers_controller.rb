@@ -13,6 +13,8 @@ class SoldiersController < ApplicationController
   # GET /soldiers/1
   # GET /soldiers/1.xml
   def show
+    @battalion = Battalion.find(params[:battalion_id])
+    @company = Company.find(params[:company_id])
     @soldier = Soldier.find(params[:id])
     @primarys = @soldier.primaries
     @children = @soldier.kids
@@ -29,7 +31,7 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.new
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
-    @soldier.primaries.build
+    @soldier.primaries.build(:battalion_id => "1",  :company_id => "1") 
   
     respond_to do |format|
       format.html # new.html.erb

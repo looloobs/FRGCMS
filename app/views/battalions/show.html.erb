@@ -1,4 +1,5 @@
 <div id="battalion_show">
+
 <h1><%= @battalion.name %><br />
 <h2><%= @battalion.unit %>, <%= @battalion.installation %> </h2></h1><br />
 <div id="battalion_show_team">
@@ -13,7 +14,7 @@ FRSA: <%= @frsa.name %><br />
 <p>
 	<% @company.each do |c| %>
 	  <tr>
-	    <td><%= link_to c.name, battalion_company_path(@company) %></td><br />
+	    <td><%= link_to c.name, battalion_company_path(@battalion, c) %></td><br />
 
 	  </tr>
 	<% end %>

@@ -1,5 +1,8 @@
+<%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company, @soldier) %> Edit this Soldier.
+<%= link_to image_tag("../images/buttons/delete.png", :border=>0), battalion_company_soldier_path(@battalion,@company, @soldier), :confirm => 'Are you sure?', :method => :delete %> Delete this Soldier.
 <div id="soldier">
 <h1>Soldier</h1>	
+		
 		<div id="soldier_info">
 		<b><%=h @soldier.rank %> <%=h @soldier.firstname %><%=h @soldier.lastname %></b><br />
 		   <%=h @soldier.maritalstatus %><br />

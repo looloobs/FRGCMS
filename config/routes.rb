@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :companies
 
+
   map.resources :battalions do |battalion| 
     battalion.resources :companies
     battalion.resources :companies do |company|
@@ -94,7 +95,7 @@ end
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "battalions", :action => "index"
+  map.root :controller => "sessions", :action => "new"
 
   # See how all your routes lay out with "rake routes"
 

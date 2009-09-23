@@ -1,4 +1,17 @@
 class CompaniesController < ApplicationController
+  #require_role "admin"
+before_filter :login_required, :only =>  [ :show, :edit, :update ]
+#before_filter :company_required, :except => [:new, :create]
+
+  def user
+    @user = User.find(session[:user_id])
+  end
+  
+  def company_required
+    redirect_to root_path unless user == "21"
+  end
+  
+  
   # GET /companies
   # GET /companies.xml
   def index

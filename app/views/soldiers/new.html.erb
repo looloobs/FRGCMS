@@ -37,6 +37,9 @@
   	<%= f.label (:address, "Address:") %>
     <%= f.text_field :address %>
 
+  	<%= f.label (:address2, "Additional Address (if needed):") %>
+    <%= f.text_field :address2 %>
+
   	<%= f.label (:city, "City:") %>
     <%= f.text_field :city %>
 
@@ -67,26 +70,30 @@
   	
 	    <% f.fields_for :primaries do |primary_form| %>
 	      <p>
-	        <%= primary_form.label (:firstname, "First Name:") %>
+		
+			<%= primary_form.hidden_field(:battalion_id) %>
+			<%= primary_form.hidden_field(:company_id) %>
+			
+	        <%= primary_form.label(:firstname, "First Name:") %>
 		    <%= primary_form.text_field :firstname %>
 
 			<%= primary_form.label (:lastname, "Last Name:") %>
 		    <%= primary_form.text_field :lastname %>
 		
-			<%= primary_form.label (:relationship, "Relationship:") %>
-		    <%= primary_form.text_field :relationship %>
+			<%= primary_form.label(:relationship, "Relationship:") %>
+		    <%= primary_form.select(:relationship, [["Please Select", ""], ["Spouse", "Spouse"], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %>
 
-		  	<%= primary_form.label (:birth_date, "Birthday:") %>
+		  	<%= primary_form.label(:birth_date, "Birthday:") %>
 			<%= primary_form.date_select(:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
 		    
 		
-		 	<%= primary_form.label (:address, "Address:") %>
+		 	<%= primary_form.label(:address, "Address:") %>
 		    <%= primary_form.text_field :address %>
 
-		  	<%= primary_form.label (:city, "City:") %>
+		  	<%= primary_form.label(:city, "City:") %>
 		    <%= primary_form.text_field :city %>
 
-		  	<%= primary_form.label (:state, "State:") %>
+		  	<%= primary_form.label(:state, "State:") %>
 		    <%= primary_form.text_field :state %>
 
 		  	<%= primary_form.label (:zip, "Zip:") %>

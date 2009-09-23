@@ -1,27 +1,24 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
-	before_filter :login_prohibited, :only => [:new, :create]
-
+	#before_filter :login_prohibited, :only => [:new, :create]
+  
   # render new.html.erb
   def new
 		#	Display recaptcha only if the number of failed logins have 
 		# exceeded the specified limit within a certain timeframe
 		@bad_visitor = UserFailure.failure_check(request.remote_ip)
-		respond_to do |format|
-      format.html 
-			format.js
-    end
   end
 
   def create  
+
     logout_keeping_session!
 		# Only verify recaptcha if the user has reached the failed login limit  
-		@bad_visitor = UserFailure.failure_check(request.remote_ip)
-		if @bad_visitor && !verify_recaptcha
-			failed_login("The captcha was incorrect, please enter the words from the picture again.", 
-											(params[:login] || params[:openid_identifier] || ''), params[:openid])
-			return
-		end
+		#@bad_visitor = UserFailure.failure_check(request.remote_ip)
+		#if @bad_visitor && !verify_recaptcha
+			#failed_login("The captcha was incorrect, please enter the words from the picture again.", 
+											#(params[:login] || params[:openid_identifier] || ''), params[:openid])
+			#return
+		#end
     if using_open_id?
       open_id_authentication(params[:openid_identifier])
     else
@@ -128,7 +125,10 @@ class SessionsController < ApplicationController
     self.current_user = user
     new_cookie_flag = (params[:remember_me] == "1")
     handle_remember_cookie! new_cookie_flag
-    redirect_back_or_default('/')
+    if current_user.position == 'Battalion Commander' : redirect_to battalion_path(current_user.battalion_id)
+    elsif current_user.position == 'Company Commander': redirect_to battalion_company_path(current_user.battalion_id, current_user.company_id)
+    elsif current_user.position == 'FRSA' : redirect_to battalion_path(current_user.battalion_id)
+    end
     flash[:notice] = "Logged in successfully."
   end
 

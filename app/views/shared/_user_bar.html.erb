@@ -1,7 +1,16 @@
 <% if logged_in? -%>
-  <div id="user-bar-greeting">Logged in as: <%= link_to_current_user :content_method => :login %> | 
-		<%= link_to 'My Account', user_profile_path(current_user), { :title => "My account" } %> |
-		<%= link_to 'My Inbox', user_messages_path(current_user), { :title => "My account" } %> |
+  <div id="user-bar-greeting">
+        <% if current_user.position == 'Battalion Commander' -%>
+	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id), { :title => "Dashboard" } %> |
+        <% elsif current_user.position == 'Company Commander' -%>
+	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+	    
+	    <% end -%>
+	   
+	    <%= link_to 'Inbox', user_messages_path(current_user), { :title => "Inbox" } %> |
+		<%= link_to 'Profile', user_profile_path(current_user), { :title => "Profile" } %> |
+		
+		
 		<% if_invites_available? do -%>
 			<%= link_to "Invite Friends (#{current_user.invitation_limit})", new_user_invitation_path %> |
 		<% end -%>
