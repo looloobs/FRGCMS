@@ -1,12 +1,11 @@
 <h1>New message</h1>
 
-
-
 <% form_for [@message] do |f| %>
 
 
+<% f.hidden_field(:user_id) %>
 
-To:<%= f.text_field :to_email %><br />
+<%= f.select(:to_email, [["Please Select", ""], ["Company NOK", @addresses], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %><br />
 Subject:<%= f.text_field :subject %><br />   
 Message:	<%= f.text_area :body %><br />
 

@@ -9,31 +9,28 @@ class MessageMailer < ActionMailer::Base
         private
 
         def find_user(message)
-          qmail = message.to.first.split('@').first
-          user_name = qmail.split('+').last
-          user = User.find_by_login(user_name)
-          user ? user.id : (raise "Couldn't find user #{user_name}")
+           qmail = message.to.first.split('@').first
+           user_name = qmail.split('+').last
+           user = User.find_by_login(user_name)
+           user ? user.id : (raise "Couldn't find user #{user_name}")
         end
 
         def create_message(message, user_id)
-          Message.create!(:body => message.body,
+            Message.create!(:body => message.body,
                           :subject => message.subject,
                           :to_email => message.to.first,
                           :from_email => message.from,
                           :user_id => user_id)
         end
         
-        
-        
-        user = User.find_by_login(login)
-        receipients = user.company.primaries
-        def send_email(message)
-          to 
+        def send_email(message)  
+          recipients message.to_email
           from "laurenrothlisberger@gmail.com"  
           subject "Soldier: Welcome to the Unit"  
           sent_on Time.now 
-          body :message => message
+          body message.body
         end
+        
 
   end
   

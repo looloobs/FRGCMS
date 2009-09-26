@@ -1,0 +1,20 @@
+<h1>Editing users_messages</h1>
+
+<% form_for(@users_messages) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :message_id %><br />
+    <%= f.text_field :message_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @users_messages %> |
+<%= link_to 'Back', users_messages_path %>

@@ -1,0 +1,13 @@
+<p>
+  <b>User:</b>
+  <%=h @users_messages.user_id %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @users_messages.message_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_users_messages_path(@users_messages) %> |
+<%= link_to 'Back', users_messages_path %>

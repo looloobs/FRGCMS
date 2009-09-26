@@ -2,8 +2,10 @@
 set :application, "FRGCMS"
 
 # The URL to your applications repository
-set :repository,  "http://github.com/looloobs/FRGCMS"
-
+set :repository,  "git://github.com/looloobs/FRGCMS.git"
+set :scm, "git"
+set :scm_verbose, true
+set :git_enable_submodules, 1
 # Uncomment this line if you're using SVN.  It makes deployments much faster
 set :deploy_via, :remote_cache
 
@@ -26,7 +28,7 @@ set :server_name, "sh01.blueboxgrid.com"
 role :app, server_name
 role :web, server_name
 role :db,  server_name, :primary => true
-
+ 
 
 # -------------------------------- Final Config --------------------------------
 # This configuration option is helpful when using svn+ssh but doesn't hurt anything to leave it enabled always.

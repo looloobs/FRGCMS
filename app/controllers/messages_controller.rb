@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
   end
   def new
     @user = User.find_by_login(params[:user_id])
+    @addresses = (@user.company.primaries).collect(&:email).join(",")
     @primary= @user.company.primaries
     @message = Message.new 
    end

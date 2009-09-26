@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090921192924) do
+ActiveRecord::Schema.define(:version => 20090924154757) do
 
   create_table "additionals", :force => true do |t|
     t.string   "relationship"
@@ -215,5 +215,12 @@ ActiveRecord::Schema.define(:version => 20090921192924) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "users_messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
