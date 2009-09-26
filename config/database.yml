@@ -21,6 +21,6 @@ test:
     database: afmove_frgcms
     username: afmove_admin
     password: lufury2
-    host: localhost
+    host: 127.0.0.1
     socket: /var/lib/mysql/mysql.sock
 
