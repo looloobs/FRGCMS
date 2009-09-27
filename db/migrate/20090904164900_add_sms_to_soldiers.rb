@@ -1,6 +1,6 @@
 class AddSmsToSoldiers < ActiveRecord::Migration
   def self.up
-    remove_column :soldiers, :nokaddress, :string
+    remove_column :soldiers, :nokaddress
     add_column :soldiers, :sms, :boolean
   end
 
