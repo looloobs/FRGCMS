@@ -30,3 +30,13 @@ production:
   pool: 5
   timeout: 5000
   
+  
+  #production:
+    #adapter: mysql
+    #encoding: utf8
+    #host: 127.0.0.1 
+    #database: afmove_
+    #username: root
+    #password:
+    #socket: /tmp/mysql.sock
+  
