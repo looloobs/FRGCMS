@@ -34,7 +34,7 @@ production:
       adapter: mysql
       encoding: utf8
       reconnect: true
-      database: frgcms
+      database: afmove_frgcms
       host: 127.0.0.1
       pool: 5
       username: afmove_admin
