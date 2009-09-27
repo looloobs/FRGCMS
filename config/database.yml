@@ -36,7 +36,7 @@ production:
       reconnect: true
       database: frgcms
       pool: 5
-      username: admin_
+      username: admin
       password: lufury2
       socket: /var/lib/mysql/mysql.sock
       
