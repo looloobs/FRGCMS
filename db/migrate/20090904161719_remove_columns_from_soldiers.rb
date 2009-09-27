@@ -6,23 +6,23 @@ class RemoveColumnsFromSoldiers < ActiveRecord::Migration
     add_column :soldiers, :sms, :boolean
     add_column :soldiers, :birth_date, :string
     add_column :soldiers, :anni_date, :string
-    remove_column :soldiers, :spousename, :string
-    remove_column :soldiers, :spouseaddress, :string
-    remove_column :soldiers, :spousecity, :string
-    remove_column :soldiers, :spousestate, :string
-    remove_column :soldiers, :spousezip, :string
-    remove_column :soldiers, :spousecellphone, :string
-    remove_column :soldiers, :spouseaddphone, :string
-    remove_column :soldiers, :spouseemail, :string
-    remove_column :soldiers, :children, :string
-    remove_column :soldiers, :nokname, :string
-    remove_column :soldiers, :nokrelationship, :string
-    remove_column :soldiers, :nokcity, :string
-    remove_column :soldiers, :nokstate, :string
-    remove_column :soldiers, :nokzip, :string
-    remove_column :soldiers, :nokcellphone, :string
-    remove_column :soldiers, :nokaddphone, :string
-    remove_column :soldiers, :nokemail, :string
+    remove_column :soldiers, :spousename
+    remove_column :soldiers, :spouseaddress
+    remove_column :soldiers, :spousecity
+    remove_column :soldiers, :spousestate
+    remove_column :soldiers, :spousezip
+    remove_column :soldiers, :spousecellphone
+    remove_column :soldiers, :spouseaddphone
+    remove_column :soldiers, :spouseemail
+    remove_column :soldiers, :children
+    remove_column :soldiers, :nokname
+    remove_column :soldiers, :nokrelationship
+    remove_column :soldiers, :nokcity
+    remove_column :soldiers, :nokstate
+    remove_column :soldiers, :nokzip
+    remove_column :soldiers, :nokcellphone
+    remove_column :soldiers, :nokaddphone
+    remove_column :soldiers, :nokemail
   end
 
   def self.down
