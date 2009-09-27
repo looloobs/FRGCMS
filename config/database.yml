@@ -37,7 +37,7 @@ production:
       database: frgcms
       host: 127.0.0.1
       pool: 5
-      username: admin
+      username: afmove_admin
       password: lufury2
       socket: /var/lib/mysql/mysql.sock
       
