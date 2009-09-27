@@ -1,6 +1,6 @@
 class ChangeUnitInUsers < ActiveRecord::Migration
   def self.up
-    remove_column :users, :unit, :string
+    remove_column :users, :unit
     add_column :users, :unit, :integer
   end
 
