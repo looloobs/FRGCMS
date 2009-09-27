@@ -34,9 +34,9 @@ production:
       adapter: mysql
       encoding: utf8
       reconnect: true
-      database: afmove_frgcms
+      database: frgcms
       pool: 5
-      username: admin
+      username: admin_
       password: lufury2
       socket: /var/lib/mysql/mysql.sock
       
