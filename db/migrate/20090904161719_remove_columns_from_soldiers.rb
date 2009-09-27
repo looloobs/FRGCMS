@@ -1,6 +1,5 @@
 class RemoveColumnsFromSoldiers < ActiveRecord::Migration
    def self.up
-    add_column :soldiers, :firstname, :string
     add_column :soldiers, :lastname, :string
     add_column :soldiers, :cellphonecarrier, :string
     add_column :soldiers, :sms, :boolean
