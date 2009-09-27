@@ -13,12 +13,12 @@ class SessionsController < ApplicationController
 
     logout_keeping_session!
 		# Only verify recaptcha if the user has reached the failed login limit  
-		#@bad_visitor = UserFailure.failure_check(request.remote_ip)
-		#if @bad_visitor && !verify_recaptcha
-			#failed_login("The captcha was incorrect, please enter the words from the picture again.", 
-											#(params[:login] || params[:openid_identifier] || ''), params[:openid])
-			#return
-		#end
+		@bad_visitor = UserFailure.failure_check(request.remote_ip)
+		if @bad_visitor && !verify_recaptcha
+			failed_login("The captcha was incorrect, please enter the words from the picture again.", 
+											(params[:login] || params[:openid_identifier] || ''), params[:openid])
+			return
+		end
     if using_open_id?
       open_id_authentication(params[:openid_identifier])
     else
@@ -48,49 +48,7 @@ class SessionsController < ApplicationController
 		UserFailure.record_failure(request.remote_ip, request.env['HTTP_USER_AGENT'], "login", login_name)
   end
 
-  def open_id_authentication(identity_url_params)
-    # Pass optional :required and :optional keys to specify what sreg fields you want.
-    # Be sure to yield registration, a third argument in the #authenticate_with_open_id block.
-    authenticate_with_open_id(identity_url_params, 
-        :optional => [ :nickname, :email, :fullname],
-				:invitation_token => params[:invitation_token],
-				:remember_me => params[:remember_me],
-				:requested => session[:return_to],
-				:refered_from => session[:refered_from]) do |result, identity_url, registration|
-			session[:return_to] = params[:requested]
-			session[:refered_from] = params[:refered_from]
-      case result.status
-      when :missing
-        failed_login("Sorry, the OpenID server couldn't be found.", identity_url, true)
-      when :invalid
-        failed_login("Sorry, but this does not appear to be a valid OpenID.", identity_url, true)
-      when :canceled
-        failed_login("OpenID verification was canceled.", identity_url, true)
-      when :failed
-        failed_login("Sorry, the OpenID verification failed.", identity_url, true)
-      when :successful 
-				OpenidUser.find_with_identity_url(identity_url) do |account, user, message, item_msg, item_path|
-					if account	
-						(successful_login(user) and return) if user
-						flash[:error_item] = [item_msg, send(item_path)]
-						failed_login(message, identity_url, true)
-					else
-						@user = OpenidUser.new(:invitation_token => params[:invitation_token])
-						assign_registration_attributes!(registration, identity_url)
-						if @user.save
-	            redirect_to root_path
-	    				flash[:notice] = "Thanks for signing up! "
-							flash[:notice] += ((in_beta? && @user.emails_match?) ? "You can now log into 																		your account." : "We're sending you an email with your activation code.")
-						else
-							flash.now[:error] = "We need some additional details before we can create your account."
-							render :template => "user/openid_accounts/new"
-						end
-					end
-				end
-      end
-    end
-  end
-
+  
   # registration is a hash containing the valid sreg keys given above
   # use this to map them to fields of your user model
   def assign_registration_attributes!(registration, identity_url)
