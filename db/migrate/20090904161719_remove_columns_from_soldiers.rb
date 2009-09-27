@@ -1,6 +1,6 @@
 class RemoveColumnsFromSoldiers < ActiveRecord::Migration
    def self.up
-    rename_column :soldiers, :name, :firstname
+    add_column :soldiers, :firstname, :string
     add_column :soldiers, :lastname, :string
     add_column :soldiers, :cellphonecarrier, :string
     add_column :soldiers, :sms, :boolean
@@ -26,6 +26,7 @@ class RemoveColumnsFromSoldiers < ActiveRecord::Migration
   end
 
   def self.down
+    rename_column :table_name, :new_column_name, :column_name
     remove_column :table_name, :column_name
     remove_column :soldiers, :column_name
   end
