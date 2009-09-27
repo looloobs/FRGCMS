@@ -34,7 +34,7 @@ test:
   production:
     adapter: mysql
     encoding: utf8
-    host: 127.0.0.1 
+    host: localhost 
     database: afmove_frgcms
     username: afmove_admin
     password: lufury2
