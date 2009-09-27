@@ -38,3 +38,7 @@ production:
           rest_auth:
             site_key: e587f9d09baa59c920b9ee97ac70f58b3c51356c
             stretches: 10
+            recaptcha:
+              publickey:
+              privatekey:
+                  
