@@ -29,15 +29,15 @@ test:
   #database: db/development.sqlite3
   #pool: 5
   #timeout: 5000
-  
-  
-  production:
-    adapter: "mysql"
-    encoding: "utf8"
-    host: "127.0.0.1" 
-    database: "afmove_frgcms"
-    username: "afmove_admin"
-    password: "lufury2"
-    socket: /var/lib/mysql/mysql.sock
-    
+ 
+    production:
+      adapter: mysql
+      encoding: utf8
+      reconnect: true
+      database: afmove_frgcms
+      pool: 5
+      username: admin
+      password: lufury2
+      socket: /var/lib/mysql/mysql.sock
+      
   
