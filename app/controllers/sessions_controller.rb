@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def new
 		#	Display recaptcha only if the number of failed logins have 
 		# exceeded the specified limit within a certain timeframe
-		@bad_visitor = UserFailure.failure_check(request.remote_ip)
+		#@bad_visitor = UserFailure.failure_check(request.remote_ip)
   end
 
   def create  
@@ -14,11 +14,11 @@ class SessionsController < ApplicationController
     logout_keeping_session!
 		# Only verify recaptcha if the user has reached the failed login limit  
 		@bad_visitor = UserFailure.failure_check(request.remote_ip)
-		if @bad_visitor && !verify_recaptcha
-			failed_login("The captcha was incorrect, please enter the words from the picture again.", 
-											(params[:login] || params[:openid_identifier] || ''), params[:openid])
-			return
-		end
+		#if @bad_visitor && !verify_recaptcha
+			#failed_login("The captcha was incorrect, please enter the words from the picture again.", 
+											#(params[:login] || params[:openid_identifier] || ''), params[:openid])
+			#return
+		#end
     if using_open_id?
       open_id_authentication(params[:openid_identifier])
     else

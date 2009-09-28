@@ -1,6 +1,7 @@
 class User::ProfilesController < ApplicationController
-  before_filter :login_required, :only =>  [ :show, :edit, :update ]
-	before_filter :login_prohibited, :only => [:new, :create]
+  #before_filter :login_required, :only =>  [ :new, :create]
+  require_role "admin", :only =>  [ :new, :create]
+	#before_filter :login_prohibited, :only => [:new, :create]
    
   # This show action only allows users to view their own profile
 
@@ -32,7 +33,7 @@ class User::ProfilesController < ApplicationController
 												 :position => params[:user][:position])
     success = @user && @user.save
     if success && @user.errors.empty?
-      redirect_back_or_default('/')
+      redirect_to admin_controls_path
       flash[:notice] = "Thanks for signing up! "
 			flash[:notice] += ((in_beta? && @user.emails_match?) ? "You can now log into your account." : "We're sending you 														an email with your activation code.")
     else

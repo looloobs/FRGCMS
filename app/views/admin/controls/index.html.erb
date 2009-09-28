@@ -2,6 +2,7 @@
 
 	<ul>
     <li><%= link_to "Administer Users (#{@users})", admin_users_path %></li>
+    <li><%= link_to "New Users", signup_path %></li>
 		<% if_in_beta? do -%>
 			<li><%= link_to 'Beta Invitations', admin_invites_path %></li>
 		<% end -%>

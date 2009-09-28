@@ -27,6 +27,6 @@
 	<%= f.label :company_id %><br />
     <%= f.collection_select(:company_id, @company, :id, :name, {:prompt => true}) %>
     <%= f.label :position %><br />
-    <%= f.select(:position, [["Please Select", ""], ["Battalion Commander", "Battalion Commander"], ["Command Sergeant Major", "Command Sergeant Major"], ["FRSA", "FRSA"], ["Company Commander", "Company Commander"], ["1st Sergeant", "1st Sergeant"], ["Training Room Sergeant", "Training Room Sergeant"], ["FRG Leader", "FRG Leader"], ["POC", "POC"]]) %> 
+    <%= f.select(:position, [["Please Select", ""], ["Battalion Commander", "Battalion Commander"], ["Command Sergeant Major", "Command Sergeant Major"], ["FRSA", "FRSA"], ["Battalion FRG Leader", "Battalion FRG Leader"], ["Company Commander", "Company Commander"], ["1st Sergeant", "1st Sergeant"], ["Training Room Sergeant", "Training Room Sergeant"], ["FRG Leader", "FRG Leader"], ["POC", "POC"]]) %> 
   <%= f.submit "Sign up"%>
 <% end -%>
