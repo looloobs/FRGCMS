@@ -74,3 +74,6 @@ task :after_setup do
   run "rm -rf #{deploy_to}public_html"
   run "mkdir #{deploy_to}static_site"
 end
+task :after_restart do
+  run "#{current_path}/script/mailer_fetcher start"
+end
