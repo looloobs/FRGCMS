@@ -75,5 +75,5 @@ task :after_setup do
   run "mkdir #{deploy_to}static_site"
 end
 task :after_start do
-  run "RAILS_ENV=production ruby #{current_path}/script/mailer_fetcher start"
+  run "/script/mailer_fetcher start"
 end
