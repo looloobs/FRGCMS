@@ -5,7 +5,7 @@
         <% elsif current_user.position == 'Company Commander' -%>
 	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
 		<% elsif current_user.position == 'FRSA' -%>
-	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id, current_user.company_id) %> |
 	    
 	    <% end -%>
 	   
