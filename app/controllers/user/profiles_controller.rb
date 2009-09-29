@@ -1,6 +1,6 @@
 class User::ProfilesController < ApplicationController
   #before_filter :login_required, :only =>  [ :new, :create]
-  require_role "admin", :only =>  [ :new, :create]
+  require_role "admin", :only =>  [ :new]
 	#before_filter :login_prohibited, :only => [:new, :create]
    
   # This show action only allows users to view their own profile
