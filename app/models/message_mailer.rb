@@ -1,7 +1,7 @@
 class MessageMailer < ActionMailer::Base
         def receive(message)
           logger.info("Got a mail about: #{message.subject}")
-          puts "Received a message with the subject '#{message.subject}'"
+          puts "Received a message '#{message.subject}'"
           user_id = find_user(message)
           create_message(message, user_id)
         end
