@@ -75,5 +75,5 @@ task :after_setup do
   run "mkdir #{deploy_to}static_site"
 end
 task :after_start do
-  run "#{deploy_to}script/mailer_fetcher start"
+  run "ruby script/mailer_fetcher start"
 end
