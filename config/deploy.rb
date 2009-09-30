@@ -35,6 +35,10 @@ role :db,  server_name, :primary => true
 default_run_options[:pty] = true 
 
 namespace :deploy do
+  task :before_start do
+    run "#{deploy_to}current/script/mail_fetcher stop"
+  end
+  
   task :restart do
     run "touch #{deploy_to}current/tmp/restart.txt"
   end

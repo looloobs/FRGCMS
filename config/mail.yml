@@ -18,3 +18,7 @@ production:
     server: imap.gmail.com
     username: frgcms@gmail.com
     password: frg1cms1
+    receiver: MessageMailer
+    ssl: true
+    port: 993
+    
