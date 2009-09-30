@@ -36,7 +36,7 @@ default_run_options[:pty] = true
 
 namespace :deploy do
   task :before_start do
-    run "#{deploy_to}current/script/mail_fetcher stop production"
+    run "#{deploy_to}current/script/mail_fetcher stop"
   end
   
   task :restart do
@@ -79,5 +79,5 @@ task :after_setup do
   run "mkdir #{deploy_to}static_site"
 end
 task :after_start do
-  run "#{deploy_to}current/script/mail_fetcher start production"
+  run "#{deploy_to}current/script/mail_fetcher start"
 end
