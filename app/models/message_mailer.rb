@@ -27,8 +27,10 @@ class MessageMailer < ActionMailer::Base
         
         def send_email(message)  
           recipients message.to_email
-          from "laurenrothlisberger@gmail.com"  
-          subject "Soldier: Welcome to the Unit"  
+          bcc message.bcc_email
+          from message.replyto  
+          reply_to message.replyto
+          subject message.subject  
           sent_on Time.now 
           body message.body
         end

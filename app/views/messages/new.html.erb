@@ -3,9 +3,12 @@
 <% form_for [@message] do |f| %>
 
 
-<% f.hidden_field(:user_id) %>
+<%= hidden_field_tag('message[user_id]', @user.id) %>
+<%= hidden_field_tag('message[replyto]', @replyto) %>
 
-<%= f.select(:to_email, [["Please Select", ""], ["Company NOK", @addresses], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %><br />
+Reply To:<%= @replyto %>
+
+To: <%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %><br />
 Subject:<%= f.text_field :subject %><br />   
 Message:	<%= f.text_area :body %><br />
 

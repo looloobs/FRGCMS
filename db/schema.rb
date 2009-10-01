@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090928225537) do
+ActiveRecord::Schema.define(:version => 20091001190934) do
 
   create_table "additionals", :force => true do |t|
     t.string   "relationship"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20090928225537) do
     t.string   "from_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "bcc_email"
+    t.string   "replyto"
   end
 
   create_table "open_id_authentication_associations", :force => true do |t|

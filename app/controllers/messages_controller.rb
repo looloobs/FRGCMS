@@ -13,9 +13,13 @@ class MessagesController < ApplicationController
   end
   def new
     @user = User.find_by_login(params[:user_id])
-    @addresses = (@user.company.primaries).collect(&:email).join(",")
-    @primary= @user.company.primaries
-    @message = Message.new 
+    @replyto = @user.email
+    @nok = (@user.company.primaries).collect(&:email).join(",")
+    @spouses = (@user.company.primaries(:conditions => ["relationship = 'spouse'"])).collect(&:email).join(",")
+    @soldiers= (@user.company.soldiers).collect(&:email).join(",")
+    @soldierspouse=((@user.company.soldiers)+(@user.company.primaries(:conditions => ["relationship = 'spouse'"]))).collect(&:email).join(",")
+    @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).join(",")
+    @message = Message.new
    end
    
   def create
