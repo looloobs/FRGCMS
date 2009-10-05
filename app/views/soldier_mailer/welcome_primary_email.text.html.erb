@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html>  
+  <head>  
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />  
+  </head>  
+
+<body> 
+Welcome!<br />
+<p>
+You are now a contact for the Family Readiness Group(FRG) for <%= @soldier.company.nickname %>, <%= @soldier.battalion.unit %>.
+</p>
+Your Soldier,<b> <%= @soldier.rank %> <%= @soldier.firstname %> <%= @soldier.lastname %>,</b> is currently serving with this unit and added you as a contact in this system.
+<p>
+The FRGCMS (Family Readiness Group, Contact Management System) is a way for the unit leaders as well as the Family Readiness Group leader to stay in touch with all our family no matter where they are located. Through this you will receive emails and newsletters keeping you up-to-date on current activity around the unit.
+</p>
+<p>
+Contacts for your Soldier are as follows:<br />
+<p>
+<b>FRG Leader:</b> <%= @soldier.company.users.find_by_position('FRG Leader').name %> : <%= @soldier.company.users.find_by_position('FRG Leader').email %><br />
+<b>Company Commander:</b><%= @soldier.company.users.find_by_position('Company Commander').name %> : <%= @soldier.company.users.find_by_position('Company Commander').email %><br />
+<b>1SG:</b> <%= @soldier.company.users.find_by_position('1st Sergeant').name %> : <%= @soldier.company.users.find_by_position('1st Sergeant').email %><br />
+</p>
+<i>**Your primary contact is the FRG Leader. For serious circumstances please contact the Commander or 1st Sergeant.</i><br />
+</p>
+<p>
+<b>We are excited to have you as a part of our unit.</b><br />
+<%= @soldier.company.nickname %> Command Team
+</p>
+
+<i>(If you would like to be removed from this system please email the FRG leader.)</i>
+	
+</body> 
+</html>

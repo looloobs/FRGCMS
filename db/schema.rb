@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091001190934) do
+ActiveRecord::Schema.define(:version => 20091004193001) do
 
   create_table "additionals", :force => true do |t|
     t.string   "relationship"
@@ -110,6 +110,18 @@ ActiveRecord::Schema.define(:version => 20091001190934) do
     t.string   "replyto"
   end
 
+  create_table "notes", :force => true do |t|
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "user_id"
+    t.string   "to_email"
+    t.string   "from_email"
+    t.string   "bcc_email"
+    t.string   "replyto"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "open_id_authentication_associations", :force => true do |t|
     t.integer "issued"
     t.integer "lifetime"
@@ -179,6 +191,9 @@ ActiveRecord::Schema.define(:version => 20091001190934) do
     t.date     "anni_date",        :limit => 255
     t.boolean  "sms"
     t.string   "address2"
+    t.string   "seniorleader"
+    t.string   "pregnant"
+    t.date     "duedate"
   end
 
   create_table "user_failures", :force => true do |t|

@@ -1,0 +1,5 @@
+:address: smtp.gmail.com
+:port: 587
+:user_name: frgcms@gmail.com
+:password: frg1cms1
+:authentication: :plain

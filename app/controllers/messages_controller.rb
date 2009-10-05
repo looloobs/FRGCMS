@@ -14,14 +14,30 @@ class MessagesController < ApplicationController
   def new
     @user = User.find_by_login(params[:user_id])
     @replyto = @user.email
-    @nok = (@user.company.primaries).collect(&:email).join(",")
-    @spouses = (@user.company.primaries(:conditions => ["relationship = 'spouse'"])).collect(&:email).join(",")
-    @soldiers= (@user.company.soldiers).collect(&:email).join(",")
-    @soldierspouse=((@user.company.soldiers)+(@user.company.primaries(:conditions => ["relationship = 'spouse'"]))).collect(&:email).join(",")
-    @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).join(",")
+    @to = @user.email
+    @position = @user.position
+   
+    if @position == "Battalion Commander" or "Command Sergeant Major" or "FRSA" or "Battalion FRG Leader"
+      @bnok = (@user.battalion.primaries).collect(&:email).join(",")
+      @bspouses = (@user.battalion.primaries(:conditions => ["relationship = 'spouse'"])).collect(&:email).join(",")
+      @bsoldiers= (@user.battalion.soldiers).collect(&:email).join(",")
+      @bsoldierspouse=((@user.battalion.soldiers)+(@user.battalion.primaries(:conditions => ["relationship = 'spouse'"]))).collect(&:email).join(",")
+      @ballcontacts=((@user.battalion.soldiers)+(@user.battalion.primaries)+(@user.battalion.additionals)).collect(&:email).join(",")
+    else
+      @nok = (@user.company.primaries).collect(&:email).join(",")
+      @spouses = (@user.company.primaries(:conditions => ["relationship = 'spouse'"])).collect(&:email).join(",")
+      @soldiers= (@user.company.soldiers).collect(&:email).join(",")
+      @soldierspouse=((@user.company.soldiers)+(@user.company.primaries(:conditions => ["relationship = 'spouse'"]))).collect(&:email).join(",")
+      @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).join(",")
+      
+    end
     @message = Message.new
    end
    
+   def edit
+    @message = Message.find(params[:id])
+   end
+    
   def create
     @user = User.find_by_login(params[:user_id])
     @message = Message.new(params[:message])
@@ -30,7 +46,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-            flash[:notice] = 'Message was sent.'
+            flash[:notice] = 'Your Message was Sent.'
             format.html { redirect_to user_messages_path(current_user)}
             
           else
@@ -45,7 +61,7 @@ class MessagesController < ApplicationController
   # GET /messages/1.xml
   def show
     @message = Message.find(params[:id])
-    @users = User.find_by_login(params[:user_id])
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @message }
@@ -77,6 +93,7 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.xml
   def destroy
+    @user = User.find_by_login(params[:user_id])
     @message = Message.find(params[:id])
     @message.destroy
 

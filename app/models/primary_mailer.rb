@@ -1,19 +1,11 @@
 class PrimaryMailer < ActionMailer::Base
-
+  
   def welcome_primary_email(primary)  
     recipients primary.email
-    from "laurenrothlisberger@gmail.com"  
-    subject "NOK: Welcome to the Unit"  
+    from "frgcms@gmail.com"  
+    subject "A New Spouse Has Join the Unit"  
     sent_on Time.now 
-    body 
-  end
-  
-  def welcome_primary_spouse_email(primary)  
-    recipients primary.email
-    from "laurenrothlisberger@gmail.com"  
-    subject "Spouse: Welcome to the Unit"  
-    sent_on Time.now 
-    body 
+    body :primary => primary, :soldier => primary.soldier
   end
 
 end

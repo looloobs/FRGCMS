@@ -1,6 +1,7 @@
 # Be sure to restart your server when you modify this file
 require 'yaml'
 
+
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
 ENV['RAILS_ENV'] ||= 'production'
@@ -63,6 +64,13 @@ Rails::Initializer.run do |config|
     :session_key => APP_CONFIG['settings']['session_key'],
     :secret      => APP_CONFIG['settings']['secret']
   }
+  
+
+
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
@@ -82,6 +90,7 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+
 end
 
 

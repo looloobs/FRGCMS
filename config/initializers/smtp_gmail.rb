@@ -1,8 +1,6 @@
-ActionMailer::Base.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true,
-  :user_name => "frgcms@gmail.com",
-  :password => "frg1cms1"
-}
+
+require "smtp_tls"
+
+mailer_config = File.open("#{RAILS_ROOT}/config/mailer.yml") 
+mailer_options = YAML.load(mailer_config) 
+ActionMailer::Base.smtp_settings = mailer_options

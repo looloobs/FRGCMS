@@ -2,14 +2,26 @@
   <div id="user-bar-greeting">
         <% if current_user.position == 'Battalion Commander' -%>
 	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id), { :title => "Dashboard" } %> |
-        <% elsif current_user.position == 'Company Commander' -%>
-	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
 		<% elsif current_user.position == 'FRSA' -%>
 	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id, current_user.company_id) %> |
+		<% elsif current_user.position == 'Command Sergeant Major' -%>
+	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id, current_user.company_id) %> |
+		<% elsif current_user.position == 'Battalion FRG Leader' -%>
+	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id, current_user.company_id) %> |
+        <% elsif current_user.position == 'Company Commander' -%>
+	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+		<% elsif current_user.position == '1st Sergeant' -%>
+	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+		<% elsif current_user.position == 'FRG Leader' -%>
+	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+		<% elsif current_user.position == 'Training Room Sergeant' -%>
+	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+	
+		<% else %>
 	    
 	    <% end -%>
 	   
-	    <%= link_to 'Inbox', user_messages_path(current_user), { :title => "Inbox" } %> |
+	    <%= link_to 'Send Messages', new_user_message_path(current_user), { :title => "Send Messages" } %> |
 		<%= link_to 'Profile', user_profile_path(current_user), { :title => "Profile" } %> |
 		
 		

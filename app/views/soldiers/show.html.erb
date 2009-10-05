@@ -41,14 +41,13 @@
 <h1>Children</h1>
 	<div id="soldier_nok">
 		<% @children.each do |child| %>
+		<p>
 		<%=h child.firstname %>	
 		<%=h child.lastname %>	
-		<%=h child.birth_date %>	
+		<%=h child.birth_date %>
+		</p>	
 		<% end %>
 	 </div>
-
-
-
 
   	<% @addi.each do |additional| %>
 <h1>Additional Contact</h1>
@@ -58,7 +57,6 @@
 	<%=h additional.firstname %> <%=h additional.lastname %><br />
 	<%=h additional.address %><br />
 	<%=h additional.city %>, <%=h additional.state %> <%=h additional.zip %><br />
-	<%=h additional.state %><br />
 	</p>
 	<p>
 	<%=h additional.email %><br />

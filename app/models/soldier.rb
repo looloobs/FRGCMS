@@ -6,7 +6,7 @@ class Soldier < ActiveRecord::Base
   has_many :kids
   has_many :users
   accepts_nested_attributes_for :primaries, :kids, :additionals
-  validates_presence_of :rank,:firstname, :lastname, :maritalstatus, :birth_date, :address,:city,:state, :zip, :email, :cell, 
+  validates_presence_of :rank,:firstname, :lastname, :maritalstatus, :birth_date, :address,:city,:state, :zip, :email, :cellphone, 
   :on => :create, :on => :update, :message => "can't be blank"
   
 

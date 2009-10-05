@@ -28,7 +28,7 @@ class MessageMailer < ActionMailer::Base
         def send_email(message)  
           recipients message.to_email
           bcc message.bcc_email
-          from message.replyto  
+          from "frgcms@gmail.com" 
           reply_to message.replyto
           subject message.subject  
           sent_on Time.now 

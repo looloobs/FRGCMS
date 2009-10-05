@@ -12,22 +12,26 @@
 
 		<%= f.label (:lastname, "Last Name:") %>
 	    <%= f.text_field :lastname %>
-
+	  </p>
+	  <p>
 	 	<%= f.label (:address, "Address:") %>
 	    <%= f.text_field :address %>
-
+	  </p>
+	  <p>
 	  	<%= f.label (:city, "City:") %>
 	    <%= f.text_field :city %>
 
 	  	<%= f.label (:state, "State:") %>
-	    <%= f.text_field :state %>
-
+	    <%= f.text_field :state, :size=> 2 %>
+	  
 	  	<%= f.label (:zip, "Zip:") %>
-	    <%= f.text_field :zip %>
-
+	    <%= f.text_field :zip, :size=> 6 %>
+	  </p>
+	<p>
 	  	<%= f.label (:email, "E-Mail:") %>
 	    <%= f.text_field :email %>
-
+		</p>
+		<p>
 	  	<%= f.label (:cellphone, "Cell Phone:") %>
 	    <%= f.text_field :cellphone %>
 
@@ -35,6 +39,7 @@
 	    <%= f.text_field :addphone %>
       </p>
    <%= remove_child_link "remove", f %>
+
   </p>
 
 

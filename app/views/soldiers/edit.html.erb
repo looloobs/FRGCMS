@@ -5,107 +5,136 @@
 <% form_for([@battalion, @company, @soldier]) do |f| %>
   <%= f.error_messages %>
 <div class="form_bg">
-<p>
-    <%= f.label (:rank, "Rank:") %>
-	<%= f.select(:rank, [["Please Select", ""], ["PV1", "PV1"], ["PV2", "PV2"], ["PFC","PFC"], ["SPC", "SPC"], ["CPL", "CPL"], ["SGT", "SGT"], ["SSG", "SSG"], ["SFC", "SFC"], ["MSG", "MSG"], ["1SG", "1SG"], ["SGM", "SGM"], ["CSM", "CSM"], ["WO1", "WO1"], ["CW2", "CW2"], ["CW3", "CW3"], ["CW4", "CW4"], ["CW5", "CW5"], ["2LT", "2LT"], ["1LT", "1LT"], ["CPT", "CPT"], ["MAJ", "MAJ"], ["LTC", "LTC"], ["COL", "COL"]]) %> 
-      	 	 	 	 	 	 	 	 	 	 	 	
+	<p>
+	    <%= f.label (:rank, "Rank:") %>
+		<%= f.select(:rank, [["Please Select", ""], ["PV1", "PV1"], ["PV2", "PV2"], ["PFC","PFC"], ["SPC", "SPC"], ["CPL", "CPL"], ["SGT", "SGT"], ["SSG", "SSG"], ["SFC", "SFC"], ["MSG", "MSG"], ["1SG", "1SG"], ["SGM", "SGM"], ["CSM", "CSM"], ["WO1", "WO1"], ["CW2", "CW2"], ["CW3", "CW3"], ["CW4", "CW4"], ["CW5", "CW5"], ["2LT", "2LT"], ["1LT", "1LT"], ["CPT", "CPT"], ["MAJ", "MAJ"], ["LTC", "LTC"], ["COL", "COL"]]) %> 
+
 
 		<%= f.label (:firstname, "First Name:") %>
 	    <%= f.text_field :firstname %>
 
 		<%= f.label (:lastname, "Last Name:") %>
 	    <%= f.text_field :lastname %>
-
+	</p>
+	<p>
 	    <%= f.label (:maritalstatus, "Marital Status:") %>
 	    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]]) %>	
 
+		<%= f.label (:anni_date, "If Married, Anniversary:") %>
+		<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950) %>
+	</p>
+	<p>
 	  	<%= f.label (:birth_date, "Birthday:") %>
 		<%= f.date_select (:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
+	</p>	
+	<p>
+		<%= f.label (:seniorleader, "Does your unit consider you a Senior Leader? (ie. Platoon SGT and up)") %>
+	    <%= f.select (:seniorleader, [["Please Select", ""], ["Yes", "Yes"], ["No", "NO"]]) %>
+	</p>
+	<p>
+		<%= f.label (:pregnant, "Are you or your spouse expecting a baby?") %>
+	    <%= f.select (:pregnant, [["Please Select", ""], ["Yes", "Yes"], ["No", "NO"]]) %>
 
-	  	<%= f.label (:anni_date, "Anniversary:") %>
-		<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950) %>
-
-		
+	  	<%= f.label (:duedate, "If YES, when is the baby due?") %>
+		<%= f.date_select (:duedate, :order => [:month, :day, :year]) %>
+	</p>
 
 	</p>
 	</div>
 	<h2>Edit Address, Phone & E-Mail</h2>
 	<div class="form_bg">
+		<p>
 	  	<%= f.label (:address, "Address:") %>
 	    <%= f.text_field :address %>
-	
+
 	  	<%= f.label (:address2, "Additional Address (if needed):") %>
 	    <%= f.text_field :address2 %>
-
+		</p>
+		<p>
 	  	<%= f.label (:city, "City:") %>
 	    <%= f.text_field :city %>
 
 	  	<%= f.label (:state, "State:") %>
-	    <%= f.text_field :state %>
+	    <%= f.text_field :state, :size => 2 %>
 
 	  	<%= f.label (:zip, "Zip:") %>
-	    <%= f.text_field :zip %>
-
+	    <%= f.text_field :zip, :size => 6 %>
+		</p>
+		<p>
 	  	<%= f.label (:email, "E-Mail:") %>
 	    <%= f.text_field :email %>
-
+		</p>
+		<p>
 	  	<%= f.label (:cellphone, "Cell Phone:") %>
-	    <%= f.text_field :cellphone %>
-
-	  	<%= f.label (:cellphonecarrier, "Cell Phone Carrier:") %>
-	    <%= f.text_field :cellphonecarrier %>
-
-	  	<%= f.label (:sms, "SMS") %>
-	    <%= f.check_box :sms %>
+	    <%= f.text_field :cellphone, :size => 15 %>
 
 	  	<%= f.label (:addphone, "Additional Phone Number:") %>
-	    <%= f.text_field :addphone %>
+	    <%= f.text_field :addphone, :size => 15 %>
+		</p>
+		<p>
+	  	<%= f.label (:cellphonecarrier, "Cell Phone Carrier:") %>
+	    <%= f.select (:cellphonecarrier, [["Please Select", ""], ["Verizon", "Verizon"], ["T-Mobile", "T-Mobile"], ["ATT", "ATT"], ["Sprint", "Sprint"], ["Virgin Mobile", "Virgin Mobile"]]) %>
 
+	  	<%= f.label (:sms, "Do you give permission for the unit to text message you?") %>
+	    <%= f.select (:sms, [["Please Select", ""], ["Yes", "Yes"], ["No", "No"]]) %>
+		</p>
+
+		</p>
 	</div>
 	<h2>Next of Kin Information</h2>
 	<div class="form_bg">
 
 		    <% f.fields_for :primaries do |primary_form| %>
-		      <p>
-		        <%= primary_form.label (:firstname, "First Name:") %>
+
+
+				<%= primary_form.hidden_field(:battalion_id) %>
+				<%= primary_form.hidden_field(:company_id) %>
+				 <p>
+		        <%= primary_form.label(:firstname, "First Name:") %>
 			    <%= primary_form.text_field :firstname %>
 
 				<%= primary_form.label (:lastname, "Last Name:") %>
 			    <%= primary_form.text_field :lastname %>
+				</p>
+				<p>
+				<%= primary_form.label(:relationship, "Relationship:") %>
+			    <%= primary_form.select(:relationship, [["Please Select", ""], ["Spouse", "Spouse"], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %>
 
-				<%= primary_form.label (:relationship, "Relationship:") %>
-			    <%= primary_form.select (:relationship, [["Please Select", ""], ["Spouse", "Spouse"], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %>
-
-			  	<%= primary_form.label (:birth_date, "Birthday:") %>
+			  	<%= primary_form.label(:birth_date, "Birthday:") %>
 				<%= primary_form.date_select(:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
-
-
-			 	<%= primary_form.label (:address, "Address:") %>
+			    </p>
+				<p>
+			 	<%= primary_form.label(:address, "Address:") %>
 			    <%= primary_form.text_field :address %>
-
-			  	<%= primary_form.label (:city, "City:") %>
+				</p>
+				<p>
+			  	<%= primary_form.label(:city, "City:") %>
 			    <%= primary_form.text_field :city %>
 
-			  	<%= primary_form.label (:state, "State:") %>
-			    <%= primary_form.text_field :state %>
+			  	<%= primary_form.label(:state, "State:") %>
+			    <%= primary_form.text_field :state, :size => 2 %>
 
 			  	<%= primary_form.label (:zip, "Zip:") %>
-			    <%= primary_form.text_field :zip %>
-
+			    <%= primary_form.text_field :zip, :size => 6 %>
+				</p>
+				<p>
 			  	<%= primary_form.label (:email, "E-Mail:") %>
 			    <%= primary_form.text_field :email %>
-
+				</p>
+				<p>
 			  	<%= primary_form.label (:cellphone, "Cell Phone:") %>
-			    <%= primary_form.text_field :cellphone %>
-
-			  	<%= primary_form.label (:cellphonecarrier, "Cell Phone Carrier:") %>
-			    <%= primary_form.text_field :cellphonecarrier %>
-
-			  	<%= primary_form.label (:sms, "SMS") %>
-			    <%= primary_form.check_box :sms %>
+			    <%= primary_form.text_field :cellphone, :size => 15 %>
 
 			  	<%= primary_form.label (:addphone, "Additional Phone Number:") %>
-			    <%= primary_form.text_field :addphone %>
+			    <%= primary_form.text_field :addphone, :size => 15 %>
+				</p>
+				<p>
+			  	<%= primary_form.label (:cellphonecarrier, "Cell Phone Carrier:") %>
+			    <%= primary_form.select :cellphonecarrier, [["Please Select", ""], ["Verizon", "Verizon"], ["T-Mobile", "T-Mobile"], ["ATT", "ATT"], ["Sprint", "Sprint"], ["Virgin Mobile", "Virgin Mobile"]] %>
+
+			  	<%= primary_form.label (:sms, "Do you give permission for the unit to text message you?") %>
+			    <%= primary_form.select (:sms, [["Please Select", ""], ["Yes", "Yes"], ["No", "No"]]) %>
+
 		      </p>
 		    <% end %>
 

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :notes
+
   map.resources :users_messages
 
   map.resources :users, :has_many => [:messages]

@@ -1,19 +1,14 @@
-<h1>Listing messages</h1>
+<div class ="red"><%= flash_messages %></div>
+
+<h1>Your Sent Messages</h1>
 
 <table id="hor-minimalist-b">
-  <tr>
-	<th>From</th>
-    <th>Message</th>
-  </tr>
+
 
 <% @messages.each do |message| %>
   <tr>
-	<td width=30% ><%=h message.from_email %></td>
-    <td><b><%= link_to message.subject, user_message_path(current_user, message) %></b> - <%=h truncate(message.body, :length => 50) %></td>
-	
 
-    <td><%= link_to "Show", user_message_path(current_user, message) %></td>
-    
+    <td><b><%= truncate(message.subject, :length => 20) %></b> - <%=h truncate(message.body, :length => 90) %></td>   
   </tr>
 <% end %>
 </table>

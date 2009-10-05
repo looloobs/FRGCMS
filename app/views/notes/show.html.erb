@@ -1,0 +1,38 @@
+<p>
+  <b>Body:</b>
+  <%=h @note.body %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%=h @note.subject %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @note.user_id %>
+</p>
+
+<p>
+  <b>To email:</b>
+  <%=h @note.to_email %>
+</p>
+
+<p>
+  <b>From email:</b>
+  <%=h @note.from_email %>
+</p>
+
+<p>
+  <b>Bcc email:</b>
+  <%=h @note.bcc_email %>
+</p>
+
+<p>
+  <b>Replyto:</b>
+  <%=h @note.replyto %>
+</p>
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>
