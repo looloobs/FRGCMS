@@ -2,10 +2,8 @@
 <div class="fields">
 	<h2>Additional Contact</h2>
 	<div class="form_bg">
-	
-	    <%= hidden_field_tag('additional[battalion_id]', @battalion.id) %>
-		<p>
-		<%= hidden_field_tag('additional[company_id]', @company.id) %>
+		<%= f.hidden_field(:battalion_id, :value=>@battalion.id) %>
+		<%= f.hidden_field(:company_id, :value=>@company.id) %>
       <p>
         <%= f.label (:firstname, "First Name:") %>
 	    <%= f.text_field :firstname %>

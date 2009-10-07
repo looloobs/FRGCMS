@@ -4,6 +4,7 @@
   <%= f.error_messages %>
 
 <%= hidden_field_tag('soldier[battalion_id]', @battalion.id) %>
+
 <p>
 <%= hidden_field_tag('soldier[company_id]', @company.id) %>
 <div id ="form">
@@ -152,6 +153,7 @@
 <p><%= add_child_link "New Child", f, :kids %></p>
 
   <% f.fields_for :additionals do |additional_form| %>
+
     <%= render :partial => 'additional', :locals => { :f => additional_form } %>
   <% end %>
   <p><%= add_child_link "New Additional", f, :additionals %></p>

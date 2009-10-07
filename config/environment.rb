@@ -84,7 +84,7 @@ Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
-	config.active_record.observers = :user_observer, :soldier_observer, :primary_observer, :message_observer
+	config.active_record.observers = :user_observer, :soldier_observer, :primary_observer, :message_observer, :additional_observer
  
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
