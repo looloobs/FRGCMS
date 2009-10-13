@@ -21,7 +21,7 @@ Example: SSG Smith's anniversary is today 10/10.<br />
 
 <% content_for :dashboard do -%>
 <%= link_to image_tag("../images/buttons/add_soldier.jpg", :border=>0), new_battalion_company_soldier_path(@battalion, @company) %><br />
-
+There are <%= @soldiers.count %> entered into the system.
 <div id="bc_box">
 	<% @soldiers.each do |soldier| %>
 	<div id="bc_focus">
