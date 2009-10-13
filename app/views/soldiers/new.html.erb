@@ -159,9 +159,7 @@
   <% end %>
   <p><%= add_child_link "New Additional", f, :additionals %></p>
 
-<% f.fields_for :users do |user_form| %>
-  <%= user_form.hidden_field(:soldier_id) %>
-<% end %>
+
 <p>
   <%= f.submit 'Create'%>
 </p>
