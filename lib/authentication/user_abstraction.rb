@@ -20,7 +20,7 @@ module Authentication
 
   				validates_presence_of     :email
   				validates_length_of       :email,    :within => 6..100 #r@a.wk
-  				validates_uniqueness_of   :email
+  				#validates_uniqueness_of   :email
   				validates_format_of       :email,    :with => Authentication.email_regex, 
 																							 :message => Authentication.bad_email_message
 
@@ -34,7 +34,7 @@ module Authentication
 																			:on => :update, :allow_nil => true, :if => :site_in_beta?
 
 					before_create :set_invitation_limit
-				  before_create :make_activation_code
+				  #before_create :make_activation_code
  
 					belongs_to :invitation
 					has_and_belongs_to_many :roles

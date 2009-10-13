@@ -3,7 +3,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base  
   belongs_to :battalion
   belongs_to :company
-  belongs_to :soldier
+  has_many :soldiers
   has_many :messages
   
 	include Authentication
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
 	# Add identity_url if you want users to be able to update their OpenID identity
-  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :position, :battalion_id, :company_id
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :invitation_token, :position, :battalion_id, :company_id, :soldier_id
 
 	def self.member_list(page)
 		paginate :all,

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091004193001) do
+ActiveRecord::Schema.define(:version => 20091009024505) do
 
   create_table "additionals", :force => true do |t|
     t.string   "relationship"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(:version => 20091004193001) do
     t.string   "position"
     t.integer  "battalion_id"
     t.integer  "company_id"
+    t.integer  "soldier_id"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

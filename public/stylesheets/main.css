@@ -397,7 +397,9 @@
 	
 	}
 	#battalion_show_sidebar {
-	
+	}
+	#battalion_show_sidebar p {
+	    
 	}
 	#battalion_show_sidebar a {
 		font-family: Arial, "MS Verdana", sans-serif;
@@ -405,7 +407,10 @@
 		color:black;
 		line-height:10px;
 		text-decoration:none;
+	
+		
 	}
+	
 	#battalion_show_sidebar a:hover {
 		font-family: Arial, "MS Verdana", sans-serif;
 		font-size:18px;
@@ -413,6 +418,7 @@
 		line-height:10px;
 		text-decoration:none;
 		background:white;
+	
 	}
 	#battalion_show h1 {
 		font-family: Arial, "MS Verdana", sans-serif;

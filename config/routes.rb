@@ -34,8 +34,7 @@ end
   map.beta_signup '/signup/:invitation_token', :controller => 'user/profiles', :action => 'new'
 	map.openid_signup '/openid_signup', :controller => 'openid_sessions', :action => 'index'
 	map.beta_openid_signup '/openid_signup/:invitation_token', :controller => 'openid_sessions', :action => 'index'
-  map.activate '/activate/:activation_code', :controller => 'user/activations', 
-		:action => 'activate', :activation_code => nil
+  #map.activate '/activate/:activation_code', :controller => 'user/activations', :action => 'activate', :activation_code => nil
   map.forgot_password '/forgot_password', :controller => 'user/passwords', :action => 'new'  
 	map.reset_password '/reset_password/:id', :controller => 'user/passwords', :action => 'edit', :id => nil  
 	map.resend_activation '/resend_activation', :controller => 'user/activations', :action => 'new'

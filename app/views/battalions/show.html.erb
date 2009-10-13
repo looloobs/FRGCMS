@@ -12,14 +12,14 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 
 <% content_for :column do -%>
 <div id="battalion_show_sidebar">
-<p>
-	<% @company.each do |c| %>
-	  <tr>
-	    <td><%= link_to c.name, battalion_company_path(@battalion, c) %></td><br />
 
-	  </tr>
+	<% @company.each do |c| %>
+	  
+	    <p><%= link_to c.name, battalion_company_path(@battalion, c) %></p>
+
+	 
 	<% end %>
-</p>
+
 <br />
 </div>
 <% end -%>

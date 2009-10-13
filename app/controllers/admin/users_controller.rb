@@ -16,6 +16,11 @@ class Admin::UsersController < ApplicationController
     end
     redirect_to :action => 'index'		
 	end
+	
+	def destroy
+    @user = User.find_by_login(params[:id])
+    @user.destroy
+  end
 
 end
 

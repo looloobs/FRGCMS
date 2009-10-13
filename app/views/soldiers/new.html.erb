@@ -7,6 +7,7 @@
 
 <p>
 <%= hidden_field_tag('soldier[company_id]', @company.id) %>
+<%= hidden_field_tag('current_user[soldier_id]', @soldier.id) %>
 <div id ="form">
 	<h1>Add A New Soldier</h1>
 <div class="form_bg">
@@ -158,6 +159,9 @@
   <% end %>
   <p><%= add_child_link "New Additional", f, :additionals %></p>
 
+<% f.fields_for :users do |user_form| %>
+  <%= user_form.hidden_field(:soldier_id) %>
+<% end %>
 <p>
   <%= f.submit 'Create'%>
 </p>
