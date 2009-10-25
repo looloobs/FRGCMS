@@ -23,6 +23,10 @@
 <% end %>
 <% if @position == "Company Commander" %>
 <%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
+<% elsif @position == "1st Sergeant" %>
+<%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
+<% elsif @position == "FRG Leader" %>
+<%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
 <% end %>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
 <p>Message:<br /><%= f.text_area :body, :cols => 117, :rows => 15 %><br /></p>
