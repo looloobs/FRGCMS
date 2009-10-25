@@ -12,20 +12,12 @@
 <p>
 <h1>Send Message To: 
 <%= @position %>
-<% if @position == "Battalion Commander" %>
+<% if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader"].include?(@position) %>
 <%= f.select(:bcc_email, [["Please Select", ""], [@bnok, @bnok], [@bspouses, @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @allcontacts]]) %></h1><br />
-<% elsif @position == "Command Sergeant Major" %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["Battalion NOK", @bnok], ["Battalion Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts]]) %></h1><br />
-<% elsif @position == "Battalion FRG Leader" %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["Battalion NOK", @bnok], ["Battalion Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts]]) %></h1><br />
-<% elsif @position == "FRSA" %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["Battalion NOK", @bnok], ["Battalion Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts]]) %></h1><br />
-<% elsif @position == "Company Commander" %>
+
+<% else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position) %>
 <%= f.select(:bcc_email, [["Please Select", ""], [@nok, @nok], [@spouses, @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
-<% elsif @position == "1st Sergeant" %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
-<% elsif @position == "FRG Leader" %>
-<%= f.select(:bcc_email, [["Please Select", ""], [@nok, @nok], [@spouses, @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
+
 <% end %>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
 <p>Message:<br /><%= f.text_area :body, :cols => 117, :rows => 15 %><br /></p>
