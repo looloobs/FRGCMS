@@ -10,4 +10,14 @@ class Soldier < ActiveRecord::Base
   :on => :create, :on => :create, :message => "can't be blank"
   validates_presence_of :rank,:firstname, :lastname, :maritalstatus, :birth_date, :address,:city,:state, :zip, :email, :cellphone, 
   :on => :create, :on => :update, :message => "can't be blank" 
+
+  def sms_message(value)
+      if value == True
+        'Yes'
+      else value == False
+        'No'
+      end
+  end
+
+
 end

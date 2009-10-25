@@ -13,12 +13,14 @@ class BattalionsController < ApplicationController
   # GET /battalions/1.xml
   def show
     
-    @battalion = Battalion.find(params[:id])
+    @battalion = Battalion.find(params[:id], :include => "soldiers")
     @company = @battalion.companies([:order => "name"]) 
     @user = @battalion.users
     @bc= @user.find_by_position('Battalion Commander')
     @sm= @user.find_by_position('Command Sergeant Major')
     @frsa= @user.find_by_position('FRSA')
+    @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"]) 
+    
     render :layout => "dashboard"
 
     

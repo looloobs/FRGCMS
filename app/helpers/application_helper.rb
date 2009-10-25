@@ -70,5 +70,7 @@ module ApplicationHelper
 	    page[div].focus
 	  end
 	end
+	
+
 
 end

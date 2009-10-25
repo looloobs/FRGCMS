@@ -16,21 +16,20 @@ class MessagesController < ApplicationController
     @replyto = @user.email
     @to = @user.email
     @position = @user.position
-   
-    if @position == "Battalion Commander" or "Command Sergeant Major" or "FRSA" or "Battalion FRG Leader"
-      @bnok = (@user.battalion.primaries).collect(&:email).join(",")
-      @bspouses = (@user.battalion.primaries(:conditions => ["relationship = 'spouse'"])).collect(&:email).join(",")
-      @bsoldiers= (@user.battalion.soldiers).collect(&:email).join(",")
-      @bsoldierspouse=((@user.battalion.soldiers)+(@user.battalion.primaries(:conditions => ["relationship = 'spouse'"]))).collect(&:email).join(",")
-      @ballcontacts=((@user.battalion.soldiers)+(@user.battalion.primaries)+(@user.battalion.additionals)).collect(&:email).join(",")
-    else
-      @nok = (@user.company.primaries).collect(&:email).join(",")
-      @spouses = (@user.company.primaries(:conditions => ["relationship = 'spouse'"])).collect(&:email).join(",")
-      @soldiers= (@user.company.soldiers).collect(&:email).join(",")
-      @soldierspouse=((@user.company.soldiers)+(@user.company.primaries(:conditions => ["relationship = 'spouse'"]))).collect(&:email).join(",")
-      @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).join(",")
-      
-    end
+    if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader"].include?(@position)
+      @bnok = (@user.battalion.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @bspouses = (@user.battalion.primaries.find(:all,:conditions => ["relationship = 'Spouse'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @bsoldiers= (@user.battalion.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @bsoldierspouse=((@user.battalion.soldiers)+(@user.battalion.primaries.find(:all,:conditions => ["relationship = 'Spouse'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @ballcontacts=((@user.battalion.soldiers)+(@user.battalion.primaries)+(@user.battalion.additionals)).collect(&:email).select{|s| !s.blank?}.join(", ")
+    else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position)
+      @nok = (@user.company.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @spouses = (@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @soldiers= (@user.company.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @soldierspouse=((@user.company.soldiers)+(@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).select{|s| !s.blank?}.join(", ")
+    end 
+    
     @message = Message.new
    end
    
