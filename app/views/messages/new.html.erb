@@ -13,7 +13,7 @@
 <h1>Send Message To: 
 <%= @position %>
 <% if @position == "Battalion Commander" %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["Battalion NOK", @bnok], ["Battalion Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @allcontacts]]) %></h1><br />
+<%= f.select(:bcc_email, [["Please Select", ""], [@bnok, @bnok], [@bspouses, @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @allcontacts]]) %></h1><br />
 <% elsif @position == "Command Sergeant Major" %>
 <%= f.select(:bcc_email, [["Please Select", ""], ["Battalion NOK", @bnok], ["Battalion Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts]]) %></h1><br />
 <% elsif @position == "Battalion FRG Leader" %>
@@ -22,7 +22,7 @@
 <%= f.select(:bcc_email, [["Please Select", ""], ["Battalion NOK", @bnok], ["Battalion Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts]]) %></h1><br />
 <% end %>
 <% if @position == "Company Commander" %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
+<%= f.select(:bcc_email, [["Please Select", ""], [@nok, @nok], [@spouses, @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
 <% elsif @position == "1st Sergeant" %>
 <%= f.select(:bcc_email, [["Please Select", ""], ["Company NOK", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
 <% elsif @position == "FRG Leader" %>
