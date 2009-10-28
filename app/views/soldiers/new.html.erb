@@ -7,7 +7,7 @@
 
 <p>
 <%= hidden_field_tag('soldier[company_id]', @company.id) %>
-<%= hidden_field_tag('current_user[soldier_id]', @soldier.id) %>
+
 <div id ="form">
 	<h1>Add A New Soldier</h1>
 <div class="form_bg">
@@ -93,10 +93,8 @@
 <div class="form_bg">
   	
 	    <% f.fields_for :primaries do |primary_form| %>
-	     
-		
-			<%= primary_form.hidden_field(:battalion_id) %>
-			<%= primary_form.hidden_field(:company_id) %>
+	     	<%= primary_form.hidden_field :battalion_id, :value => @battalion.id %>
+			<%= primary_form.hidden_field :company_id, :value => @company.id %>
 			 <p>
 	        <%= primary_form.label(:firstname, "First Name:") %>
 		    <%= primary_form.text_field :firstname %>
