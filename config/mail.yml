@@ -1,11 +1,10 @@
 development:
     type: imap
-    server: imap.gmail.com
-    username: frgcms@gmail.com
-    password: frg1cms1
+    server: mail.blueboxgrid.com 
+    username: admin@frgcms.com
+    password: laurenrothlisberger
     receiver: MessageMailer
-    ssl: true
-    port: 993
+    port: 2500 
 
 test:
     type: imap
@@ -15,10 +14,9 @@ test:
     
 production:
     type: imap
-    server: imap.gmail.com
-    username: frgcms@gmail.com
-    password: frg1cms1
+    server: mail.blueboxgrid.com 
+    username: admin@frgcms.com
+    password: laurenrothlisberger
     receiver: MessageMailer
-    ssl: true
-    port: 993
+    port: 2500
     

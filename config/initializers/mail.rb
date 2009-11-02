@@ -1,14 +1,12 @@
 # Email settings
-require 'smtp_tls'
+#require 'smtp_tls'
 
 ActionMailer::Base.smtp_settings = {
-  :address => "smtp.gmail.com",
-  :port => 587,
-  :authentication => :plain,
-  :enable_starttls_auto => true,
-  :user_name => "frgcms@gmail.com",
-  :password => "frg1cms1"
+  :address => "mail.blueboxgrid.com",
+  :port => 2500,
+  :authentication => :login,
+  :user_name => "admin@frgcms.com",
+  :password => "laurenrothlisberger"
   }
-
 
 

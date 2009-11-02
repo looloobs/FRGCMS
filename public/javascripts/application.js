@@ -16,3 +16,12 @@ function remove_fields(link) {
   }
   $(link).up(".fields").hide();
 }
+
+function check_selected_value(soldier_maritalstatus) {
+  if (document.getElementById(soldier_maritalstatus).value == "Single") {
+    document.getElementById('soldier_anni_date').disabled = true;
+  }
+  else {
+    document.getElementById('soldier_anni_date').disabled = false;
+  }
+}

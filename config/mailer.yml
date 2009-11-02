@@ -1,5 +1,6 @@
-:address: smtp.gmail.com
-:port: 587
-:user_name: frgcms@gmail.com
-:password: frg1cms1
+:address: mail.blueboxgrid.com 
+:port: 2500
+:user_name: admin@frgcms.com
+:password: laurenrothlisberger
 :authentication: :plain
+
