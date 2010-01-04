@@ -28,14 +28,19 @@ class MessageMailer < ActionMailer::Base
         def send_email(message)  
           recipients message.to_email
           bcc message.bcc_email
-          from "admin@frgcms.com" 
-          reply_to message.replyto
-          subject message.subject  
-          sent_on Time.now 
+          cc message.cc_mail
+          from message.to_email 
+          #reply_to message.replyto
+          subject message.subject
           body message.body
-        end
-        
+          sent_on Time.now 
+           
+          unless message.attachment_file_name.blank? 
+                attachment "application/octet-stream" do |a|  
+                  a.body = File.read(message.attachment.to_file.path) 
+                  a.filename = message.attachment_file_name
+                end
+          end
 
-  end
-  
-
+          end
+end

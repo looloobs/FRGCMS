@@ -23,7 +23,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :battalions do |battalion| 
     battalion.resources :companies
     battalion.resources :companies do |company|
-      company.resources :soldiers 
+      company.resources :soldiers
+      company.resources :primaries 
+        company.resources :soldiers do |soldier|
+          soldier.resources :additionals
+        end
   end
 end
 

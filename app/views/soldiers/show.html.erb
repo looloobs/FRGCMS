@@ -26,7 +26,6 @@
 		<%=h primary.firstname %> <%=h primary.lastname %><br />
 		<%=h primary.address %><br />
 		<%=h primary.city %>, <%=h primary.state %> <%=h primary.zip %><br />
-		<%=h primary.state %><br />
 		</p>
 		<p>
 		<%=h primary.email %><br />
@@ -52,6 +51,7 @@
 
   	<% @addi.each do |additional| %>
 <h1>Additional Contact</h1>
+<%= link_to image_tag("../images/buttons/delete.png", :border=>0), battalion_company_soldier_additional_path(@battalion,@company, @soldier,@addi), :confirm => 'Are you sure?', :method => :delete %> Delete this Additional Contact.
 <div id="soldier_add">
 	<%=h additional.relationship %><br />
 	<p>

@@ -11,8 +11,8 @@ class Soldier < ActiveRecord::Base
   
   validates_presence_of :rank,:firstname, :lastname, :maritalstatus, :birth_date, :address,:city,:state, :zip, :email, :cellphone, 
   :on => :create, :on => :create, :message => "can't be blank"
-  validates_presence_of :rank,:firstname, :lastname, :maritalstatus, :birth_date, :address,:city,:state, :zip, :email, :cellphone, 
-  :on => :create, :on => :update, :message => "can't be blank" 
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
 
   def sms_message(value)
       if value == True
@@ -20,6 +20,14 @@ class Soldier < ActiveRecord::Base
       else value == False
         'No'
       end
+  end
+  
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['lastname LIKE ?', "%#{search}%"], :order => 'lastname')
+    else
+      find(:all, :order => 'lastname')
+    end
   end
 
 

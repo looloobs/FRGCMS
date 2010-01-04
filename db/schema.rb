@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091009024505) do
+ActiveRecord::Schema.define(:version => 20091231024956) do
 
   create_table "additionals", :force => true do |t|
     t.string   "relationship"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20091009024505) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.integer  "attached_id"
   end
 
   create_table "four_oh_fours", :force => true do |t|
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20091009024505) do
     t.integer  "soldier_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "logged_exceptions", :force => true do |t|
@@ -108,6 +110,11 @@ ActiveRecord::Schema.define(:version => 20091009024505) do
     t.datetime "updated_at"
     t.string   "bcc_email"
     t.string   "replyto"
+    t.string   "cc_mail"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
   create_table "notes", :force => true do |t|
@@ -156,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20091009024505) do
     t.datetime "updated_at"
     t.integer  "battalion_id"
     t.integer  "company_id"
+    t.string   "contacted"
   end
 
   create_table "roles", :force => true do |t|

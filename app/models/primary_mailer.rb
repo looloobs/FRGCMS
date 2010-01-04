@@ -11,7 +11,7 @@ class PrimaryMailer < ActionMailer::Base
   
   def welcome_frg_email(primary)  
     recipients primary.company.users.find_by_position('FRG Leader').email
-    from "frgcms@gmail.com"
+    from "admin@frgcms.com"
     reply_to primary.company.users.find_by_position('FRG Leader').email  
     subject "New Spouse Added for " .concat(primary.soldier.rank).concat(" ").concat(primary.soldier.firstname).concat(" ").concat(primary.soldier.lastname)
     sent_on Time.now 

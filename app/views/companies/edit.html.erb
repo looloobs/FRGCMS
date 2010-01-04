@@ -8,9 +8,13 @@
     <%= f.text_field :installation_id %>
   </p>
   <p>
-    <%= f.label :battalion_id %><br />
-    <%= f.text_field :battalion_id %>
+    <%= f.label :battalion_id, "Battalion/Squadron:" %><br />
+    <%= f.collection_select(:battalion_id, @battalion, :id, :unit, {:include_blank => true}) %>
   </p>
+  <p><div class="red">
+    <%= f.label :attached_id, "**If you are currently attached to another Battalion/Squadron:" %><br />
+    <%= f.collection_select(:attached_id, @battalion, :id, :unit, {:include_blank => true}) %>
+  </div></p>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

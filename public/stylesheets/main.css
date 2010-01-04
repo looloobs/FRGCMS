@@ -36,6 +36,10 @@
 	.right{
 		float:right;
 	}
+	.search{
+		float:right;
+		padding-right:50px;
+	}
 	#wrap {
 	 	width:1000px;
 	 	margin:0 auto;

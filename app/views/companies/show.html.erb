@@ -10,18 +10,28 @@
 </div>
 <% content_for :column do -%>
 <div id="company_show_sidebar">
-<p>
-This area will show recent activity in the future:<br />
-Example: SSG Smith's anniversary is today 10/10.<br />
 
-</p>
-<br />
 </div>
 <% end -%>
 
 <% content_for :dashboard do -%>
+<div id="form">
+	<div class="search">
+<% form_tag battalion_company_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search by LAST NAME", :name => nil %>
+
+  </p>
+<% end %>
+	</div>
+</div>
 <%= link_to image_tag("../images/buttons/add_soldier.jpg", :border=>0), new_battalion_company_soldier_path(@battalion, @company) %><br />
-There are <%= @soldiers.count %> entered into the system.
+<p>
+There are <%= @soldiers.size %> Soldiers in <%= @company.name %>.<br />
+There are <%= @primary.size %> Spouses in <%= @company.name %>.<br />
+There are <%= @kid.size %> Kids in <%= @company.name %>.<br />
+</p>
 <div id="bc_box">
 	<% @soldiers.each do |soldier| %>
 	<div id="bc_focus">

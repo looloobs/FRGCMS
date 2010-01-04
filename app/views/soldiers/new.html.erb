@@ -25,10 +25,10 @@
 </p>
 <p>
     <%= f.label (:maritalstatus, "Marital Status:") %>
-    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]]) %>	
-
+    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]], :onchange => "check_selected_value('soldier_maritalstatus');") %>
+	
 	<%= f.label (:anni_date, "If Married, Anniversary:") %>
-	<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950) %>
+	<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950, :include_blank => true) %>
 </p>
 <p>
   	<%= f.label (:birth_date, "Birthday:") %>
@@ -43,7 +43,7 @@
     <%= f.select (:pregnant, [["Please Select", ""], ["Yes", "Yes"], ["No", "NO"]]) %>
 
   	<%= f.label (:duedate, "If YES, when is the baby due?") %>
-	<%= f.date_select (:duedate, :order => [:month, :day, :year]) %>
+	<%= f.date_select (:duedate, :order => [:month, :day, :year], :include_blank => true) %>
 </p>
 
 </p>
@@ -89,7 +89,7 @@
 	</p>
 </div>
 <h2>Next of Kin Information (NOK)</h2>
-<div class="red">**NOK information is required for every Soldier</div>
+<div class="red">**NOK information is required for every Soldier.</div>
 <div class="form_bg">
   	
 	    <% f.fields_for :primaries do |primary_form| %>
@@ -102,10 +102,11 @@
 			<%= primary_form.label (:lastname, "Last Name:") %>
 		    <%= primary_form.text_field :lastname %>
 			</p>
-			<p>
+			<p><div class="red">If you are married, your NOK is your spouse.</div>
 			<%= primary_form.label(:relationship, "Relationship:") %>
 		    <%= primary_form.select(:relationship, [["Please Select", ""], ["Spouse", "Spouse"], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %>
-			
+			</p>
+			<p>
 		  	<%= primary_form.label(:birth_date, "Birthday:") %>
 			<%= primary_form.date_select(:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
 		    </p>
@@ -124,8 +125,13 @@
 		    <%= primary_form.text_field :zip, :size => 6 %>
 			</p>
 			<p>
+			<div class="red">If your NOK does not have an e-mail address DO NOT put your own, leave it blank.<br /></div>
 		  	<%= primary_form.label (:email, "E-Mail:") %>
 		    <%= primary_form.text_field :email %>
+			</p>
+			<p>
+		  	<%= primary_form.label (:contacted, "Would your NOK contact like to receive information from the Family Readiness Group?") %>
+		    <%= primary_form.select(:contacted, [["Yes", "Yes"], ["No", "No"]]) %>
 			</p>
 			<p>
 		  	<%= primary_form.label (:cellphone, "Cell Phone:") %>

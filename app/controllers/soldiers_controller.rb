@@ -2,8 +2,8 @@ class SoldiersController < ApplicationController
   # GET /soldiers
   # GET /soldiers.xml
   def index
-    @soldiers = Soldier.all
-
+    @soldiers = Soldier.find(:all, :conditions => ['lastname LIKE ?', "%#{params[:search]}%"])
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @soldiers }
@@ -44,6 +44,8 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @primarys = @soldier.primaries
+    @addi = @soldier.additionals
   end
 
   # POST /soldiers
@@ -90,6 +92,8 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @primarys = @soldier.primaries
+    @primarys.destroy
     @soldier.destroy
 
     respond_to do |format|

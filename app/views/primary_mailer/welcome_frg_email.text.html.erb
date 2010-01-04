@@ -9,18 +9,17 @@
 Hi,
 </p>
 <p>
-Just to let you know a new Soldier has joined the unit.
+A new Soldier, <%= @soldier.rank %> <%= @soldier.lastname %>, has joined <%= @soldier.company.name %>.
 </p>
 <p>
+<%= @soldier.rank %> <%= @soldier.lastname %>'s Spouse is: <br />
 
-<p>
-<%= @soldier.primary.firstname %>
-Relationship
-Email
-Phone
+Name: <%= @primary.firstname %> <%= @primary.lastname %><br />
+Email: <%= @primary.email %><br />
+Phone: <%= @primary.cellphone %><br />
 </p>
 <p>
-If the Soldier has a local spouse please be sure to welcome her into the Unit.
+Please be sure to welcome this spouse into <%= @soldier.company.name %>.
 </p>
 </body> 
 </html>

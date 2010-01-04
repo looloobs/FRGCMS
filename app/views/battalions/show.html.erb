@@ -19,16 +19,21 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 
 	 
 	<% end %>
+	
+<div class="red">	Attached Units: </div>
+	<% @attached.each do |a| %>
+	  
+	    <p><%= link_to a.name, battalion_company_path(@attached, a) %></p>
+
+	 
+	<% end %>
 
 <br />
 </div>
 <% end -%>
 
 <% content_for :dashboard do -%>
-	*** This area will be used to give updates on the battalion. ***<br />
-	Examples:<br />
-	-Chaos company added two new spouses.<br />
-	-Chaos company SSG Smith had an anniversary. <br />
+
 	<div id="bc_box">
 		<% @soldier.each do |soldier| %>
 		<div id="bc_focus">

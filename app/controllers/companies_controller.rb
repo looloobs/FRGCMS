@@ -31,7 +31,10 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
     @cc = @company.users.find_by_position('Company Commander')
     @fs = @company.users.find_by_position('1st Sergeant')
     @frg = @company.users.find_by_position('FRG Leader')
-    @soldiers = @company.soldiers
+    @soldiers = @company.soldiers.search params[:search]
+    @primary = @company.primaries.find(:all,:conditions => ["relationship = 'Spouse'"])
+    @kid = @company.kids
+ 
     render :layout => "dashboard"
   end
 
@@ -39,7 +42,7 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
   # GET /companies/new.xml
   def new
     @company = Company.new
-
+    @battalion = Battalion.all
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @company }
@@ -49,6 +52,7 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
   # GET /companies/1/edit
   def edit
     @company = Company.find(params[:id])
+    @battalion = Battalion.all
   end
 
   # POST /companies

@@ -1,26 +1,27 @@
-<div id ="message">
-
-
-<% form_for [@message] do |f| %>
+<div id="message">
+	
+<% form_for [@message], :html => { :multipart => true } do |f| %>
 <%= error_messages_for :message %>
 
 <%= hidden_field_tag('message[user_id]', @user.id) %>
-<%= hidden_field_tag('message[replyto]', @replyto) %>
+<!--%= hidden_field_tag('message[replyto]', @replyto) % -->
 <%= hidden_field_tag('message[from_email]', @replyto) %>
 <%= hidden_field_tag('message[to_email]', @to) %>
 <!--<div class="right"><%= link_to "See Sent Messages", user_messages_path(current_user) %></div> -->
 <p>
 <h1>Send Message To: 
-<%= @position %>
 <% if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader"].include?(@position) %>
 <%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @bnok], ["Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @allcontacts]]) %></h1><br />
 
 <% else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position) %>
-<%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1><br />
+<%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1>
 
 <% end %>
+
+<p>To:<br /><%= f.text_field :cc_mail, :size => 50 %><br /> </p>
+<p>Attachment:<br /><%= f.file_field :attachment %><br /> </p>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
-<p>Message:<br /><%= f.text_area :body, :cols => 117, :rows => 15 %><br /></p>
+<p>Message:<br /><%= f.text_area :body, :cols => 90, :rows => 20 %><br />
 </p>
     <%= f.submit "Send" %>
 <% end %>

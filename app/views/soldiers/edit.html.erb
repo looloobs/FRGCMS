@@ -82,7 +82,9 @@
 		</p>
 	</div>
 	<h2>Next of Kin Information</h2>
+	<div class="red">(You can not delete NOK contact, you can only edit it. Every Soldier must have a NOK.)</div>
 	<div class="form_bg">
+
 
 		    <% f.fields_for :primaries do |primary_form| %>
 
@@ -146,9 +148,12 @@
 	<p><%= add_child_link "New Child", f, :kids %></p>
 
 	  <% f.fields_for :additionals do |additional_form| %>
+	<%= link_to image_tag("../images/buttons/delete.png", :border=>0), battalion_company_soldier_additional_path(@battalion,@company, 	 @soldier,@addi), :confirm => 'Are you sure?', :method => :delete %> Delete this Additional Contact.
 	    <%= render :partial => 'additional', :locals => { :f => additional_form } %>
 	  <% end %>
+	<% if @soldier.additionals.empty? %>
 	  <p><%= add_child_link "New Additional", f, :additionals %></p>
+	<% end %>
 
 	<p>
 	  <%= f.submit 'Create'%>
