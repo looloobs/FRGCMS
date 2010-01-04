@@ -124,6 +124,10 @@
 			    <%= primary_form.text_field :email %>
 				</p>
 				<p>
+				<%= primary_form.label (:contacted, "Would your NOK contact like to receive information from the Family Readiness Group?") %>
+			    <%= primary_form.select(:contacted, [["Yes", "Yes"], ["No", "No"]]) %>
+				</p>
+				<p>
 			  	<%= primary_form.label (:cellphone, "Cell Phone:") %>
 			    <%= primary_form.text_field :cellphone, :size => 15 %>
 
