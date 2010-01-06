@@ -123,7 +123,12 @@
 		margin-top:-25px;
 		padding:5px;
 	}
-	/* messages */
+	/* videos */
+	#flashcontent {
+		padding:0px;
+		margin:0px;
+		background:green;
+	}
 	
 	/* table */
 	#hor-minimalist-b
