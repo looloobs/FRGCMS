@@ -21,7 +21,7 @@
 	    <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]]) %>	
 
 		<%= f.label (:anni_date, "If Married, Anniversary:") %>
-		<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950) %>
+		<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950, :include_blank => true) %>
 	</p>
 	<p>
 	  	<%= f.label (:birth_date, "Birthday:") %>
@@ -36,7 +36,7 @@
 	    <%= f.select (:pregnant, [["Please Select", ""], ["Yes", "Yes"], ["No", "NO"]]) %>
 
 	  	<%= f.label (:duedate, "If YES, when is the baby due?") %>
-		<%= f.date_select (:duedate, :order => [:month, :day, :year]) %>
+		<%= f.date_select (:duedate, :order => [:month, :day, :year], :include_blank => true) %>
 	</p>
 
 	</p>
