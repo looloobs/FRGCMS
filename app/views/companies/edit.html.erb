@@ -1,19 +1,11 @@
 <h1>Editing company</h1>
 
-<% form_for(@company) do |f| %>
+<% form_for([:battalion, @company]) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :installation_id %><br />
-    <%= f.text_field :installation_id %>
-  </p>
-  <p>
-    <%= f.label :battalion_id, "Battalion/Squadron:" %><br />
-    <%= f.collection_select(:battalion_id, @battalion, :id, :unit, {:include_blank => true}) %>
-  </p>
   <p><div class="red">
     <%= f.label :attached_id, "**If you are currently attached to another Battalion/Squadron:" %><br />
-    <%= f.collection_select(:attached_id, @battalion, :id, :unit, {:include_blank => true}) %>
+    <%= f.collection_select(:attached_id, @attached, :id, :unit, {:include_blank => true}) %>
   </div></p>
   <p>
     <%= f.label :name %><br />
@@ -23,6 +15,12 @@
     <%= f.label :nickname %><br />
     <%= f.text_field :nickname %>
   </p>
+
+Platoons:<br />
+	<% @platoons.each do |platoon| %>
+		<%=h platoon.name %> | <%= link_to 'Edit', edit_battalion_company_platoon_path(@battalion, @company, platoon) %>
+	
+	<% end %>
   <p>
     <%= f.submit 'Update' %>
   </p>

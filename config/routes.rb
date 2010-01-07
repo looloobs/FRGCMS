@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :platoons
+
   map.resources :videos
 
   map.resources :notes
@@ -26,7 +28,8 @@ ActionController::Routing::Routes.draw do |map|
     battalion.resources :companies
     battalion.resources :companies do |company|
       company.resources :soldiers
-      company.resources :primaries 
+      company.resources :primaries
+      company.resources :platoons 
         company.resources :soldiers do |soldier|
           soldier.resources :additionals
         end

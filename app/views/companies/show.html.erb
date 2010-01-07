@@ -1,3 +1,4 @@
+
 <div id="company_show">
 <% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %>
 <h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
@@ -10,6 +11,21 @@
 </div>
 <% content_for :column do -%>
 <div id="company_show_sidebar">
+
+	<% @platoon.each do |p| %>
+	  
+	    <p><%= link_to p.name, battalion_company_platoon_path(@battalion, @company, p) %></p>
+
+	 
+	<% end %>
+	
+<div class="red">	Attached Units: </div>
+	<% @attached.each do |a| %>
+	  
+	    <p><%= link_to a.name, battalion_company_platoon_path(@attached, a) %></p>
+
+	 
+	<% end %>
 
 </div>
 <% end -%>

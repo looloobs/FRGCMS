@@ -13,10 +13,14 @@
 <div class="form_bg">
 
 <p>
-    <%= f.label (:rank, "Rank:") %>
-	<%= f.select(:rank, [["Please Select", ""], ["PV1", "PV1"], ["PV2", "PV2"], ["PFC","PFC"], ["SPC", "SPC"], ["CPL", "CPL"], ["SGT", "SGT"], ["SSG", "SSG"], ["SFC", "SFC"], ["MSG", "MSG"], ["1SG", "1SG"], ["SGM", "SGM"], ["CSM", "CSM"], ["WO1", "WO1"], ["CW2", "CW2"], ["CW3", "CW3"], ["CW4", "CW4"], ["CW5", "CW5"], ["2LT", "2LT"], ["1LT", "1LT"], ["CPT", "CPT"], ["MAJ", "MAJ"], ["LTC", "LTC"], ["COL", "COL"]]) %> 
-      	 	 	 	 	 	 	 	 	 	 	 	
-
+	<%= f.label (:platoon_id, "Platoon:")%>
+	<%= f.collection_select(:platoon_id, @platoon, :id, :name, {:prompt => true}) %>
+</p>
+	<p>
+		
+	    <%= f.label (:rank, "Rank:") %>
+		<%= f.select(:rank, [["Please Select", ""], ["PV1", "PV1"], ["PV2", "PV2"], ["PFC","PFC"], ["SPC", "SPC"], ["CPL", "CPL"], ["SGT", "SGT"], ["SSG", "SSG"], ["SFC", "SFC"], ["MSG", "MSG"], ["1SG", "1SG"], ["SGM", "SGM"], ["CSM", "CSM"], ["WO1", "WO1"], ["CW2", "CW2"], ["CW3", "CW3"], ["CW4", "CW4"], ["CW5", "CW5"], ["2LT", "2LT"], ["1LT", "1LT"], ["CPT", "CPT"], ["MAJ", "MAJ"], ["LTC", "LTC"], ["COL", "COL"]]) %>
+		
 	<%= f.label (:firstname, "First Name:") %>
     <%= f.text_field :firstname %>
 

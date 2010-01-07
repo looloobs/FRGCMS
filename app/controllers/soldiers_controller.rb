@@ -19,6 +19,7 @@ class SoldiersController < ApplicationController
     @primarys = @soldier.primaries
     @children = @soldier.kids
     @addi = @soldier.additionals
+    @platoon = @company.platoons
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @soldier }
@@ -31,6 +32,7 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.new
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @platoon = @company.platoons
     @soldier.primaries.build(:battalion_id => "1",  :company_id => "1") 
   
     respond_to do |format|
@@ -46,6 +48,7 @@ class SoldiersController < ApplicationController
     @company = Company.find(params[:company_id])
     @primarys = @soldier.primaries
     @addi = @soldier.additionals
+    @platoon = @company.platoons
   end
 
   # POST /soldiers
@@ -54,6 +57,7 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.new(params[:soldier])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @platoon = @company.platoons
     @frg = @company.users.find_by_position('FRG Leader')
     respond_to do |format|
       if @soldier.save
@@ -74,6 +78,7 @@ class SoldiersController < ApplicationController
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
     @frg = @company.users.find_by_position('FRG Leader')
+    @platoon = @company.platoons
     respond_to do |format|
       if @soldier.update_attributes(params[:soldier])
         flash[:notice] = 'Soldier was successfully updated.'

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100105022746) do
+ActiveRecord::Schema.define(:version => 20100107052449) do
 
   create_table "additionals", :force => true do |t|
     t.string   "relationship"
@@ -144,6 +144,15 @@ ActiveRecord::Schema.define(:version => 20100105022746) do
     t.string  "salt",       :null => false
   end
 
+  create_table "platoons", :force => true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.integer  "battalion_id"
+    t.integer  "attached_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "primaries", :force => true do |t|
     t.string   "relationship"
     t.string   "firstname"
@@ -202,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20100105022746) do
     t.string   "seniorleader"
     t.string   "pregnant"
     t.date     "duedate"
+    t.integer  "platoon_id"
   end
 
   create_table "user_failures", :force => true do |t|

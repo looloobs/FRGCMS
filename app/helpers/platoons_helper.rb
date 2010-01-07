@@ -1,0 +1,2 @@
+module PlatoonsHelper
+end

@@ -1,0 +1,50 @@
+
+<div id="company_show">
+<% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %>
+<h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
+
+<div id="battalion_show_team">
+  <b>Commander:</b> <%=h @cc.name %><br />
+  <b>1SG:</b> <%=h @fs.name %><br />
+  <b>FRG Leader:</b> <%=h @frg.name %><br />
+</div>
+</div>
+<% content_for :column do -%>
+<div id="company_show_sidebar">
+
+</div>
+<% end -%>
+
+<% content_for :dashboard do -%>
+<div id="form">
+	
+</div>
+<%= link_to image_tag("../images/buttons/add_soldier.jpg", :border=>0), new_battalion_company_soldier_path(@battalion, @company) %><br />
+
+<div id="bc_box">
+	<% @soldiers.each do |soldier| %>
+	<div id="bc_focus">
+	   	<div class="right">
+	    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_company_soldier_path(@battalion, @company,soldier) %>
+	    <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %>
+		</div>
+	   <%=h soldier.rank %> <%=h soldier.lastname %><br />
+	   Cell: <%=h soldier.cellphone %><br />
+	   <% soldier.primaries.each do |primary| %>
+	   <p>
+	   <%=h primary.firstname %> <%=h primary.lastname %> (<%=h primary.relationship %>)<br />
+	    
+	   (c):<%=h primary.cellphone %><br />
+	   <%=h primary.email %><br />
+	   </p>
+		<% end %>
+
+	</div>
+	<% end %>
+</div>
+
+<% end -%>
+<p>
+<% else %>	
+	  show nothing or public information
+<% end %>

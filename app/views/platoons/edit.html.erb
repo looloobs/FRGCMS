@@ -1,0 +1,22 @@
+<h1>Editing platoon</h1>
+
+<% form_for(@platoon) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+<%= hidden_field_tag('platoon[battalion_id]', @battalion.id) %>
+
+<%= hidden_field_tag('platoon[company_id]', @company.id) %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :attached_id %><br />
+    <%= f.collection_select(:attached_id, @attached, :id, :name, {:include_blank => true}) %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

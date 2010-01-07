@@ -28,6 +28,8 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
   def show
     @company = Company.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
+    @platoon = @company.platoons.find(:all, :order => "name")
+    @attached = Platoon.all(:conditions => ["attached_id = ?", @company.id]) 
     @cc = @company.users.find_by_position('Company Commander')
     @fs = @company.users.find_by_position('1st Sergeant')
     @frg = @company.users.find_by_position('FRG Leader')
@@ -52,7 +54,9 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
   # GET /companies/1/edit
   def edit
     @company = Company.find(params[:id])
-    @battalion = Battalion.all
+    @battalion = Battalion.find(params[:battalion_id])
+    @attached = Battalion.all
+    @platoons = @company.platoons
   end
 
   # POST /companies
@@ -76,11 +80,11 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
   # PUT /companies/1.xml
   def update
     @company = Company.find(params[:id])
-
+    @battalion = Battalion.find(params[:battalion_id])
     respond_to do |format|
       if @company.update_attributes(params[:company])
         flash[:notice] = 'Company was successfully updated.'
-        format.html { redirect_to(@company) }
+        format.html { redirect_to battalion_company_path(@battalion, @company) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

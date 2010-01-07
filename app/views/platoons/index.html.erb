@@ -1,0 +1,26 @@
+<h1>Listing platoons</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Company</th>
+    <th>Battalion</th>
+    <th>Attached</th>
+  </tr>
+
+<% @platoons.each do |platoon| %>
+  <tr>
+    <td><%=h platoon.name %></td>
+    <td><%=h platoon.company_id %></td>
+    <td><%=h platoon.battalion_id %></td>
+    <td><%=h platoon.attached_id %></td>
+    <td><%= link_to 'Show', platoon %></td>
+    <td><%= link_to 'Edit', edit_platoon_path(platoon) %></td>
+    <td><%= link_to 'Destroy', platoon, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New platoon', new_platoon_path %>

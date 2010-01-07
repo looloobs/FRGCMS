@@ -4,6 +4,7 @@ class Company < ActiveRecord::Base
   has_many :primaries
   has_many :additionals
   has_many :kids
+  has_many :platoons
   belongs_to :battalion 
  
   def self.search(search)
