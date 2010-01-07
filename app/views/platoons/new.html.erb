@@ -1,6 +1,6 @@
 <h1>New platoon</h1>
 
-<% form_for(@platoon) do |f| %>
+<% form_for([:battalion, :company, @platoon]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -15,7 +15,7 @@
 If this platoon is going to be attached to another unit, please choose one of the units below:
   <p>
     <%= f.label :attached_id %><br />
-    <%= f.collection_select(:attached_id, @company, :id, :name, {:include_blank => true}) %>
+    <%= f.collection_select(:attached_id, @attached, :id, :name, {:include_blank => true}) %>
   </p>
   <p>
     <%= f.submit 'Create' %>

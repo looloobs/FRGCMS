@@ -28,7 +28,8 @@ class PlatoonsController < ApplicationController
   def new
     @platoon = Platoon.new
     @battalion = Battalion.find(params[:battalion_id])
-    @company = @battalion.companies
+    @company = Company.find(params[:company_id])
+    @attached = @battalion.companies
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @platoon }
@@ -47,11 +48,12 @@ class PlatoonsController < ApplicationController
   # POST /platoons.xml
   def create
     @platoon = Platoon.new(params[:platoon])
-
+     @battalion = Battalion.find(params[:battalion_id])
+      @company = Company.find(params[:company_id])
     respond_to do |format|
       if @platoon.save
         flash[:notice] = 'Platoon was successfully created.'
-        format.html { redirect_to :back }
+        format.html { redirect_to battalion_company_path(@battalion, @company) }
         format.xml  { render :xml => @platoon, :status => :created, :location => @platoon }
       else
         format.html { render :action => "new" }
@@ -64,11 +66,12 @@ class PlatoonsController < ApplicationController
   # PUT /platoons/1.xml
   def update
     @platoon = Platoon.find(params[:id])
-
+    @battalion = Battalion.find(params[:battalion_id])
+    @company = Company.find(params[:company_id])
     respond_to do |format|
       if @platoon.update_attributes(params[:platoon])
         flash[:notice] = 'Platoon was successfully updated.'
-        format.html { redirect_to :back }
+        format.html { redirect_to battalion_company_path(@battalion, @company)}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
