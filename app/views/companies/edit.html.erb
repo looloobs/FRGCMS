@@ -17,6 +17,7 @@
   </p>
 
 Platoons:<br />
+	<%= link_to "Add A Platoon", new_battalion_company_platoon_path(@battalion, @company)%><br />
 	<% @platoons.each do |platoon| %>
 		<%=h platoon.name %> | <%= link_to 'Edit', edit_battalion_company_platoon_path(@battalion, @company, platoon) %>
 	
@@ -26,5 +27,4 @@ Platoons:<br />
   </p>
 <% end %>
 
-<%= link_to 'Show', @company %> |
 <%= link_to 'Back', companies_path %>
