@@ -91,6 +91,7 @@ class SessionsController < ApplicationController
     elsif current_user.position == 'Battalion FRG Leader' : redirect_to battalion_path(current_user.battalion_id)
     elsif current_user.position == '1st Sergeant' : redirect_to battalion_company_path(current_user.battalion_id, current_user.company_id)
     elsif current_user.position == 'FRG Leader' : redirect_to battalion_company_path(current_user.battalion_id, current_user.company_id)
+    elsif current_user.position == 'Training Room Sergeant' : redirect_to battalion_company_path(current_user.battalion_id, current_user.company_id)
     elsif current_user.position == 'Admin' : redirect_to admin_controls_path
     end
     flash[:notice] = "Logged in successfully."

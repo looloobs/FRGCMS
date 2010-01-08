@@ -1,37 +1,38 @@
 <% if logged_in? -%>
   <div id="user-bar-greeting">
         <% if current_user.position == 'Battalion Commander' -%>
-	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id), { :title => "Dashboard" } %> |
-		<% elsif current_user.position == 'FRSA' -%>
-	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id) %> |
-		<% elsif current_user.position == 'Command Sergeant Major' -%>
-	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id) %> |
-		<% elsif current_user.position == 'Battalion FRG Leader' -%>
-	    <%= link_to 'Dashboard', battalion_path(current_user.battalion_id) %> |
-        <% elsif current_user.position == 'Company Commander' -%>
-	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
-		<% elsif current_user.position == '1st Sergeant' -%>
-	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
-		<% elsif current_user.position == 'FRG Leader' -%>
-	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
-		<% elsif current_user.position == 'Training Room Sergeant' -%>
-	    <%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
-	
-		<% else %>
-	    
-	    <% end -%>
-	   
-	    <%= link_to 'Send Messages', new_user_message_path(current_user), { :title => "Send Messages" } %> |
-		<%= link_to 'Training Videos', videos_path, { :title => "Training Videos" } %> |
-		<%= link_to 'Profile', user_profile_path(current_user), { :title => "Profile" } %> |
-		
-		
-		
-		
-		<%= link_to "Log Out", logout_path, { :title => "Log out" }    %> </div>
-<% else -%>
-  <div id="user-bar-greeting">Log in with: 
-		<%= link_to_remote "Username", {:url => new_session_path, :method => :get}, :href => login_path %> |
-		<%= link_to_remote "OpenID", {:url => new_openid_session_path, :method => :get}, :href => login_with_openid_path %> |
-  	<%= link_to "New Account", signup_path, { :title => "Create an account" } %></div>	
+<%= link_to 'Dashboard', battalion_path(current_user.battalion_id), { :title => "Dashboard" } %> |
+<% elsif current_user.position == 'FRSA' -%>
+<%= link_to 'Dashboard', battalion_path(current_user.battalion_id) %> |
+<% elsif current_user.position == 'Command Sergeant Major' -%>
+<%= link_to 'Dashboard', battalion_path(current_user.battalion_id) %> |
+<% elsif current_user.position == 'Battalion FRG Leader' -%>
+<%= link_to 'Dashboard', battalion_path(current_user.battalion_id) %> |
+<% elsif current_user.position == 'Company Commander' -%>
+<%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+<% elsif current_user.position == '1st Sergeant' -%>
+<%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+<% elsif current_user.position == 'FRG Leader' -%>
+<%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+<% elsif current_user.position == 'Training Room Sergeant' -%>
+<%= link_to 'Dashboard', battalion_company_path(current_user.battalion_id, current_user.company_id) %> |
+ 
+<% else %>
+ 
 <% end -%>
+ 
+<%= link_to 'Send Messages', new_user_message_path(current_user), { :title => "Send Messages" } %> |
+<%= link_to 'Training Videos', videos_path, { :title => "Training Videos" } %> |
+<%= link_to 'Profile', user_profile_path(current_user), { :title => "Profile" } %> |
+ 
+ 
+ 
+ 
+<%= link_to "Log Out", logout_path, { :title => "Log out" } %> </div>
+<% else -%>
+  <div id="user-bar-greeting">Log in with:
+<%= link_to_remote "Username", {:url => new_session_path, :method => :get}, :href => login_path %> |
+<%= link_to_remote "OpenID", {:url => new_openid_session_path, :method => :get}, :href => login_with_openid_path %> |
+   <%= link_to "New Account", signup_path, { :title => "Create an account" } %></div>
+<% end -%>
+
