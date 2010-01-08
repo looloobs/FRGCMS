@@ -63,7 +63,7 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
   # POST /companies.xml
   def create
     @company = Company.new(params[:company])
-
+    @battalion = Battalion.find(params[:battalion_id])
     respond_to do |format|
       if @company.save
         flash[:notice] = 'Company was successfully created.'
