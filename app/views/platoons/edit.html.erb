@@ -1,6 +1,6 @@
 <h1>Editing platoon</h1>
 
-<% form_for(@platoon) do |f| %>
+<% form_for([@battalion, @company, @platoon]) do |f| %>
   <%= f.error_messages %>
 
   <p>

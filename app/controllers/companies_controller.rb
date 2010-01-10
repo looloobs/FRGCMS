@@ -33,7 +33,7 @@ before_filter :login_required, :only =>  [ :show, :edit, :update ]
     @cc = @company.users.find_by_position('Company Commander')
     @fs = @company.users.find_by_position('1st Sergeant')
     @frg = @company.users.find_by_position('FRG Leader')
-    @soldiers = @company.soldiers.search params[:search]
+    @soldiers = @company.soldiers.search(params[:search])
     @primary = @company.primaries.find(:all,:conditions => ["relationship = 'Spouse'"])
     @kid = @company.kids
  
