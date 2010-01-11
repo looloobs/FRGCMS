@@ -29,7 +29,7 @@ class PlatoonsController < ApplicationController
     @platoon = Platoon.new
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
-    @attached = @battalion.companies
+    @attached = @battalion.companies.find(:all, :conditions =>[ "name != ?", @company.name ] )
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @platoon }
@@ -41,7 +41,7 @@ class PlatoonsController < ApplicationController
     @platoon = Platoon.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
-    @attached = @battalion.companies
+    @attached = @battalion.companies.find(:all, :conditions =>[ "name != ?", @company.name ] )
   end
 
   # POST /platoons
