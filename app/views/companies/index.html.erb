@@ -1,5 +1,18 @@
 <h1>Listing companies</h1>
+<% form_for @search do |f| %>
+  <p>
+    <%= f.label :name_like, "Name" %><br />
+    <%= f.text_field :name_like %>
+  </p>
+  <p>
+    <%= f.label :nickname_like, "NickName" %><br />
+    <%= f.text_field :nickname_like %>
+  </p>
 
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end %>
 <table>
   <tr>
     <th>Installation</th>
