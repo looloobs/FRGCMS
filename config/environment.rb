@@ -37,7 +37,7 @@ Rails::Initializer.run do |config|
 								:source => "http://gems.github.com"
 	config.gem "yfactorial-utility_scopes", :lib => false, :version => '0.2.2',
 								:source => "http://gems.github.com"
-	config.gem "searchlogic"
+	#config.gem "searchlogic"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
