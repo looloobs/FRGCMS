@@ -20,7 +20,15 @@
 	 
 	<% end %>
 	
+<div class="red">	Attached Units: </div>
+	<% @attached.each do |a| %>
+	  
+	    <p><%= link_to a.name, battalion_company_platoon_path(@battalion, @company, a) %></p>
 
+	 
+	<% end %>
+
+</div>
 <% end -%>
 
 <% content_for :dashboard do -%>
