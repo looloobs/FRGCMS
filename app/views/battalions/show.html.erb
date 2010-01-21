@@ -13,7 +13,7 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 <% content_for :column do -%>
 <div id="battalion_show_sidebar">
 
-	<% @company.each do |c| %>
+	<% @company_list.each do |c| %>
 	  
 	    <p><%= link_to c.name, battalion_company_path(@battalion, c) %></p>
 
@@ -38,8 +38,9 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 		<% @soldier.each do |soldier| %>
 		<div id="bc_focus">
 		   	<div class="right">
-		    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_company_soldier_path(@battalion, @company,soldier) %>
-		    <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %>
+
+		    <!-- %= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_soldier_path(@battalion, @company,soldier) %-->
+		    <!-- %= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) % -->
 			</div>
 		   <%=h soldier.rank %> <%=h soldier.lastname %><br />
 		   Cell: <%=h soldier.cellphone %><br />
