@@ -14,7 +14,7 @@ class BattalionsController < ApplicationController
   def show
     
     @battalion = Battalion.find(params[:id], :include => "soldiers")
-    @company_list = @battalion.companies.find(:all, :order => "name")
+    @company_list = @battalion.companies.find(:all, :order => "name") 
     @attached = Company.all(:conditions => ["attached_id = ?", @battalion.id]) 
     @user = @battalion.users
     @bc= @user.find_by_position('Battalion Commander')
