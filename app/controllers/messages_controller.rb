@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
     @to = @user.email
     @bseniorleads=(@user.battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"]))
     @position = @user.position
-    if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader"].include?(@position)
+    if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader","Battalion FRG Co-Leader","Rear-D Commander"].include?(@position)
       @bnok = (@user.battalion.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bspouses = (@user.battalion.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bsoldiers= (@user.battalion.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
