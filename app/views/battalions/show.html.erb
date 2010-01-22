@@ -39,8 +39,8 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 		<div id="bc_focus">
 		   	<div class="right">
 
-		    <!-- %= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_soldier_path(@battalion, @company,soldier) %-->
-		    <!-- %= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) % -->
+		    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_company_soldier_path(@battalion, soldier.company_id, soldier) %>
+		    <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, soldier.company_id, soldier) %>
 			</div>
 		   <%=h soldier.rank %> <%=h soldier.lastname %><br />
 		   Cell: <%=h soldier.cellphone %><br />
