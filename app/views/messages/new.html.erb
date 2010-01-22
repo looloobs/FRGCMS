@@ -10,7 +10,7 @@
 <!--<div class="right"><%= link_to "See Sent Messages", user_messages_path(current_user) %></div> -->
 <p>
 <h1>Send Message To: 
-<% if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader"].include?(@position) %>
+<% if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader", "Battalion FRG Co-Leader","Rear-D Commander"].include?(@position) %>
 <%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @bnok], ["Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts], ["All FRG Leaders", @bfrgleaders], ["Senior Spouses", @senior_spouse]]) %></h1><br />
 
 <% else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position) %>
