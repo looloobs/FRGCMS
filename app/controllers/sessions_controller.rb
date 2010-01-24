@@ -85,7 +85,7 @@ class SessionsController < ApplicationController
     new_cookie_flag = (params[:remember_me] == "1")
     handle_remember_cookie! new_cookie_flag
     if current_user.position == 'Battalion Commander' : redirect_to battalion_path(current_user.battalion_id)
-    elsif current_user.position == 'Company Commander': redirect_to battalion_path(current_user.battalion_id, current_user.company_id)
+    elsif current_user.position == 'Company Commander': redirect_to battalion_company_path(current_user.battalion_id, current_user.company_id)
     elsif current_user.position == 'Rear-D Commander': redirect_to battalion_path(current_user.battalion_id)
     elsif current_user.position == 'Battalion FRG Leader': redirect_to battalion_path(current_user.battalion_id)
     elsif current_user.position == 'Battalion FRG Co-Leader': redirect_to battalion_path(current_user.battalion_id)
