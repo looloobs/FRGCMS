@@ -23,7 +23,7 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 <div class="red">	Attached Units: </div>
 	<% @attached.each do |a| %>
 	  
-	    <p><%= link_to a.name, battalion_company_path(@attached, a) %></p>
+	    <p><%= link_to a.name, battalion_company_path(a.battalion_id, a) %></p>
 
 	 
 	<% end %>

@@ -1,6 +1,6 @@
 
 <div id="company_show">
-<% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %>
+<!--% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %-->
 <h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
 
 <div id="battalion_show_team">
@@ -74,6 +74,6 @@ There are <%= @kid.size %> Kids in <%= @company.name %>.<br />
 
 <% end -%>
 <p>
-<% else %>	
-	  show nothing or public information
-<% end %>
+<!--% else %>	
+	  show nothing or public information -->
+<!--% end %-->
