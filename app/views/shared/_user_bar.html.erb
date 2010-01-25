@@ -24,15 +24,9 @@
 <%= link_to 'Send Messages', new_user_message_path(current_user), { :title => "Send Messages" } %> |
 <%= link_to 'Training Videos', videos_path, { :title => "Training Videos" } %> |
 <%= link_to 'Profile', user_profile_path(current_user), { :title => "Profile" } %> |
- 
- 
- 
- 
 <%= link_to "Log Out", logout_path, { :title => "Log out" } %> </div>
 <% else -%>
   <div id="user-bar-greeting">Log in with:
-<%= link_to_remote "Username", {:url => new_session_path, :method => :get}, :href => login_path %> |
-<%= link_to_remote "OpenID", {:url => new_openid_session_path, :method => :get}, :href => login_with_openid_path %> |
-   <%= link_to "New Account", signup_path, { :title => "Create an account" } %></div>
+</div>
 <% end -%>
 
