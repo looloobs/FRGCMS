@@ -1,6 +1,7 @@
 class BattalionsController < ApplicationController
   # GET /battalions
   # GET /battalions.xml
+  before_filter :login_required
   def index
     @battalions = Battalion.all
     respond_to do |format|
