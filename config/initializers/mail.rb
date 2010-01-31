@@ -2,7 +2,7 @@
 #require 'smtp_tls'
 
 ActionMailer::Base.smtp_settings = {
-  :address => "mail.blueboxgid.com ",
+  :address => "mail.blueboxgrid.com",
   :port => 2500,
   :authentication => :login,
   :user_name => "admin@frgcms.com",
