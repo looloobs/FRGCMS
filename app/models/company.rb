@@ -6,7 +6,6 @@ class Company < ActiveRecord::Base
   has_many :kids
   has_many :platoons
   belongs_to :battalion 
-
-
+  belongs_to :account
 
 end

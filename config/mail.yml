@@ -1,6 +1,6 @@
 development:
     type: imap
-    server: mail.blueboxgrid.com 
+    server: mail-gw.frgcms.com 
     username: admin@frgcms.com
     password: laurenrothlisberger
     receiver: MessageMailer
@@ -14,7 +14,7 @@ test:
     
 production:
     type: imap
-    server: mail.blueboxgrid.com 
+    server: mail-gw.frgcms.com 
     username: admin@frgcms.com
     password: laurenrothlisberger
     receiver: MessageMailer

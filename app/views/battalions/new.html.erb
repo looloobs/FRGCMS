@@ -1,4 +1,4 @@
-<h1>New battalion</h1>
+<h1>New Battalion/Squadron</h1>
 
 <% form_for(@battalion) do |f| %>
   <%= f.error_messages %>
@@ -15,6 +15,14 @@
     <%= f.label :installation %><br />
     <%= f.text_field :installation %>
   </p>
+<% f.fields_for :users do |user_form| %>
+  <%= render :partial => 'user', :locals => { :f => user_form } %>
+<% end %>
+
+<% f.fields_for :companies do |company_form| %>
+  <%= render :partial => 'company', :locals => { :f => company_form } %>
+<% end %>
+<p><%= add_child_link "Add Another Company", f, :companies %></p>
   <p>
     <%= f.submit 'Create' %>
   </p>

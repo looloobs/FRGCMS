@@ -1,0 +1,14 @@
+<div class="fields">
+	<h1>New Company/Troop/Battery</h1>
+	<div class="form_bg">
+			  <p>
+			    <%= f.label :name %><br />
+			    <%= f.text_field :name %>
+			  </p>
+			  <p>
+			    <%= f.label :nickname %><br />
+			    <%= f.text_field :nickname %>
+			  </p>
+			<%= remove_child_link "remove", f %>
+	</div>
+</div>

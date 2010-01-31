@@ -35,7 +35,7 @@ class User::ProfilesController < ApplicationController
     if success && @user.errors.empty?
       redirect_to admin_controls_path
       flash[:notice] = "Thanks for signing up! "
-			flash[:notice] += ((in_beta? && @user.emails_match?) ? "You can now log into your account." : "We're sending you 														an email with your activation code.")
+			flash[:notice] += ((in_beta? && @user.emails_match?) ? "You can now log into your account." : "We're sending you an email with your activation code.")
     else
       flash.now[:error]  = "We couldn't set up that account, sorry.  Please try again, or %s."
 			flash[:error_item] = ["contact us", contact_site]

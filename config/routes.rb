@@ -1,4 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :accounts do |account|
+    account.resources :battalions
+    account.resources :companies
+  end
+
   map.resources :platoons
 
   map.resources :videos
@@ -41,6 +46,8 @@ end
   map.login '/login', :controller => 'sessions', :action => 'new'
 	map.login_with_openid '/login_with_openid', :controller => 'openid_sessions', :action => 'new'
 	map.signup '/signup', :controller => 'user/profiles', :action => 'new'
+	map.members '/members', :controller => 'accounts/members', :action => 'new'
+	map.account '/account', :controller => 'user/accounts', :action => 'new'
   map.beta_signup '/signup/:invitation_token', :controller => 'user/profiles', :action => 'new'
 	map.openid_signup '/openid_signup', :controller => 'openid_sessions', :action => 'index'
 	map.beta_openid_signup '/openid_signup/:invitation_token', :controller => 'openid_sessions', :action => 'index'
@@ -65,6 +72,7 @@ end
 		user.resources :invitations
 		user.resources :openid_accounts 
 		user.resources :passwords
+		user.resources :accounts
     user.resources :profiles do |profiles|
 			profiles.resources :password_settings
 		end

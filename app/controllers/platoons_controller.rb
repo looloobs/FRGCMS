@@ -84,10 +84,12 @@ class PlatoonsController < ApplicationController
   # DELETE /platoons/1.xml
   def destroy
     @platoon = Platoon.find(params[:id])
+    @battalion = Battalion.find(params[:battalion_id])
+    @company = Company.find(params[:company_id])
     @platoon.destroy
 
     respond_to do |format|
-      format.html { redirect_to(platoons_url) }
+      format.html { redirect_to battalion_company_path(@battalion, @company) }
       format.xml  { head :ok }
     end
   end

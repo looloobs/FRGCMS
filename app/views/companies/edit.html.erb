@@ -19,7 +19,7 @@
 Platoons:<br />
 	<%= link_to "Add A Platoon", new_battalion_company_platoon_path(@battalion, @company)%><br />
 	<% @platoons.each do |platoon| %>
-		<%=h platoon.name %> | <%= link_to 'Edit', edit_battalion_company_platoon_path(@battalion, @company, platoon) %>
+		<%=h platoon.name %> | <%= link_to 'Edit', edit_battalion_company_platoon_path(@battalion, @company, platoon) %> | <%= link_to "Delete this Platoon", battalion_company_platoon_path(@battalion,@company, platoon), :confirm => 'Are you sure?', :method => :delete %> <br />
 	
 	<% end %>
   <p>

@@ -1,0 +1,26 @@
+<h1>Sign up as a new user</h1>
+
+
+<% @user.password = @user.password_confirmation = nil %>
+
+<%= error_messages_for :user %>
+<% form_for :user do |f| -%>
+<p>Battalion Commander:
+  <%= f.text_field :name %>
+  <%= f.text_field :email %>
+
+  <%= hidden_field_tag(:password, "password") %>
+  <%= hidden_field_tag(:login, "login") %>
+  <%= hidden_field_tag(:position, "Battalion Commander") %>
+</p><br />
+Command Sergeant Major:
+	<%= f.text_field :name %>
+	  <%= f.text_field :email %>
+
+	  <%= hidden_field_tag(:password, "password") %>
+	  <%= hidden_field_tag(:login, "login2") %>
+	  <%= hidden_field_tag(:position, "Command Sergeant Major") %>
+	
+  
+  <%= f.submit "Sign up"%>
+<% end -%>

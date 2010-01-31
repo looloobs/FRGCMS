@@ -32,7 +32,9 @@ class BattalionsController < ApplicationController
   # GET /battalions/new.xml
   def new
     @battalion = Battalion.new
-
+  
+    company = @battalion.companies.build
+    user = @battalion.users.build
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @battalion }
@@ -42,13 +44,14 @@ class BattalionsController < ApplicationController
   # GET /battalions/1/edit
   def edit
     @battalion = Battalion.find(params[:id])
+    
   end
 
   # POST /battalions
   # POST /battalions.xml
   def create
     @battalion = Battalion.new(params[:battalion])
-
+    
     respond_to do |format|
       if @battalion.save
         flash[:notice] = 'Battalion was successfully created.'
