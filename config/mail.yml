@@ -14,7 +14,7 @@ test:
     
 production:
     type: imap
-    server: mail-gw.frgcms.com 
+    server: mail.blueboxgroup.com 
     username: admin@frgcms.com
     password: laurenrothlisberger
     receiver: MessageMailer
