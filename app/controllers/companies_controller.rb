@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   #require_role "admin"
-before_filter :login_required, :only =>  [ :show, :edit, :update ]
+#before_filter :login_required, :only =>  [ :show, :edit, :update ]
 #before_filter :company_required, :except => [:new, :create]
 
   def user

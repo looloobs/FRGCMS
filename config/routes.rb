@@ -1,8 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :accounts do |account|
-    account.resources :battalions
-    account.resources :companies
-  end
 
   map.resources :platoons
 
@@ -25,9 +21,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :primaries
 
   map.resources :soldiers
-
   map.resources :companies
-
+  map.resources :users
+  map.resource :user_session
+  map.resource :account, :controller => "users"
 
   map.resources :battalions do |battalion| 
     battalion.resources :companies
@@ -55,31 +52,7 @@ end
   map.forgot_password '/forgot_password', :controller => 'user/passwords', :action => 'new'  
 	map.reset_password '/reset_password/:id', :controller => 'user/passwords', :action => 'edit', :id => nil  
 	map.resend_activation '/resend_activation', :controller => 'user/activations', :action => 'new'
-
-  map.namespace :admin do |admin|
-		admin.resources :controls
-		admin.resources :invite_actions
-		admin.resources :invites
-		admin.resources :mailings
-		admin.resources :states
-    admin.resources :users do |users|
-			users.resources :roles
-		end    
-  end
-
-  map.namespace :user do |user|
-		user.resources :activations
-		user.resources :invitations
-		user.resources :openid_accounts 
-		user.resources :passwords
-		user.resources :accounts
-    user.resources :profiles do |profiles|
-			profiles.resources :password_settings
-		end
-  end    
-
-	map.resource  :session
-	map.resource  :openid_session
+ 
 	map.resources :members
   map.connect "logged_exceptions/:action/:id", :controller => "logged_exceptions"
   map.resources :logged_exceptions
@@ -116,7 +89,7 @@ end
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "sessions", :action => "new"
+  map.root :controller => "user_sessions", :action => "new"
 
   # See how all your routes lay out with "rake routes"
 

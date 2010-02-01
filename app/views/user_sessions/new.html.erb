@@ -1,0 +1,30 @@
+<div id ="wrap">
+	<div id ="main">
+		<div class="logo">
+<%= link_to image_tag("/images/logo2_small.png", :border=>0), '/' %>
+</div>
+<div id="logging">
+<h1>Log in with your account</h1>
+<!-- <p><%= link_to "Login with OpenID", login_with_openid_path %></p>-->
+<div id="form">
+	<div class="field_row">
+		<% form_for @user_session, :url => user_session_path do |f| %>
+		  <%= f.error_messages %>
+		  <%= f.label :login %><br />
+		  <%= f.text_field :login %><br />
+		  <br />
+		  <%= f.label :password %><br />
+		  <%= f.password_field :password %><br />
+		  <br />
+		  <%= f.check_box :remember_me %><%= f.label :remember_me %><br />
+		  <br />
+		  <%= f.submit "Login" %>
+		<% end %>		
+
+<%= flash_messages %>
+	    </div>
+	</div>
+  </div>
+</div>
+
+ 

@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.xml
   def index
-    @users = User.find_by_login(params[:user_id])
+    @users = current_user
     @messages = @users.messages
     
 
@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
    end
     
   def create
-    @user = User.find_by_login(params[:user_id])
+    @user = current_user.login
     @message = Message.new(params[:message])
     #@user = User.find_by_login(params[:user_id])
     #@primary= @user.company.primaries
@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
             flash[:notice] = 'Your Message was Sent.'
-            format.html { redirect_to user_messages_path(current_user)}
+            format.html { redirect_to user_messages_path(current_user.login)}
             
           else
             format.html { render :action => "new" }

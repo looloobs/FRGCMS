@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100128033201) do
+ActiveRecord::Schema.define(:version => 20100131232746) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at"
@@ -233,21 +233,26 @@ ActiveRecord::Schema.define(:version => 20100128033201) do
 
   add_index "user_failures", ["remote_ip"], :name => "index_user_failures_on_remote_ip"
 
-  create_table "users", :force => true do |t|
-    t.string   "user_type"
-    t.string   "login",                     :limit => 40
-    t.string   "name",                      :limit => 100, :default => ""
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+  create_table "user_sessions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_token",            :limit => 40
-    t.datetime "remember_token_expires_at"
-    t.string   "activation_code",           :limit => 40
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "user_type"
+    t.string   "login",                         :limit => 40
+    t.string   "name",                          :limit => 100, :default => ""
+    t.string   "email",                         :limit => 100
+    t.string   "crypted_password",              :limit => 128, :default => "",   :null => false
+    t.string   "password_salt",                 :limit => 128, :default => "",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "old_remember_token",            :limit => 40
+    t.datetime "old_remember_token_expires_at"
+    t.string   "old_activation_code",           :limit => 40
     t.datetime "activated_at"
-    t.string   "password_reset_code",       :limit => 40
-    t.boolean  "enabled",                                  :default => true
+    t.string   "old_password_reset_code",       :limit => 40
+    t.boolean  "enabled",                                      :default => true
     t.string   "identity_url"
     t.integer  "invitation_id"
     t.integer  "invitation_limit"
@@ -255,9 +260,20 @@ ActiveRecord::Schema.define(:version => 20100128033201) do
     t.integer  "battalion_id"
     t.integer  "company_id"
     t.integer  "soldier_id"
+    t.integer  "login_count",                                  :default => 0,    :null => false
+    t.integer  "failed_login_count",                           :default => 0,    :null => false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.string   "persistence_token"
+    t.string   "single_access_token"
+    t.string   "perishable_token"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
 
   create_table "users_messages", :force => true do |t|
     t.integer  "user_id"

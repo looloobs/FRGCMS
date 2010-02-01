@@ -3,10 +3,8 @@
 
 class ApplicationController < ActionController::Base
   layout "application"
-  # AuthenticatedSystem must be included for RoleRequirement, and is provided by installing acts_as_authenticates and running 'script/generate authenticated account user'.
-  include AuthenticatedSystem
   # You can move this into a different controller, if you wish.  This module gives you the require_role helpers, and others.
-  include RoleRequirementSystem
+  
   include ExceptionLoggable
   
   helper :all # include all helpers, all the time
@@ -15,29 +13,45 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery 
   
-  # See ActionController::Base for details 
-  # Uncomment this to filter the contents of submitted sensitive data parameters
-  # from your application log (in this case, all fields with names like "password"). 
-  filter_parameter_logging :password, :password_confirmation, :old_password
+  helper_method :current_user_session, :current_user
+    filter_parameter_logging :password, :password_confirmation
 
+    private
+      def current_user_session
+        return @current_user_session if defined?(@current_user_session)
+        @current_user_session = UserSession.find
+      end
 
-    # - Some more application code ... -
+      def current_user
+        return @current_user if defined?(@current_user)
+        @current_user = current_user_session && current_user_session.record
+      end
 
+      def require_user
+        unless current_user
+          store_location
+          flash[:notice] = "You must be logged in to access this page"
+          redirect_to new_user_session_url
+          return false
+        end
+      end
 
+      def require_no_user
+        if current_user
+          store_location
+          flash[:notice] = "You must be logged out to access this page"
+          redirect_to account_url
+          return false
+        end
+      end
 
-  # Change to the location of your contact form
-	def contact_site
-		root_path
-	end
+      def store_location
+        session[:return_to] = request.request_uri
+      end
 
-	def nested_layout
-		"default"
-	end
+      def redirect_back_or_default(default)
+        redirect_to(session[:return_to] || default)
+        session[:return_to] = nil
+      end
+  end
 
-	def in_beta?
-		APP_CONFIG['settings']['in_beta']
-	end
-	
-
-
-end
