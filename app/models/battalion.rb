@@ -8,8 +8,8 @@ class Battalion < ActiveRecord::Base
   has_many :additionals
   belongs_to :account
   
-  #accepts_nested_attributes_for :companies, :allow_destroy => true
-  #accepts_nested_attributes_for :users, :allow_destroy => true
+  accepts_nested_attributes_for :companies, :allow_destroy => true
+  accepts_nested_attributes_for :users, :allow_destroy => true
   
   #include Authentication
   #include Authentication::ByCookieToken

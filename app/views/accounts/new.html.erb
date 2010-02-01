@@ -1,11 +1,47 @@
-<h1>New account</h1>
-
 <% form_for(@account) do |f| %>
   <%= f.error_messages %>
 
 <% f.fields_for :battalions do |battalion_form| %>
   <%= render :partial => 'battalion', :locals => { :f => battalion_form } %>
 <% end %>
+Battalion Commander:
+<% f.fields_for :users do |user_form| %>
+ 	<%= user_form.label (:name, "Name:") %>
+	<%= user_form.text_field :name%>
+	<br />
+	<%= user_form.label (:name, "Login:") %>
+	<%= user_form.text_field :login%>
+	<br />
+	<%= user_form.label (:name, "E-Mail:") %>
+	<%= user_form.text_field :email%>
+	<br />
+	<%= user_form.label :password %><br />
+	<%= user_form.password_field :password %><br />
+	<br />
+	<%= user_form.label :password_confirmation %><br />
+	<%= user_form.password_field :password_confirmation %><br />
+	
+<% end %>
+
+Command Sergeant Major:
+<% f.fields_for :users do |user_form| %>
+ 	<%= user_form.label (:name, "Name:") %>
+	<%= user_form.text_field :name%>
+	<br />
+	<%= user_form.label (:name, "Login:") %>
+	<%= user_form.text_field :login%>
+	<br />
+	<%= user_form.label (:name, "E-Mail:") %>
+	<%= user_form.text_field :email%>
+	<br />
+	<%= user_form.label :password %><br />
+	<%= user_form.password_field :password %><br />
+	<br />
+	<%= user_form.label :password_confirmation %><br />
+	<%= user_form.password_field :password_confirmation %><br />
+	
+<% end %>
+  <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>

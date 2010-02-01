@@ -14,7 +14,6 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   def show
     @account = Account.find(params[:id])
-    @battalion = @account.battalions
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,8 +25,9 @@ class AccountsController < ApplicationController
   # GET /accounts/new.xml
   def new
     @account = Account.new
-    @account.battalions.build
-    
+    battalion = @account.battalions.build
+    user = @account.users.build
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @account }
@@ -43,11 +43,11 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
-    
+
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'
-        format.html { redirect_to(@account) }
+        format.html { redirect_to :back }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
         format.html { render :action => "new" }

@@ -15,9 +15,7 @@
     <%= f.label :installation %><br />
     <%= f.text_field :installation %>
   </p>
-<% f.fields_for :users do |user_form| %>
-  <%= render :partial => 'user', :locals => { :f => user_form } %>
-<% end %>
+
 
 <% f.fields_for :companies do |company_form| %>
   <%= render :partial => 'company', :locals => { :f => company_form } %>

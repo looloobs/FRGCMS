@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   belongs_to :battalion
   belongs_to :company
+  belongs_to :account
   has_many :soldiers
   has_many :messages
   
