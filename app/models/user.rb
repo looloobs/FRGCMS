@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
     end
   
     def activate!(params)
-      self.active = true
+      self.active = 1
       self.password = params[:user][:password]
       self.password_confirmation = params[:user][:password_confirmation]
       save
