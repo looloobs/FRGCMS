@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100131232746) do
+ActiveRecord::Schema.define(:version => 20100202161414) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20100131232746) do
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"
+    t.boolean  "active"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

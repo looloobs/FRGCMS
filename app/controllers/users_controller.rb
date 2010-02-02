@@ -6,19 +6,23 @@ class UsersController < ApplicationController
     @user = User.new
     @battalion = Battalion.find(:all) 
     @company = Company.find(:all)
+    
+      render :layout => 'videos'
   end
   
   def create
-    @user = User.new(params[:user])
-    @battalion = Battalion.find(:all) 
-    @company = Company.find(:all)
-    if @user.save
-      flash[:notice] = "Account registered!"
-      redirect_back_or_default account_url
-    else
-      render :action => :new
-    end
-  end
+     @user = User.new
+
+     if @user.signup!(params)
+       @user.deliver_activation_instructions!
+       flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+       redirect_to profile_url
+     else
+       render :action => :new
+     end
+    
+   end
+
   
   def show
     @user = @current_user

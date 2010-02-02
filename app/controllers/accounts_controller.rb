@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
   def new
     @account = Account.new
     battalion = @account.battalions.build
-    user = @account.users.build
+    battalion.users.build
 
     respond_to do |format|
       format.html # new.html.erb

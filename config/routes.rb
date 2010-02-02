@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :companies
   map.resources :users
   map.resource :user_session
-  map.resource :account, :controller => "users"
+  map.resource :profile, :controller => "users"
 
   map.resources :battalions do |battalion| 
     battalion.resources :companies
@@ -58,6 +58,9 @@ end
 	map.resources :members
   map.connect "logged_exceptions/:action/:id", :controller => "logged_exceptions"
   map.resources :logged_exceptions
+  map.register '/register/:activation_code', :controller => 'activations', :action => 'new'
+  map.activate '/activate/:id', :controller => 'activations', :action => 'create'
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
 
