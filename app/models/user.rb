@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :soldiers
   has_many :messages
   
-	attr_accessible :login, :email, :password, :password_confirmation
+	attr_accessible :login, :email, :password, :password_confirmation, :position, :battalion_id, :company_id
 
     def active?
       active
@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     def signup!(params)
         self.login = params[:user][:login]
         self.email = params[:user][:email]
+        self.name = params[:user][:name]
+        self.position = params[:user][:position]
+        self.battalion_id = params[:user][:battalion_id]
+        self.company_id = params[:user][:company_id]
         save_without_session_maintenance
     end
 

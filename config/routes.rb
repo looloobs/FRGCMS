@@ -41,21 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 end
 
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.login '/login', :controller => 'sessions', :action => 'new'
-	map.login_with_openid '/login_with_openid', :controller => 'openid_sessions', :action => 'new'
-	map.signup '/signup', :controller => 'user/profiles', :action => 'new'
-	map.members '/members', :controller => 'accounts/members', :action => 'new'
-	map.account '/account', :controller => 'user/accounts', :action => 'new'
-  map.beta_signup '/signup/:invitation_token', :controller => 'user/profiles', :action => 'new'
-	map.openid_signup '/openid_signup', :controller => 'openid_sessions', :action => 'index'
-	map.beta_openid_signup '/openid_signup/:invitation_token', :controller => 'openid_sessions', :action => 'index'
-  #map.activate '/activate/:activation_code', :controller => 'user/activations', :action => 'activate', :activation_code => nil
-  map.forgot_password '/forgot_password', :controller => 'user/passwords', :action => 'new'  
-	map.reset_password '/reset_password/:id', :controller => 'user/passwords', :action => 'edit', :id => nil  
-	map.resend_activation '/resend_activation', :controller => 'user/activations', :action => 'new'
- 
-	map.resources :members
+  
   map.connect "logged_exceptions/:action/:id", :controller => "logged_exceptions"
   map.resources :logged_exceptions
   map.register '/register/:activation_code', :controller => 'activations', :action => 'new'

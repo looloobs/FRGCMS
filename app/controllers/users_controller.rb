@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @battalion = Battalion.find(:all) 
     @company = Company.find(:all)
     
-      render :layout => 'videos'
+    render :layout => 'videos'
   end
   
   def create
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user = @current_user # makes our views "cleaner" and more consistent
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
-      redirect_to account_url
+      redirect_to profile_url
     else
       render :action => :edit
     end
