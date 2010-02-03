@@ -20,7 +20,7 @@ class UserSessionsController < ApplicationController
         elsif @user_session.user.position == 'Battalion FRG Leader' : redirect_to battalion_path(@user_session.user.battalion_id)
         elsif @user_session.user.position == '1st Sergeant' : redirect_to battalion_company_path(@user_session.user.battalion_id, @user_session.user.company_id)
         elsif @user_session.user.position == 'FRG Leader' : redirect_to battalion_company_path(@user_session.user.battalion_id, @user_session.user.company_id)
-        elsif @user_session.user.position == 'Training Room Sergeant' : redirect_to battalion_company_path(@user_session.userbattalion_id, @user_session.user.company_id)
+        elsif @user_session.user.position == 'Training Room Sergeant' : redirect_to battalion_company_path(@user_session.user.battalion_id, @user_session.user.company_id)
         else
         end
     else
