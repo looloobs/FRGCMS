@@ -18,16 +18,7 @@
 
 <% end %>
 
-<% @attached.each do |a| %>
-	Attached Units<br />
-	<%= a.name %>
 
-<% end %>
-<% @attach_soldiers.each do |s| %>
-	Attached Units<br />
-	<%= s.lastname %>
-
-<% end %>
 <p>To:<br /><%= f.text_field :cc_mail, :size => 50 %><br /> </p>
 <p>Attachment:<br /><%= f.file_field :attachment %><br /> </p>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
