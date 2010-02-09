@@ -17,14 +17,19 @@ class MessagesController < ApplicationController
     @to = @user.email
     @bseniorleads=(@user.battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"]))
     @position = @user.position
+    @battalion = @user.battalion
+    @soldier = Soldier.all
+    @attached = Company.find(:all, :conditions => ["attached_id = ?", @battalion])
+    @attach_soldiers = Soldier.find(:all, :conditions => ["company_id = ?", @attached])
     if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader","Battalion FRG Co-Leader","Rear-D Commander"].include?(@position)
       @bnok = (@user.battalion.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bspouses = (@user.battalion.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bsoldiers= (@user.battalion.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bsoldierspouse=((@user.battalion.soldiers)+(@user.battalion.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")
-      @ballcontacts=((@user.battalion.soldiers)+(@user.battalion.primaries)+(@user.battalion.additionals)).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @ballcontacts=((@user.battalion.soldiers)+(@user.battalion.primaries)+(@user.battalion.additionals)+(@attach_soldiers)).collect(&:email).select{|s| !s.blank?}.join(", ")
       @senior_spouse = (@user.battalion.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"])).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bfrgleaders=(@user.battalion.users.find(:all, :conditions => ["position = 'FRG Leader'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @attached_company=(@attach_soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
     else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position)
       @nok = (@user.company.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
       @spouses = (@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
