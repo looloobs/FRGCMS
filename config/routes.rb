@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :childrens
 
   map.resources :primaries
-  map.resources :battalions, :member => { :profile => :get } 
+  map.resources :battalions, :member => { :senior_leaders => :any }
   map.resources :soldiers
   map.resources :companies
   map.resources :users
@@ -29,6 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   #map.resource :profile, :controller => "users" 
   
   map.resources :battalions do |battalion| 
+    
     battalion.resources :companies
     battalion.resources :soldiers
     battalion.resources :companies do |company|

@@ -4,7 +4,13 @@ class BattalionsController < ApplicationController
   #before_filter :login_required
   filter_resource_access
   
-  
+  def new
+    @battalion = Battalion.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @battalion }
+    end
+  end
   
   def index
     @battalions = Battalion.all
@@ -36,16 +42,7 @@ class BattalionsController < ApplicationController
 
   # GET /battalions/new
   # GET /battalions/new.xml
-  def new
-    @battalion = Battalion.new
-  
-    company = @battalion.companies.build
-    user = @battalion.users.build
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @battalion }
-    end
-  end
+
 
   # GET /battalions/1/edit
   def edit
@@ -99,9 +96,20 @@ class BattalionsController < ApplicationController
     end
   end
   
-  def profile
+  def senior_leaders
+    @user = User.new
+    #role = @user.roles.build(:user => @user)
     @battalion = Battalion.find(params[:id])
-    @users = @battalion.users.find(:all, :order => "position")
-    render :layout => "videos"
+    @company_list = @battalion.companies.find(:all, :order => "name") 
+    @attached = Company.all(:conditions => ["attached_id = ?", @battalion.id]) 
+    @comp = @battalion.companies
+    @profiles = @battalion.users
+    #@position = Position.all
+    #@company_user = @company.users
+    @bc= @profiles.find_by_position('Battalion Commander')
+    @csm= @profiles.find_by_position('Command Sergeant Major')
+    @frsa= @profiles.find_by_position('FRSA')
+    @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
+    @senior_leader = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname")
   end
 end

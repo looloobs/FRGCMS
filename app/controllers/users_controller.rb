@@ -14,7 +14,19 @@ class UsersController < ApplicationController
   def create
      @user = User.new(params[:user])
      if @user.signup!(params)
-       @user.deliver_activation_instructions!
+       if @user.position == 'Company Commander'
+        @user.deliver_activation_instructions_cc!
+       elsif @user.position == 'FRSA'
+         @user.deliver_activation_instructions_frsa!
+       elsif @user.position == 'Battalion Commander' or 'Battalion FRG Leader' or 'Battalion FRG Co-Leader'
+         @user.deliver_activation_instructions_battalion!
+       elsif @user.position == 'FRG Leader'
+         @user.deliver_activation_instructions_frg_leader!
+       elsif @user.position == 'POC'
+         @user.deliver_activation_instructions_poc!
+       else
+         @user.deliver_activation_instructions!
+       end 
        flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
        redirect_to :back
      else
