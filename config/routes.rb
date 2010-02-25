@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :companies
   map.resources :users
   map.resource :user_session
-  map.resource :profile, :controller => "users" 
+  #map.resource :profile, :controller => "users" 
   
   map.resources :battalions do |battalion| 
     battalion.resources :companies

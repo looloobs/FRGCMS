@@ -2,7 +2,7 @@
 <%= flash.now[:notice] %>
 
 <p> 
-<% form_for @user, :url => profile_path do |f| %>
+<% form_for @user do |f| %>
   <%= f.error_messages %>
 </p>
 <p>
@@ -28,4 +28,4 @@ Leave Password blank if you do not need to reset it.
   <%= f.submit "Update" %>
 <% end %>
 
-<br /><%= link_to "My Profile", profile_path %>
+
