@@ -32,7 +32,7 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
   #config.gem "authlogic"
-  config.gem "declarative_authorization", :source => "http://gemcutter.org"
+  #config.gem "declarative_authorization", :source => "http://gemcutter.org"
 
   # config/authorization_rules.rb
   
