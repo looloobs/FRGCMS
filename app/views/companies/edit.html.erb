@@ -41,7 +41,7 @@ Company Admin Users:
 		  <%= g.submit "Register" %>
 		<% end %>
 	  <% else %>
-		<% c.users.first_sg.each do |u| %>
+		<% @user.first_sg.each do |u| %>
 				Name: <%= h(u.name) %><br />
 				Email: <%= h(u.email)%><br />
 				<%= link_to 'Edit', edit_user_path(u) %>
@@ -64,6 +64,28 @@ Company Admin Users:
 		<% end %>
 	  <% else %>
 		<% @user.frg.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>	
+	    <% end %>
+	  <% end %></p>
+	<p><strong>Training Room NCO:</strong>
+		<% @user.training_nco.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>	
+	  <br />
+	  <% if @user.training_nco.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |g| %>
+		  <%= g.error_messages %>
+		  <%= render :partial => "form", :locals => { :g => g, :position => 'Training Room NCO', :company => @company.id, :role => 'company'} %>
+		  <%= g.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% @user.training_nco.each do |u| %>
 				Name: <%= h(u.name) %><br />
 				Email: <%= h(u.email)%><br />
 				<%= link_to 'Edit', edit_user_path(u) %>	

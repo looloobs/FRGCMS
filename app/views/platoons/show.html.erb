@@ -32,7 +32,7 @@
 	  <% if @poc.blank? %>
 		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
 		  <%= f.error_messages %>
-		    <%= render :partial => "form", :locals => { :f => f, :position => 'POC', :company => @company.id} %>
+		    <%= render :partial => "form", :locals => { :f => f, :position => 'POC', :company => @company.id, :role => 'poc'} %>
 		  <%= f.submit "Register" %>
 		<% end %>
 	  <% else %>
