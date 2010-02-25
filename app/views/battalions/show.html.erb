@@ -196,7 +196,7 @@ Add user below.
 	<% if @profiles.battalion_co_frg.blank? %>
 	<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
 	   <%= f.error_messages %>
-	   <%= render :partial => "form", :locals => { :f => f, :position => 'Battalion FRG Leader', :company => 'nil', :role => 'battalion'} %>
+	   <%= render :partial => "form", :locals => { :f => f, :position => 'Battalion FRG Co-Leader', :company => 'nil', :role => 'battalion'} %>
 	   <%= f.submit "Register" %>
 	<% end %>
      <% else %>

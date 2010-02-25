@@ -18,7 +18,7 @@ class UsersController < ApplicationController
         @user.deliver_activation_instructions_cc!
        elsif @user.position == 'FRSA'
          @user.deliver_activation_instructions_frsa!
-       elsif @user.position == 'Battalion Commander' or 'Battalion FRG Leader' or 'Battalion FRG Co-Leader'
+       elsif @user.position == 'Battalion Commander' or 'Battalion FRG Leader' or 'Battalion FRG Co-Leader' or 'Command Sergeant Major'
          @user.deliver_activation_instructions_battalion!
        elsif @user.position == 'FRG Leader'
          @user.deliver_activation_instructions_frg_leader!

@@ -62,11 +62,11 @@ class User < ActiveRecord::Base
     
     def deliver_activation_instructions_frsa!
         reset_perishable_token!
-        NotifierMailer.deliver_activation_instructions_cc(self)
+        NotifierMailer.deliver_activation_instructions_frsa(self)
     end
     def deliver_activation_instructions_battalion!
         reset_perishable_token!
-        NotifierMailer.deliver_activation_instructions_cc(self)
+        NotifierMailer.deliver_activation_instructions_battalion(self)
     end
     def deliver_activation_instructions_cc!
         reset_perishable_token!
@@ -74,11 +74,11 @@ class User < ActiveRecord::Base
     end
     def deliver_activation_instructions_frg_leader!
         reset_perishable_token!
-        NotifierMailer.deliver_activation_instructions_cc(self)
+        NotifierMailer.deliver_activation_instructions_frg_leader(self)
     end
     def deliver_activation_instructions_poc!
         reset_perishable_token!
-        NotifierMailer.deliver_activation_instructions_cc(self)
+        NotifierMailer.deliver_activation_instructions_poc(self)
     end
     def deliver_activation_confirmation!
         reset_perishable_token!

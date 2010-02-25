@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.xml
-  filter_resource_access
+  #filter_resource_access
   
   def index
     @users = current_user
