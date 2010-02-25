@@ -5,20 +5,20 @@
 <%= @battalion.installation %> </h2><br />
 <div id="battalion_show_team">
 BC: LTC 
-<% if @profiles.battalion_commander.nil? %>
+<% if @profiles.battalion_commander.blank? %>
 Add user below.<br />	
 <% else %>					
 <%= @bc.name %><br />
 <% end %>
 CSM: CSM 
-<% if @profiles.csm.nil? %>
-Add user below.
+<% if @profiles.csm.blank? %>
+Add user below.<br />
 <% else %>					
 <%= @csm.name %><br />
 <% end %>
 FRSA:
-<% if @profiles.frsa.nil? %>
-Add user below.
+<% if @profiles.frsa.blank? %>
+Add user below.<br />
 <% else %>					
 <%= @frsa.name %><br />
 <% end %>
