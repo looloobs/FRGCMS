@@ -1,0 +1,1 @@
+User.create(:name => 'Lauren Rothlisberger', :login => 'looloobs', :position => 'Admin', :roles => 'Admin')

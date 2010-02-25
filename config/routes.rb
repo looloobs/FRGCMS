@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :videos
 
   map.resources :notes
-
+  map.resources :roles
   map.resources :users_messages
 
   map.resources :users, :has_many => [:messages]
@@ -21,21 +21,22 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :childrens
 
   map.resources :primaries
-
+  map.resources :battalions, :member => { :profile => :get } 
   map.resources :soldiers
   map.resources :companies
   map.resources :users
   map.resource :user_session
-  map.resource :profile, :controller => "users"
-
+  map.resource :profile, :controller => "users" 
+  
   map.resources :battalions do |battalion| 
     battalion.resources :companies
     battalion.resources :soldiers
     battalion.resources :companies do |company|
+      company.resources :users
       company.resources :soldiers
       company.resources :primaries
-      company.resources :platoons 
-        company.resources :soldiers do |soldier|
+      company.resources :platoons, :member => { :add_poc => :any }
+      company.resources :soldiers do |soldier|
           soldier.resources :additionals
         end
   end

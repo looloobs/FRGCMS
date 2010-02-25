@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
-  belongs_to :users
+  acts_as_textiled 
   
+  belongs_to :users
   #validates_presence_of :bcc_email, :if => :cc_mail?
   
   has_attached_file :attachment      

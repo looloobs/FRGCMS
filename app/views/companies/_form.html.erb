@@ -1,0 +1,12 @@
+<%= g.hidden_field(:position, :value => position) %>
+<%= g.hidden_field(:battalion_id, :value => @battalion.id) %>
+<%= g.hidden_field(:company_id, :value => company) %>
+<%= g.hidden_field(:role, :value => role) %>
+
+
+<%= g.label(:name, "Name:") %>
+<%= g.text_field :name, :value => '' %>
+<br />
+<%= g.label(:email, "E-Mail:") %>
+<%= g.text_field :email, :value => '' %>
+<br />

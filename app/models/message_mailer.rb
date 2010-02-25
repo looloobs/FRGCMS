@@ -34,6 +34,7 @@ class MessageMailer < ActionMailer::Base
           subject message.subject
           body message.body
           sent_on Time.now 
+          content_type "text/html" 
            
           unless message.attachment_file_name.blank? 
                 attachment "application/octet-stream" do |a|  

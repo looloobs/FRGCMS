@@ -1,0 +1,9 @@
+<%= link_to "Add A Company to Your Battalion", new_battalion_company_path(@battalion)%>
+
+<% @users.each do |user| %>
+	<p>
+	<%= user.position %> <br />
+	<%= user.name %><br />
+	<%= user.email %><br />
+	</p>
+<% end %>

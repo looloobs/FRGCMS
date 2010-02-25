@@ -11,18 +11,45 @@ class User < ActiveRecord::Base
   
   belongs_to :battalion
   belongs_to :company
+  belongs_to :platoon
   belongs_to :account
   has_many :soldiers
   has_many :messages
+  #has_many :roles
+  #has_one :position
   
-	attr_accessible :login, :email, :password, :password_confirmation, :position, :battalion_id, :company_id
-
+  ROLES = %w[admin battalion company trnco poc]
+  
+  #accepts_nested_attributes_for :roles, :allow_destroy => true
+  accepts_nested_attributes_for :soldiers, :allow_destroy => true
+  
+  def role_symbols
+    [role.to_sym]
+  end
+  
+  named_scope :battalion_commander, :conditions =>{:position => 'Battalion Commander'}
+  named_scope :csm, :conditions =>{:position => 'Command Sergeant Major'}
+  named_scope :frsa, :conditions =>{:position => 'FRSA'}
+  named_scope :battalion_frg, :conditions =>{:position => 'Battalion FRG Leader'}
+  named_scope :battalion_co_frg, :conditions =>{:position => 'Battalion FRG Co-Leader'}
+  named_scope :rear_d, :conditions =>{:position => 'Rear-D Commander'}
+  named_scope :s_one, :conditions =>{:position => 'S1'}
+  named_scope :company_commanders, :conditions =>{:position => 'Company Commander'}
+  named_scope :first_sg, :conditions =>{:position => '1st Sergeant'}
+  named_scope :frg, :conditions =>{:position => 'FRG Leader'}
+  named_scope :training_nco, :conditions =>{:position => 'Training Room NCO'}
+  named_scope :poc, :conditions =>{:position => 'POC'}
+  named_scope :other_user, :conditions =>{:position => 'Other'}
+  #named_scope :active, :conditions => {:active => "1"}
+  
+	attr_accessible :name, :login, :email, :password, :password_confirmation, :position, :battalion_id, :company_id, :platoon_id, :role 
     def active?
       active
     end
   
     def activate!(params)
       self.active = 1
+      self.login = params[:user][:login]
       self.password = params[:user][:password]
       self.password_confirmation = params[:user][:password_confirmation]
       save
@@ -43,16 +70,15 @@ class User < ActiveRecord::Base
     end
     
     def signup!(params)
-        self.login = params[:user][:login]
         self.email = params[:user][:email]
         self.name = params[:user][:name]
         self.position = params[:user][:position]
         self.battalion_id = params[:user][:battalion_id]
         self.company_id = params[:user][:company_id]
+        self.platoon_id = params[:user][:platoon_id]
+        self.role = params[:user][:role]
         save_without_session_maintenance
     end
-
-    
     
     
     

@@ -27,11 +27,8 @@ class AccountsController < ApplicationController
     @account = Account.new
     battalion = @account.battalions.build
     battalion.users.build
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @account }
-    end
+    
+    render :layout => 'videos'    
   end
 
   # GET /accounts/1/edit
@@ -43,7 +40,14 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
-
+    
+    if @user.signup!(params)
+       @user.deliver_activation_instructions!
+       flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+       redirect_to profile_url
+     else
+       render :action => :new
+     end
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'

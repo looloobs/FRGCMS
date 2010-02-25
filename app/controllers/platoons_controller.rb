@@ -16,6 +16,7 @@ class PlatoonsController < ApplicationController
     @platoon = Platoon.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @poc = @platoon.users.find_by_position('POC')
     @cc = @company.users.find_by_position('Company Commander')
     @fs = @company.users.find_by_position('1st Sergeant')
     @frg = @company.users.find_by_position('FRG Leader')
@@ -92,5 +93,21 @@ class PlatoonsController < ApplicationController
       format.html { redirect_to battalion_company_path(@battalion, @company) }
       format.xml  { head :ok }
     end
+  end
+  
+  def poc
+    @company = Company.find(params[:id])
+    @battalion = Battalion.find(params[:battalion_id])
+    @platoon = Platoon.find(params[:id])
+    @soldiers = @platoon.soldiers
+    render :layout => "poc"
+  end
+  
+  def add_poc
+    @company = Company.find(params[:id])
+    @battalion = Battalion.find(params[:battalion_id])
+    @platoon = Platoon.find(params[:id])
+    @user = User.new
+    render :layout => "poc"
   end
 end

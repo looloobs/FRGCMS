@@ -1,14 +1,16 @@
 <div class="fields">
 	<h1>New Company/Troop/Battery</h1>
 	<div class="form_bg">
-			  <p>
-			    <%= f.label :name %><br />
-			    <%= f.text_field :name %>
-			  </p>
-			  <p>
-			    <%= f.label :nickname %><br />
-			    <%= f.text_field :nickname %>
-			  </p>
-			<%= remove_child_link "remove", f %>
+		<%= g.hidden_field(:battalion_id, :value => battalion) %>
+		<p>
+		<%= g.label :name, "Name: (eg. Bravo Company)" %><br />
+		<%= g.text_field :name %>
+		</p>
+		<p>
+		<%= g.label :nickname, "Name: (eg. Braveheart)" %><br />
+		<%= g.text_field :nickname %>
+		</p>
+		<span class="red">** If this is a Company attached to you, do not create them, they need to be created in their own Battalion and then attached as shown in the help section/training videos.</span><br />
+		<%= g.submit 'Create' %>
 	</div>
 </div>

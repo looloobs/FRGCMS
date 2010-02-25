@@ -1,33 +1,64 @@
 
 <div id="company_show">
-<% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %>
+<!--% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %-->
 <h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
 
 <div id="battalion_show_team">
+  <% if @cc.blank? %>
+  CC: User Not Active<br />
+  <% else %>
   <b>Commander:</b> <%=h @cc.name %><br />
+  <% end %>
+  <% if @fs.blank? %>
+  1SG: User Not Active<br />
+  <% else %>
   <b>1SG:</b> <%=h @fs.name %><br />
+  <% end %>
+  <% if @frg.blank? %>
+  FRG Leader: User Not Active<br />
+  <% else %>
   <b>FRG Leader:</b> <%=h @frg.name %><br />
+  <% end %>
+
 </div>
 </div>
 <% content_for :column do -%>
 <div id="company_show_sidebar">
 
+	<p><strong>POC:</strong>
+		
+
+	  <br />
+	  <% if @poc.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+		  <%= f.error_messages %>
+		    <%= render :partial => "form", :locals => { :f => f, :position => 'POC', :company => @company.id} %>
+		  <%= f.submit "Register" %>
+		<% end %>
+	  <% else %>
+
+	  
+				Name: <%= h(@poc.name) %>    <% if @poc.active.blank?  %>
+			  	<span class="red"><%= "- Inactive "%></span>
+					<% else %>
+					<%= "- Active "%>
+					<% end %><br />
+				Email: <%= h(@poc.email)%><br />
+				<%= link_to 'Change POC for '+ @platoon.name, edit_user_path(@poc) %>
+	  <% end %></p>
+
 </div>
 <% end -%>
-
+<% if current_user.role == 'admin' or 'company' or 'battalion'%>
 <% content_for :dashboard do -%>
 <div id="form">
 	
 </div>
-<%= link_to image_tag("../images/buttons/add_soldier.jpg", :border=>0), new_battalion_company_soldier_path(@battalion, @company) %><br />
+To assign a Soldier to this platoon go into their profile (edit) and set their platoon.
 
 <div id="bc_box">
 	<% @soldiers.each do |soldier| %>
 	<div id="bc_focus">
-	   	<div class="right">
-	    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_company_soldier_path(@battalion, @company,soldier) %>
-	    <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, @company,soldier) %>
-		</div>
 	   <%=h soldier.rank %> <%=h soldier.lastname %><br />
 	   Cell: <%=h soldier.cellphone %><br />
 	   <% soldier.primaries.each do |primary| %>

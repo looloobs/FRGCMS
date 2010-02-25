@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100202161414) do
+ActiveRecord::Schema.define(:version => 20100221005610) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at"
@@ -160,6 +160,12 @@ ActiveRecord::Schema.define(:version => 20100202161414) do
     t.datetime "updated_at"
   end
 
+  create_table "positions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "primaries", :force => true do |t|
     t.string   "relationship"
     t.string   "firstname"
@@ -183,7 +189,8 @@ ActiveRecord::Schema.define(:version => 20100202161414) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "user_id"
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
@@ -271,6 +278,8 @@ ActiveRecord::Schema.define(:version => 20100202161414) do
     t.string   "single_access_token"
     t.string   "perishable_token"
     t.boolean  "active"
+    t.integer  "platoon_id"
+    t.string   "role"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -4,15 +4,30 @@
 <h1><%=h @battalion.name%>: <%=h @company.nickname %></h1>
 
 <div id="battalion_show_team">
+  <% if @cc.blank? %>
+  CC: User Not Active<br />
+  <% else %>
   <b>Commander:</b> <%=h @cc.name %><br />
+  <% end %>
+  <% if @fs.blank? %>
+  1SG: User Not Active<br />
+  <% else %>
   <b>1SG:</b> <%=h @fs.name %><br />
+  <% end %>
+  <% if @frg.blank? %>
+  FRG Leader: User Not Active<br />
+  <% else %>
   <b>FRG Leader:</b> <%=h @frg.name %><br />
+  <% end %>
 <%= link_to "Edit Your Company Profile", edit_battalion_company_path(@battalion, @company) %>
 </div>
 </div>
+
 <% content_for :column do -%>
 <div id="company_show_sidebar">
-
+  <% if @cc.blank? || @fs.blank? || @frg.blank? %>
+<span class="red">  If your Company Commander, 1SG or FRG Leader are not registered/active Soldiers can not be added to the system. See your <%= link_to "Company Profile", edit_battalion_company_path(@battalion, @company) %> for more information.</span>
+  <% else %>
 	<% @platoon.each do |p| %>
 	  
 	    <p><%= link_to p.name, battalion_company_platoon_path(@battalion, @company, p) %></p>
@@ -29,7 +44,9 @@
 	<% end %>
 
 </div>
+  <% end %>
 <% end -%>
+
 
 <% content_for :dashboard do -%>
 <div id="form">
@@ -44,7 +61,11 @@
 <% end %>
 	</div>
 </div>
+<% if @cc.blank? || @fs.blank? || @frg.blank? %>
+<span class="red">If your Company Commander, 1SG or FRG Leader are not registered/active Soldiers can not be added to the system. See your <%= link_to "Company Profile", edit_battalion_company_path(@battalion, @company) %> for more information.</span>
+<% else %>
 <%= link_to image_tag("../images/buttons/add_soldier.jpg", :border=>0), new_battalion_company_soldier_path(@battalion, @company) %><br />
+<% end %>
 <p>
 There are <%= @soldiers.size %> Soldiers in <%= @company.name %>.<br />
 There are <%= @primary.size %> Spouses in <%= @company.name %>.<br />
@@ -74,6 +95,4 @@ There are <%= @kid.size %> Kids in <%= @company.name %>.<br />
 
 <% end -%>
 <p>
-<!--% else %>	
-	  show nothing or public information -->
-<!--% end %-->
+

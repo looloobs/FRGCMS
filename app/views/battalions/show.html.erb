@@ -4,9 +4,24 @@
 <h2><p><%= @battalion.unit %><br /></p>
 <%= @battalion.installation %> </h2><br />
 <div id="battalion_show_team">
-Battalion Commander: LTC <%= @bc.name %><br />
-Command Sergeant Major: CSM <%= @sm.name %><br />
-<br />
+BC: LTC 
+<% if @profiles.battalion_commander.nil? %>
+Add user below.<br />	
+<% else %>					
+<%= @bc.name %><br />
+<% end %>
+CSM: CSM 
+<% if @profiles.csm.nil? %>
+Add user below.
+<% else %>					
+<%= @csm.name %><br />
+<% end %>
+FRSA:
+<% if @profiles.frsa.nil? %>
+Add user below.
+<% else %>					
+<%= @frsa.name %><br />
+<% end %>
 </div>
 <br />
 
@@ -14,13 +29,14 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 <div id="battalion_show_sidebar">
 
 	<% @company_list.each do |c| %>
-	  
-	    <p><%= link_to c.name, battalion_company_path(@battalion, c) %></p>
-
-	 
+	  	<% if c.users.company_commanders.blank? || c.users.first_sg.blank? || c.users.frg.blank? %>
+		<p><%= c.name + " is missing key admin, please register below to access this Company."%></p>
+		<% else %>
+	    <p><%= link_to c.name, battalion_company_path(@battalion, c) %></p>	
+	 	<% end %>
 	<% end %>
 	
-<div class="red">	Attached Units: </div>
+<div class="red">Attached Units: </div>
 	<% @attached.each do |a| %>
 	  
 	    <p><%= link_to a.name, battalion_company_path(a.battalion_id, a) %></p>
@@ -34,27 +50,302 @@ Command Sergeant Major: CSM <%= @sm.name %><br />
 
 <% content_for :dashboard do -%>
 
-	<div id="bc_box">
-		<% @soldier.each do |soldier| %>
-		<div id="bc_focus">
-		   	<div class="right">
-
-		    <%= link_to image_tag("../images/buttons/info.png", :border=>0), battalion_company_soldier_path(@battalion, soldier.company_id, soldier) %>
-		    <%= link_to image_tag("../images/buttons/edit.png", :border=>0), edit_battalion_company_soldier_path(@battalion, soldier.company_id, soldier) %>
-			</div>
-		   <%=h soldier.rank %> <%=h soldier.lastname %><br />
-		   Cell: <%=h soldier.cellphone %><br />
-		   <% soldier.primaries.each do |primary| %>
-		   <p>
-		   <%=h primary.firstname %> <%=h primary.lastname %> (<%=h primary.relationship %>)<br />
-
-		   (c):<%=h primary.cellphone %><br />
-		   <%=h primary.email %><br />
-		   </p>
-			<% end %>
-
-		</div>
+<div id="bc_box">
+	<div class="form_bg">
+	<p><div id="form">
+		<strong> Battalion Commander </strong>
+		<% if  @profiles.battalion_commander.blank?  %>
+		<span class="red"><%= "- Inactive "%></span>
+		<% else %>
+		<%= "- Active "%>
 		<% end %>
+	<br />
+		
+		<% if @profiles.battalion_commander.blank? %>
+		<% form_for :user, @user, :url => users_path do |f| %>
+			<%= f.error_messages %>
+		    <%= render :partial => "form", :locals => { :f => f, :position => 'Battalion Commander', :company => 'nil', :role => 'battalion'} %>
+		  <%= f.submit "Register" %>
+		<% end %>
+		
+	  <% else %>
+		<% @profiles.battalion_commander.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email:<%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+				
+	    <% end %>
+	  <% end %>
 	</div>
+	</p>
+
+	<p><div id="form">
+		<strong> Command Sergeant Major </strong> 
+		<% if  @profiles.csm.nil?  %>
+		<span class="red"><%= "- Inactive "%></span>
+		<% else %>
+		<%= "- Active "%>
+		<% end %><br />
+		<% if @profiles.csm.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+		  <%= f.error_messages %>
+		  <%= render :partial => "form", :locals => { :f => f, :position => 'Command Sergeant Major', :company => 'nil', :role => 'battalion'} %>
+			<!--% f.fields_for :roles do |builder| %-->
+				<!--%= builder.hidden_field :name, "battalion" %-->
+			<!--% end %-->
+		  <%= f.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% @profiles.csm.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email:<%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+	    <% end %>
+	  <% end %>
+	</div>
+	</p>
+	
+	<div id="form">
+		<p>
+		<strong>FRSA </strong>
+		<% if  @profiles.frsa.nil?  %>
+		<span class="red"><%= "- Inactive "%></span>
+		<% else %>
+		<%= "- Active "%>
+		<% end %><br />
+		<% if @profiles.frsa.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+		  <%= f.error_messages %>
+		  <%= render :partial => "form", :locals => { :f => f, :position => 'FRSA', :company => 'nil', :role => 'battalion'} %>
+		  <%= f.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% @profiles.frsa.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email:<%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+	    <% end %>
+	  <% end %>
+	</p>
+	</div>
+	</div>
+<!-- BATTALION OTHER ADMIN USERS -->	
+	
+	<div class="form_bg">
+		<div id="form">
+	<p>
+	Additional Battalion Users:
+	These are NOT REQUIRED Users, but are people you may want to give access to the system.
+	<p>
+	 <strong>Rear-D Commander</strong>
+	    <% @profiles.rear_d.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
+	<% if @profiles.rear_d.blank? %>
+	<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+	   <%= f.error_messages %>
+	   <%= render :partial => "form", :locals => { :f => f, :position => 'Rear-D Commander', :company => 'nil', :role => 'battalion'} %>
+	   <%= f.submit "Register" %>
+	<% end %>
+     <% else %>
+	<% @profiles.rear_d.each do |u| %>
+			Name: <%= h(u.name) %><br />
+			Email:<%= h(u.email)%><br />
+			<%= link_to 'Edit', edit_user_path(u) %>
+     <% end %>
+    <% end %>
+    </p>
+    <p>
+	 <strong>Battalion FRG Leader/Advisor</strong>
+	    <% @profiles.battalion_frg.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
+	<% if @profiles.battalion_frg.blank? %>
+	<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+	   <%= f.error_messages %>
+	   <%= render :partial => "form", :locals => { :f => f, :position => 'Battalion FRG Leader', :company => 'nil', :role => 'battalion'} %>
+	   <%= f.submit "Register" %>
+	<% end %>
+     <% else %>
+	<% @profiles.battalion_frg.each do |u| %>
+			Name: <%= h(u.name) %><br />
+			Email:<%= h(u.email)%><br />
+			<%= link_to 'Edit', edit_user_path(u) %>
+     <% end %>
+    <% end %>
+    </p>
+	<p>
+	 <strong>Battalion FRG Co-Leader/Advisor</strong>
+	    <% @profiles.battalion_co_frg.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
+	<% if @profiles.battalion_co_frg.blank? %>
+	<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+	   <%= f.error_messages %>
+	   <%= render :partial => "form", :locals => { :f => f, :position => 'Battalion FRG Leader', :company => 'nil', :role => 'battalion'} %>
+	   <%= f.submit "Register" %>
+	<% end %>
+     <% else %>
+	<% @profiles.battalion_co_frg.each do |u| %>
+			Name: <%= h(u.name) %><br />
+			Email:<%= h(u.email)%><br />
+			<%= link_to 'Edit', edit_user_path(u) %>
+     <% end %>
+    <% end %>
+    </p>
+    <p>
+	 <strong>S1</strong>
+	    <% @profiles.s_one.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
+	<% if @profiles.s_one.blank? %>
+	<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+	   <%= f.error_messages %>
+	   <%= render :partial => "form", :locals => { :f => f, :position => 'S1', :company => 'nil', :role => 'battalion'} %>
+	   <%= f.submit "Register" %>
+	<% end %>
+     <% else %>
+	<% @profiles.s_one.each do |u| %>
+			Name: <%= h(u.name) %><br />
+			Email:<%= h(u.email)%><br />
+			<%= link_to 'Edit', edit_user_path(u) %>
+     <% end %>
+    <% end %>
+    </p>
+    <p>
+	 <strong>Other Battalion User (XO, S3, etc...)</strong>
+<br />
+	<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+	   <%= f.error_messages %>
+	   <%= render :partial => "form", :locals => { :f => f, :position => 'Other', :company => 'nil', :role => 'battalion'} %>
+	   <%= f.submit "Register" %>
+	<% end %>
+	<p>
+    <strong>Currently Registered Other Users</strong><br />
+	<% @profiles.other_user.each do |u| %>
+			<p>
+			Name: <%= h(u.name) %>
+			<% if u.active.blank? %>
+		    <span class="red"><%= "- Inactive "%></span>
+		    <% else %>
+		    <%= "- Active "%>
+		    <% end %><br />
+			Email: <%= h(u.email)%><br />
+			<%= link_to 'Edit', edit_user_path(u) %>
+			</p>
+    </p>
+    <% end %>
+    </p>
+	</p>
+	</div>
+	</div>
+	<!-- COMPANY SECTION COMPANY SECTION COMPANY SECTION COMPANY SECTION COMPANY SECTION -->
+	<div id="form">
+	<p>
+	<% form_for :company, @company, :url => { :action => "create", :controller => "companies"} do |g| %>
+	  <%= render :partial => 'company', :locals => { :g => g, :battalion => @battalion.id } %>
+	<% end %>
+	</p>
+	</div>
+	
+	    
+	<% @comp.each do |c| %>
+	<div class="form_bg">
+		<div id="form">
+	<p>
+	<h1>  <%= link_to h(c.name), battalion_company_path(@battalion, c) %></h1>
+	<%= "There are " + c.soldiers.size.to_s + " Soldiers in " + c.name + "." %><br />
+	<%= "There are " + c.primaries.spouses.size.to_s + " spouses in " + c.name + "." %><br />
+	  <p><strong>Company Commander:</strong>
+		<% c.users.company_commanders.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>
+	  <br />
+	  <% if c.users.company_commanders.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+		  <%= f.error_messages %>
+		  <%= render :partial => "form", :locals => { :f => f, :position => 'Company Commander', :company => c.id, :role => 'company'} %>
+		  <%= f.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% c.users.company_commanders.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+	    <% end %>
+	  <% end %></p>
+	  <p><strong>First Sergeant:</strong>
+	   	<% c.users.first_sg.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>	
+	  <br />
+	  <% if c.users.first_sg.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+		  <%= f.error_messages %>
+		  <%= render :partial => "form", :locals => { :f => f, :position => '1st Sergeant', :company => c.id, :role => 'company'} %>
+		  <%= f.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% c.users.first_sg.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+	    <% end %>
+	  <% end %></p>
+	<p><strong>FRG Leader:</strong>
+		<% c.users.frg.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>	
+	  <br />
+	  <% if c.users.frg.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
+		  <%= f.error_messages %>
+		  <%= render :partial => "form", :locals => { :f => f, :position => 'FRG Leader', :company => c.id, :role => 'company'} %>
+		    <% f.fields_for :roles do |company| %>
+				<%= company.hidden_field :name, :value =>"company" %>
+			<% end %>
+		  <%= f.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% c.users.frg.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>	
+	    <% end %>
+	  <% end %></p>
+	</div>
+	</p>
+	</div>
+	<% end %>
+	
+</div>
 <% end -%>
 </div>

@@ -8,7 +8,7 @@
 <% @messages.each do |message| %>
   <tr>
 
-    <td><b><%= truncate(message.subject, :length => 20) %></b> - <%=h truncate(message.body, :length => 90) %></td>   
+    <td><b><%= link_to truncate(message.subject, :length => 20), user_message_path(current_user, message) %></b> -<%= truncate(message.body, :length => 80)%> <%=h message.created_at %></td>   
   </tr>
 <% end %>
 </table>

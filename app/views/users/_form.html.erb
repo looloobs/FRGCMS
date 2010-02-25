@@ -1,15 +1,19 @@
+<%= form.hidden_field (:position, :value => (params[:position])) %>
+<%= form.hidden_field (:battalion_id, :value => (params[:battalion_id])) %>
+<%= form.hidden_field (:company_id, :value => (params[:company_id])) %>
+<%= form.hidden_field (:platoon_id, :value => (params[:platoon_id])) %>
+
+
 <%= form.label (:name, "Name:") %>
 <%= form.text_field :name%>
 <br />
-<%= form.label (:name, "E-Mail:") %>
+
+<br />
+<%= form.label (:email, "E-Mail:") %>
 <%= form.text_field :email%>
 <br />
-<%= form.label (:position, "Position:") %>
-<%= form.text_field :position %>
-<br />
-<%= form.label (:battalion_id, "Battalion_id:") %>
-<%= form.text_field :battalion_id %>
-<br />
-<%= form.label (:company_id, "company_id:") %>
-<%= form.text_field :company_id %>
 
+
+<!-- %= form.label (:position, "Position:") %-->
+<!--%= form.text_field :position %--> 
+<br />

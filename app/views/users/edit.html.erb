@@ -1,9 +1,31 @@
 <h1>Edit My Account</h1>
- 
+<%= flash.now[:notice] %>
+
+<p> 
 <% form_for @user, :url => profile_path do |f| %>
   <%= f.error_messages %>
-  <%= render :partial => "form", :object => f %>
+</p>
+<p>
+  <%= f.label (:name, "Name:") %><br />
+  <%= f.text_field :name%>
+</p>
+<p>
+  <%= f.label (:email, "E-Mail:") %><br />
+  <%= f.text_field :email%>
+</p>
+<p>
+  <%= f.label(:login, "Login:") %><br />
+  <%= f.text_field :login %><br />
+</p>
+<p>
+Leave Password blank if you do not need to reset it.
+  <%= f.label :password, "Set your password" %><br />
+  <%= f.password_field :password %><br />
+<br />
+  <%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %><br />
+</p>
   <%= f.submit "Update" %>
 <% end %>
- 
+
 <br /><%= link_to "My Profile", profile_path %>

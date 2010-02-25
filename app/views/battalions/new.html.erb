@@ -1,28 +1,28 @@
 <h1>New Battalion/Squadron</h1>
 
-<% form_for(@battalion) do |f| %>
-  <%= f.error_messages %>
+<% form_for(@battalion) do |g| %>
+  <%= g.error_messages %>
 
   <p>
-    <%= f.label :unit %><br />
-    <%= f.text_field :unit %>
+    <%= g.label :unit %><br />
+    <%= g.text_field :unit %>
   </p>
   <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= g.label :name %><br />
+    <%= g.text_field :name %>
   </p>
   <p>
-    <%= f.label :installation %><br />
-    <%= f.text_field :installation %>
+    <%= g.label :installation %><br />
+    <%= g.text_field :installation %>
   </p>
 
 
-<% f.fields_for :companies do |company_form| %>
-  <%= render :partial => 'company', :locals => { :f => company_form } %>
+<% g.fields_for :companies do |g| %>
+  <%= render :partial => 'company', :locals => { :g => g } %>
 <% end %>
-<p><%= add_child_link "Add Another Company", f, :companies %></p>
+
   <p>
-    <%= f.submit 'Create' %>
+    <%= g.submit 'Create' %>
   </p>
 <% end %>
 

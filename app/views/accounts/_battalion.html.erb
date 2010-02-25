@@ -10,21 +10,7 @@
 			    <%= f.text_field :name %>
 			  </p>
 			<%= remove_child_link "remove", f %>
-		Battalion Commander
-		<p>	<% f.fields_for :users do |user_form| %>
-			<%= user_form.label (:name, "Name:") %>
-			<%= user_form.text_field :name%>
-			<br />
-			<%= user_form.label (:name, "Login:") %>
-			<%= user_form.text_field :login%>
-			<br />
-			<%= user_form.label (:email, "E-Mail:") %>
-			<%= user_form.text_field :email%>
-			<br />
-			<%= user_form.label (:position, "Position:") %>
-			<%= user_form.text_field :position%>
-			<br />
-			<% end %>
+
 		</p>
 		CSM
 		

@@ -31,6 +31,11 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
+  #config.gem "authlogic"
+  config.gem "declarative_authorization", :source => "http://gemcutter.org"
+
+  # config/authorization_rules.rb
+  
 	config.gem "rspec", :lib => false, :version => '1.1.12' 
 	config.gem "rspec-rails", :lib => false, :version => '1.1.12'
 	config.gem "ctran-annotate", :lib => false, :version => '2.0.0',
@@ -38,6 +43,7 @@ Rails::Initializer.run do |config|
 	config.gem "yfactorial-utility_scopes", :lib => false, :version => '0.2.2',
 								:source => "http://gems.github.com"
 	#config.gem "searchlogic"
+
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
@@ -70,6 +76,13 @@ Rails::Initializer.run do |config|
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :address => "mail.blueboxgrid.com",
+    :port => 2500,
+    :authentication => :login,
+    :user_name => "admin@frgcms.com",
+    :password => "laurenrothlisberger"
+    }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => "frgcms.com" }
 

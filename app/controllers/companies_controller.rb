@@ -2,6 +2,8 @@ class CompaniesController < ApplicationController
   #require_role "admin"
 #before_filter :login_required, :only =>  [ :show, :edit, :update ]
 #before_filter :company_required, :except => [:new, :create]
+filter_resource_access
+
 
   def user
     @user = User.find(session[:user_id])
@@ -57,17 +59,18 @@ class CompaniesController < ApplicationController
     @battalion = Battalion.find(params[:battalion_id])
     @attached = Battalion.all
     @platoons = @company.platoons
+    @user = @company.users
   end
 
   # POST /companies
   # POST /companies.xml
   def create
     @company = Company.new(params[:company])
-    @battalion = Battalion.find(params[:battalion_id])
+    #@battalion = Battalion.find(params[:battalion_id])
     respond_to do |format|
       if @company.save
         flash[:notice] = 'Company was successfully created.'
-        format.html { redirect_to(@company) }
+        format.html { redirect_to :back }
         format.xml  { render :xml => @company, :status => :created, :location => @company }
       else
         format.html { render :action => "new" }
@@ -104,4 +107,5 @@ class CompaniesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end

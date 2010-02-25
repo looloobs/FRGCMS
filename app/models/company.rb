@@ -8,4 +8,6 @@ class Company < ActiveRecord::Base
   belongs_to :battalion 
   belongs_to :account
 
+
+
 end

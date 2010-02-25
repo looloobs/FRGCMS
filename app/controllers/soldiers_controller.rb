@@ -7,6 +7,7 @@ class SoldiersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @soldiers }
+      format.xls if params[:format] == 'xls'
     end
   end
 
@@ -97,13 +98,19 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
-    @primarys = @soldier.primaries
-    @primarys.destroy
+
     @soldier.destroy
 
     respond_to do |format|
       format.html { redirect_to battalion_company_path(@battalion, @company) }
       format.xml  { head :ok }
     end
+  end
+  
+  def export
+    headers['Content-Type'] = "application/vnd.ms-excel"
+    headers['Content-Disposition'] = 'attachment; filename="iris.xls"'
+    headers['Cache-Control'] = ''
+    @soldiers = Soldier.find(:all)
   end
 end

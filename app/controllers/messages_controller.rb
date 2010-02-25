@@ -1,16 +1,23 @@
 class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.xml
+  filter_resource_access
+  
   def index
     @users = current_user
     @messages = @users.messages
-    
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @messages }
     end
   end
+  
+  def show
+    @message = Message.find(params[:id])
+    @users = current_user
+
+  end
+  
   def new
     @user = User.find_by_login(params[:user_id])
     @replyto = @user.email
@@ -67,14 +74,7 @@ class MessagesController < ApplicationController
    end
   # GET /messages/1
   # GET /messages/1.xml
-  def show
-    @message = Message.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @message }
-    end
-  end
 
   # GET /messages/new
   # GET /messages/new.xml

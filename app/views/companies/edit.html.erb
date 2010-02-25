@@ -1,4 +1,86 @@
 <h1>Editing company</h1>
+Company Admin Users:
+	<div class="form_bg">
+		<div id="form">
+	<p>
+	  <p><strong>Company Commander:</strong>
+		<% @user.company_commanders.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>
+	  <br />
+	  <% if @user.company_commanders.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |g| %>
+		  <%= g.error_messages %>
+		  <%= render :partial => "form", :locals => { :g => g, :position => 'Company Commander', :company => @company.id, :role => 'company'} %>
+		  <%= g.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% @user.company_commanders.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+	    <% end %>
+	  <% end %></p>
+	  <p><strong>First Sergeant:</strong>
+	   	<% @user.first_sg.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>	
+	  <br />
+	  <% if @user.first_sg.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |g| %>
+		  <%= g.error_messages %>
+		  <%= render :partial => "form", :locals => { :g => g, :position => '1st Sergeant', :company => @company.id, :role => 'company'} %>
+		  <%= g.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% c.users.first_sg.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>
+	    <% end %>
+	  <% end %></p>
+	<p><strong>FRG Leader:</strong>
+		<% @user.frg.each do |u| %>
+			<% if u.active.blank?  %>
+	    	<span class="red"><%= "- Inactive "%></span>
+			<% else %>
+			<%= "- Active "%>
+			<% end %>
+		<% end %>	
+	  <br />
+	  <% if @user.frg.blank? %>
+		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |g| %>
+		  <%= g.error_messages %>
+		  <%= render :partial => "form", :locals => { :g => g, :position => 'FRG Leader', :company => @company.id, :role => 'company'} %>
+		  <%= g.submit "Register" %>
+		<% end %>
+	  <% else %>
+		<% @user.frg.each do |u| %>
+				Name: <%= h(u.name) %><br />
+				Email: <%= h(u.email)%><br />
+				<%= link_to 'Edit', edit_user_path(u) %>	
+	    <% end %>
+	  <% end %></p>
+	<p>
+    <strong> POC </strong><br />
+	** To register POCs click into the platoon the POC belongs to. If the platoon does not exist create a platoon then go to the platoon page to add the POC.
+	</p>
+	</div>
+
+	</p>
+	</div>
+
+	
+
+
 
 <% form_for([@battalion, @company]) do |f| %>
   <%= f.error_messages %>

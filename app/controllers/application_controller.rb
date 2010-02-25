@@ -6,17 +6,21 @@ class ApplicationController < ActionController::Base
   # You can move this into a different controller, if you wish.  This module gives you the require_role helpers, and others.
   
   include ExceptionLoggable
-  
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery 
-  
-  helper_method :current_user_session, :current_user
+   
+    helper_method :current_user_session, :current_user
     filter_parameter_logging :password, :password_confirmation
+    
+    before_filter :set_current_user
+    def set_current_user
+      Authorization.current_user = current_user
+    end
 
-    private
       def current_user_session
         return @current_user_session if defined?(@current_user_session)
         @current_user_session = UserSession.find
@@ -53,5 +57,6 @@ class ApplicationController < ActionController::Base
         redirect_to(session[:return_to] || default)
         session[:return_to] = nil
       end
+      
   end
 

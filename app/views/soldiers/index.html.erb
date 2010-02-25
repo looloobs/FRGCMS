@@ -1,3 +1,5 @@
+<%= link_to 'Export to Excel', formatted_soldiers_url(:xls) %>
+
 <h1>Listing soldiers</h1>
 
 <table>
@@ -18,6 +20,7 @@
     <td><%=h soldier.rank %></td>
     <td><%=h soldier.firstname %></td>
     <td><%=h soldier.lastname %></td>
+	<td><%=h soldier.address %></td>
  
     <td><%= link_to 'Show', soldier %></td>
     <td><%= link_to 'Edit', edit_soldier_path(soldier) %></td>

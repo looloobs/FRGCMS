@@ -6,6 +6,7 @@ class Soldier < ActiveRecord::Base
   has_many :additionals, :dependent => :destroy
   has_many :kids, :dependent => :destroy
   belongs_to :user
+  belongs_to :message
   
   accepts_nested_attributes_for :primaries, :allow_destroy => true
   accepts_nested_attributes_for :kids, :allow_destroy => true 
@@ -17,9 +18,9 @@ class Soldier < ActiveRecord::Base
 
 
   def sms_message(value)
-      if value == True
+      if value == true
         'Yes'
-      else value == False
+      else value == nil
         'No'
       end
   end
@@ -31,6 +32,7 @@ class Soldier < ActiveRecord::Base
       find(:all, :order => 'lastname')
     end
   end
+
 
 
 end

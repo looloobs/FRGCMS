@@ -1,0 +1,14 @@
+
+
+<%= f.hidden_field(:position, :value => position) %>
+<%= f.hidden_field(:battalion_id, :value => @battalion.id) %>
+<%= f.hidden_field(:company_id, :value => company) %>
+<%= f.hidden_field(:role, :value => role) %>
+
+
+<%= f.label(:name, "Name:") %>
+<%= f.text_field :name%>
+<br />
+<%= f.label(:email, "E-Mail:") %>
+<%= f.text_field :email%>
+<br />

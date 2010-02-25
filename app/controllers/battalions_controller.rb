@@ -2,25 +2,31 @@ class BattalionsController < ApplicationController
   # GET /battalions
   # GET /battalions.xml
   #before_filter :login_required
+  filter_resource_access
+  
+  
+  
   def index
     @battalions = Battalion.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @battalions }
-    end
+    render :layout => "videos"
   end
 
   # GET /battalions/1
   # GET /battalions/1.xml
   def show
-    
-    @battalion = Battalion.find(params[:id], :include => "soldiers")
+    @user = User.new
+    #role = @user.roles.build(:user => @user)
+    @battalion = Battalion.find(params[:id])
     @company_list = @battalion.companies.find(:all, :order => "name") 
     @attached = Company.all(:conditions => ["attached_id = ?", @battalion.id]) 
-    @user = @battalion.users
-    @bc= @user.find_by_position('Battalion Commander')
-    @sm= @user.find_by_position('Command Sergeant Major')
-    @frsa= @user.find_by_position('FRSA')
+    @comp = @battalion.companies
+    @profiles = @battalion.users
+    #@position = Position.all
+    #@company_user = @company.users
+    @bc= @profiles.find_by_position('Battalion Commander')
+    @csm= @profiles.find_by_position('Command Sergeant Major')
+    @frsa= @profiles.find_by_position('FRSA')
+    @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
     @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname") 
     
     render :layout => "dashboard"
@@ -91,5 +97,11 @@ class BattalionsController < ApplicationController
       format.html { redirect_to(battalions_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def profile
+    @battalion = Battalion.find(params[:id])
+    @users = @battalion.users.find(:all, :order => "position")
+    render :layout => "videos"
   end
 end
