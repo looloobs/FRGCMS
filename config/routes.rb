@@ -21,14 +21,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :childrens
 
   map.resources :primaries
-  map.resources :battalions, :member => { :senior_leaders => :any }
+  #map.resources :battalions, :member => { :senior_leaders => :any }
   map.resources :soldiers
   map.resources :companies
   map.resources :users
   map.resource :user_session
   #map.resource :profile, :controller => "users" 
   
-  map.resources :battalions do |battalion| 
+  map.resources :battalions, :member => { :senior_leaders => :any } do |battalion| 
     
     battalion.resources :companies
     battalion.resources :soldiers

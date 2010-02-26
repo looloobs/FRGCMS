@@ -81,7 +81,7 @@ Company Admin Users:
 	  <% if @user.training_nco.blank? %>
 		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |g| %>
 		  <%= g.error_messages %>
-		  <%= render :partial => "form", :locals => { :g => g, :position => 'Training Room NCO', :company => @company.id, :role => 'company'} %>
+		  <%= render :partial => "form", :locals => { :g => g, :position => 'Training Room NCO', :company => @company.id, :role => 'trnco'} %>
 		  <%= g.submit "Register" %>
 		<% end %>
 	  <% else %>

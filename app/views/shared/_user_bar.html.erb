@@ -14,9 +14,9 @@
 
 
 <% end -%>
-	<!-- % permitted_to? :new, :messages do %-->
+	<% permitted_to? :new, :messages do %>
 		<%= link_to 'Send Messages', new_user_message_path(current_user.login), { :title => "Send Messages" } %> |
-	<!-- % end %-->
+	<% end %>
  
 
 <%= link_to 'Training Videos', videos_path, { :title => "Training Videos" } %> |

@@ -2,7 +2,9 @@ class BattalionsController < ApplicationController
   # GET /battalions
   # GET /battalions.xml
   #before_filter :login_required
-  filter_resource_access
+  filter_resource_access :collection => [:all],
+  :additional_member => {:senior_leaders => :show}
+  
   
   def new
     @battalion = Battalion.new
@@ -110,6 +112,7 @@ class BattalionsController < ApplicationController
     @csm= @profiles.find_by_position('Command Sergeant Major')
     @frsa= @profiles.find_by_position('FRSA')
     @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
-    @senior_leader = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname")
+    @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname")
+    render :layout => "dashboard"
   end
 end
