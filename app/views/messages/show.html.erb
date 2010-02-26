@@ -1,12 +1,15 @@
 
-
+<p>
+  <strong>Sent On:</strong>
+  <%= @message.created_at.strftime("%B %d %Y") %>
+</p>
 <p>
   <strong>Subject:</strong>
-  <%= @message.body %>
+  <%= @message.subject %>
 </p>
 <p>
   <strong>Body:</strong>
-
+   <%= @message.body %>
 </p>
 
 

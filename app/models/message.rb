@@ -1,6 +1,5 @@
 class Message < ActiveRecord::Base
-  acts_as_textiled 
-  
+  acts_as_textiled :body
   belongs_to :users
   #validates_presence_of :bcc_email, :if => :cc_mail?
   

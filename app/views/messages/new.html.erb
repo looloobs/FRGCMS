@@ -1,5 +1,7 @@
 <div id="message">
 	
+<div class="right"><%= link_to "See Sent Messages", user_messages_path(current_user) %></div>
+	
 <% form_for [@message], :html => { :multipart => true } do |f| %>
 <%= error_messages_for :message %>
 
@@ -7,7 +9,7 @@
 <!--%= hidden_field_tag('message[replyto]', @replyto) % -->
 <%= hidden_field_tag('message[from_email]', @replyto) %>
 <%= hidden_field_tag('message[to_email]', @to) %>
-<!--<div class="right"><%= link_to "See Sent Messages", user_messages_path(current_user) %></div> -->
+
 <p>
 <h1>Send Message To: 
 <% if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader", "Battalion FRG Co-Leader","Rear-D Commander"].include?(@position) %>
@@ -22,8 +24,9 @@
 <p>To:<br /><%= f.text_field :cc_mail, :size => 50 %><br /> </p>
 <p>Attachment:<br /><%= f.file_field :attachment %><br /> </p>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
-<p>Message:<br /><%= f.text_area :body, :cols => 90, :rows => 20 %><br />
+<p>Message:<br /><%= textile_editor 'message', 'body', :cols => 90, :rows => 20 -%><br />
 </p>
+<%= textile_editor_initialize -%>
     <%= f.submit "Send" %>
 <% end %>
 </div>

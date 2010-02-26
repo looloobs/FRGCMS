@@ -8,11 +8,12 @@
 <% @messages.each do |message| %>
   <tr>
 
-    <td><b><%= link_to truncate(message.subject, :length => 20), user_message_path(current_user, message) %></b> -<%= truncate(message.body, :length => 80)%> <%=h message.created_at %></td>   
+    <td><b><%= link_to truncate(message.subject, :length => 20), user_message_path(current_user, message) %></b> </td>
+    <td><%= truncate(strip_tags(message.body), :length => 80)%> </td>   
+    <td><%= message.created_at.strftime("%B %d %Y") %></td> 
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New message', new_user_message_path(current_user) %>
