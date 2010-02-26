@@ -22,11 +22,9 @@ class MessagesController < ApplicationController
     @user = User.find_by_login(params[:user_id])
     @replyto = @user.email
     @to = @user.email
-    @bseniorleads=(@user.battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"]))
     @position = @user.position
     @battalion = @user.battalion
     @soldier = Soldier.all
-    @battalion_co = @user.battalion.users.find(:all, :conditions => ["position = ?",'Battalion FRG Co-Leader'])
     @attached = Company.find(:all, :conditions => ["attached_id = ?", @battalion])
     @attach_soldiers = Soldier.find(:all, :conditions => ["company_id = ?", @attached])
     if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader","Battalion FRG Co-Leader","Rear-D Commander"].include?(@position)
