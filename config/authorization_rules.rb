@@ -14,6 +14,7 @@ authorization do
   
   role :company do
     has_permission_on [:companies], :to => [:show, :edit, :update] 
+    has_permission_on [:platoons], :to => [:show, :edit, :update, :new, :create, :destroy] 
     has_permission_on [:messages], :to => [:new, :index, :show, :edit, :update] 
   end
   
