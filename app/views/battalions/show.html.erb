@@ -56,11 +56,13 @@ Add user below.<br />
 	<div class="form_bg">
 	<p><div id="form">
 		<strong> Battalion Commander </strong>
-		<% if  @profiles.battalion_commander.blank?  %>
-		<span class="red"><%= "- Inactive "%></span>
-		<% else %>
-		<%= "- Active "%>
-		<% end %>
+	    <% @profiles.battalion_commander.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
 	<br />
 		
 		<% if @profiles.battalion_commander.blank? %>
@@ -83,11 +85,13 @@ Add user below.<br />
 
 	<p><div id="form">
 		<strong> Command Sergeant Major </strong> 
-		<% if  @profiles.csm.nil?  %>
-		<span class="red"><%= "- Inactive "%></span>
-		<% else %>
-		<%= "- Active "%>
-		<% end %><br />
+		<% @profiles.csm.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
 		<% if @profiles.csm.blank? %>
 		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
 		  <%= f.error_messages %>
@@ -110,11 +114,13 @@ Add user below.<br />
 	<div id="form">
 		<p>
 		<strong>FRSA </strong>
-		<% if  @profiles.frsa.nil?  %>
-		<span class="red"><%= "- Inactive "%></span>
-		<% else %>
-		<%= "- Active "%>
-		<% end %><br />
+	    <% @profiles.frsa.each do |p| %>
+	    <% if p.active.blank? %>
+	    <span class="red"><%= "- Inactive "%></span>
+	    <% else %>
+	    <%= "- Active "%>
+	    <% end %>
+	    <% end %><br />
 		<% if @profiles.frsa.blank? %>
 		<% form_for :user, @user, :url => { :action => "create", :controller => "users"} do |f| %>
 		  <%= f.error_messages %>
