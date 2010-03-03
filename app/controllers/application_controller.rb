@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   # You can move this into a different controller, if you wish.  This module gives you the require_role helpers, and others.
   
   include ExceptionLoggable
-
+  include SslRequirement
+  
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
