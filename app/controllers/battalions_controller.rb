@@ -2,9 +2,9 @@ class BattalionsController < ApplicationController
   # GET /battalions
   # GET /battalions.xml
   #before_filter :login_required
-  if RAILS_ENV == 'production' 
-  ssl_required :index, :show, :new, :edit
-  end
+  #if RAILS_ENV == 'production' 
+  #ssl_required :index, :show, :new, :edit
+  #end
   filter_resource_access :collection => [:all],
   :additional_member => {:senior_leaders => :show}
   
