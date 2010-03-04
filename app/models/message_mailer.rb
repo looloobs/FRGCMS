@@ -32,7 +32,7 @@ class MessageMailer < ActionMailer::Base
           from message.to_email 
           #reply_to message.replyto
           subject message.subject
-          body :message => message
+          body message.body
           sent_on Time.now 
           content_type "text/html" 
            
