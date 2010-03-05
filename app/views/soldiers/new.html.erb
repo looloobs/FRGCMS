@@ -34,13 +34,16 @@
 <p>
     <%= f.label (:maritalstatus, "*Marital Status:") %>
     <%= f.select (:maritalstatus, [["Please Select", ""], ["Single", "Single"], ["Married", "Married"]], :onchange => "check_selected_value('soldier_maritalstatus');") %>
-	
+	<p>
 	<%= f.label (:anni_date, "If Married, Anniversary:") %>
 	<%= f.date_select (:anni_date, :order => [:month, :day, :year], :start_year => 1950, :include_blank => true) %>
+	 BE SURE TO FILL OUT THE ENTIRE DATE
+	</p>
 </p>
 <p>
   	<%= f.label (:birth_date, "Birthday:") %>
 	<%= f.date_select (:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
+	BE SURE TO FILL OUT THE ENTIRE DATE
 </p>	
 <p>
 	<%= f.label (:seniorleader, "*Are you a PLT SGT or above?") %>
@@ -115,7 +118,7 @@
 		    <%= primary_form.select(:relationship, [["Please Select", ""], ["Spouse", "Spouse"], ["Parents", "Parents"], ["Mother", "Mother"], ["Father", "Father"], ["Other", "Other"]]) %>
 			</p>
 			<p>
-		  	<%= primary_form.label(:birth_date, "Birthday:") %>
+		  	<%= primary_form.label(:birth_date, "Birthday:BE SURE TO FILL OUT THE ENTIRE DATE") %>
 			<%= primary_form.date_select(:birth_date, :order => [:month, :day, :year], :start_year => 1920) %>
 		    </p>
 			<p>
