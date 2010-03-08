@@ -2,6 +2,9 @@ class CompaniesController < ApplicationController
   #require_role "admin"
 #before_filter :login_required, :only =>  [ :show, :edit, :update ]
 #before_filter :company_required, :except => [:new, :create]
+if RAILS_ENV == 'production' 
+ssl_required :index, :show, :new, :edit, :create, :update
+end
 filter_resource_access
 
 

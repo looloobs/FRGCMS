@@ -1,6 +1,11 @@
 class PlatoonsController < ApplicationController
   # GET /platoons
   # GET /platoons.xml
+  if RAILS_ENV == 'production' 
+  ssl_required :index, :show, :new, :edit, :create, :update
+  end
+  filter_resource_access
+  
   def index
     @platoons = Platoon.all
 
@@ -55,10 +60,10 @@ class PlatoonsController < ApplicationController
       if @platoon.save
         flash[:notice] = 'Platoon was successfully created.'
         format.html { redirect_to battalion_company_path(@battalion, @company) }
-        format.xml  { render :xml => @platoon, :status => :created, :location => @platoon }
+        #format.xml  { render :xml => @platoon, :status => :created, :location => @platoon }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @platoon.errors, :status => :unprocessable_entity }
+        #format.xml  { render :xml => @platoon.errors, :status => :unprocessable_entity }
       end
     end
   end
