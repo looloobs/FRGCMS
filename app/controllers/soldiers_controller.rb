@@ -2,7 +2,7 @@ class SoldiersController < ApplicationController
   # GET /soldiers
   # GET /soldiers.xml
   if RAILS_ENV == 'production' 
-  ssl_required :index, :show, :new, :edit, :create, :update
+  ssl_required :index, :show, :new, :edit, :create, :update, :destroy
   end
   
   def index
