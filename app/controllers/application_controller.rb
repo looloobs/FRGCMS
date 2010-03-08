@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
   
   include ExceptionLoggable
   include SslRequirement
+  if RAILS_ENV == 'production' 
+  ssl_required :all
+  end
   
   helper :all # include all helpers, all the time
 
@@ -45,7 +48,16 @@ class ApplicationController < ActionController::Base
         if current_user
           store_location
           flash[:notice] = "You must be logged out to access this page"
-          redirect_to profile_url
+          redirect_to user_path(@current_user)
+          return false
+        end
+      end
+      
+      def require_no_user_activation
+        if current_user
+          store_location
+          flash[:notice] = "You can not activate a new account if you are logged in. Log out to activate a new account."
+          redirect_to user_path(@current_user)
           return false
         end
       end
