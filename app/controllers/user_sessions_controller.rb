@@ -1,5 +1,8 @@
 class UserSessionsController < ApplicationController
   #before_filter :require_no_user, :only => [:new, :create]
+  if RAILS_ENV == 'production' 
+  ssl_required :index, :show, :new, :edit, :create, :update
+  end
   before_filter :require_user, :only => :destroy
   
   def new
