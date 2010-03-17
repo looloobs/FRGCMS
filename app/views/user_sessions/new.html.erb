@@ -4,6 +4,7 @@
 <%= link_to image_tag("/images/logo2_small.png", :border=>0), '/' %>
 </div>
 <div id="logging">
+	<%= flash_messages %>
 <h1>Log in with your account</h1>
 <div id="form">
 	<div class="field_row">
@@ -20,7 +21,8 @@
 		  <%= f.submit "Login" %>
 		<% end %>		
 
-<%= flash_messages %>
+
+<%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
 	    </div>
 	</div>
   </div>

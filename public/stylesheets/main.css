@@ -48,6 +48,13 @@
 	 	width:1000px;
 	 	margin:0 auto;
 	}
+	.notice {
+		background: red;
+		padding: 5px;
+		width: 700px;
+		color:white;
+		font-style:bold;
+	}
 	/* Header styles */
 	#header {
 		background:#000;

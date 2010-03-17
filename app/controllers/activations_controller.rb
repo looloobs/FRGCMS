@@ -1,8 +1,8 @@
 class ActivationsController < ApplicationController
-    before_filter :require_no_user, :only => [:new, :create]
+    before_filter :require_no_user_activation, :only => [:new, :create]
 
     def new
-      @user = User.find_using_perishable_token(params[:activation_code], 1.week) || (raise Exception)
+      @user = User.find_using_perishable_token(params[:activation_code], 3.weeks) || (raise Exception)
       raise Exception if @user.active?
       
       render :layout => 'videos'

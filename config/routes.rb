@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :additionals
 
   map.resources :childrens
+  map.resources :password_resets
 
   map.resources :primaries
   #map.resources :battalions, :member => { :senior_leaders => :any }

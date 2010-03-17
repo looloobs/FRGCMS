@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
     c.validate_email_field = false
     
   end
+  acts_as_textiled :signature
   
   belongs_to :battalion
   belongs_to :company
@@ -42,7 +43,7 @@ class User < ActiveRecord::Base
   named_scope :other_user, :conditions =>{:position => 'Other'}
   #named_scope :active, :conditions => {:active => "1"}
   
-	attr_accessible :name, :login, :email, :password, :password_confirmation, :position, :battalion_id, :company_id, :platoon_id, :role 
+	attr_accessible :name, :login, :email, :password, :password_confirmation, :position, :battalion_id, :company_id, :platoon_id, :role, :signature 
     def active?
       active
     end
@@ -83,6 +84,10 @@ class User < ActiveRecord::Base
     def deliver_activation_confirmation!
         reset_perishable_token!
         NotifierMailer.deliver_activation_confirmation(self)
+    end
+    def deliver_password_reset_instructions!  
+      reset_perishable_token!  
+      Notifier.deliver_password_reset_instructions(self)  
     end
     
     def has_no_credentials?

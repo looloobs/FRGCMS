@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
   
   def new
     @user = User.find_by_login(params[:user_id])
+    @signature = @user.signature
     @replyto = @user.email
     @to = @user.email
     @position = @user.position

@@ -14,6 +14,15 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
+config.action_mailer.default_content_type = "text/html"
 config.action_mailer.raise_delivery_errors = true
 config.action_mailer.perform_deliveries = true
+config.action_mailer.smtp_settings = {
+  :address => "mail.blueboxgrid.com",
+  :port => 2500,
+  :authentication => :login,
+  :user_name => "admin@frgcms.com",
+  :password => "laurenrothlisberger"
+  }
 config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_url_options = { :host => "frgcms.com" }

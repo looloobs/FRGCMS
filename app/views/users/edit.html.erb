@@ -18,6 +18,10 @@
   <%= f.text_field :login %><br />
 </p>
 <p>
+  <%= f.label(:signature, "Signature Block:") %><br />
+  <%= f.text_area :signature %><br />
+</p>
+<p>
 Leave Password blank if you do not need to reset it.
   <%= f.label :password, "Set your password" %><br />
   <%= f.password_field :password %><br />

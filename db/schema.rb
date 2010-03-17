@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100226050031) do
+ActiveRecord::Schema.define(:version => 20100227013046) do
 
   create_table "accounts", :force => true do |t|
     t.datetime "created_at"
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(:version => 20100226050031) do
     t.boolean  "active"
     t.integer  "platoon_id"
     t.string   "role"
+    t.text     "signature"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

@@ -21,12 +21,16 @@
 <% end %>
 
 
+
 <p>To:<br /><%= f.text_field :cc_mail, :size => 50 %><br /> </p>
 <p>Attachment:<br /><%= f.file_field :attachment %><br /> </p>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
 <p>Message:<br /><%= textile_editor 'message', 'body', :cols => 90, :rows => 20 -%><br />
 </p>
 <%= textile_editor_initialize -%>
+<p><!-- %= @signature %-->
+<!-- %= link_to 'Edit My Signature', edit_user_path(current_user)%--><br /></p>
+
     <%= f.submit "Send" %>
 <% end %>
 </div>
