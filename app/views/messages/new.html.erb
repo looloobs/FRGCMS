@@ -72,7 +72,7 @@ Click on the box of any group you wish to receive your message. You can choose M
 </div>
 <% end %>
 
-<% else ["Admin"].include?(@position) %>
+<% else ["admin"].include?(@position) %>
 <%= check_box_tag ('message[bcc_email]', @allusers) %> <%= f.label :bcc_email, "All Users" %><br />
 <!--%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %--></h1>
 <% end %>
