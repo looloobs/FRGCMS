@@ -16,65 +16,12 @@
 Click on the box of any group you wish to receive your message. You can choose MULTIPLE BOXES. Be cautious not to duplicate recipients in your choices.
 </p>
 <% if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader", "Battalion FRG Co-Leader","Rear-D Commander"].include?(@position) %>
-<div id="message_receip_main">
-<p>
-<%= check_box_tag (:bcc_email, value = @bspouses) %> <%= f.label :bcc_email, "Battalion Spouses" %><br />
-<%= check_box_tag (:bcc_email, value = @bsoldiers) %> <%= f.label :bcc_email, "All Battalion Soldiers" %><br />
-<%= check_box_tag (:bcc_email, value = @bsoldierspouse) %> <%= f.label :bcc_email, "All Battalion Soldiers & Spouses" %><br />
-<%= check_box_tag (:bcc_email, value = @ballcontacts) %> <%= f.label :bcc_email, "All Battalion Contacts" %><br />
-<%= check_box_tag (:bcc_email, value = @bfrgleaders) %> <%= f.label :bcc_email, "All FRG Leaders" %><br />
-<%= check_box_tag (:bcc_email, value = @senior_spouse) %> <%= f.label :bcc_email, "Battalion Senior Spouses" %><br />
-<%= check_box_tag (:bcc_email, value = @attached_company) %> <%= f.label :bcc_email, "Attached Companies ONLY" %><br />
-</p>
-</div>
 
-<p>
-<% @company.each do |c| %>
-<div id="message_receip_add">
-<%= check_box_tag (:bcc_email, value = ((c.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, c.name + " Spouses" %><br />
+<%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @bnok], ["Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts], ["All FRG Leaders", @bfrgleaders], ["Senior Spouses", @senior_spouse], ["Attached Company(s) Only", @attached_company]]) %></h1><br />
 
-<%= check_box_tag (:bcc_email, value = ((c.soldiers.find(:all)).collect(&:email).select{|s| !s.blank?}.join(", "))) %> <%= f.label :bcc_email, c.name + " Soldiers" %><br />
+<% else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position) %>
 
-<%= check_box_tag (:bcc_email, value = ((c.soldiers)+(c.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, c.name + " Soldiers & Spouses" %><br />
-
-<%= check_box_tag (:bcc_email, value = ((c.soldiers)+(c.additionals)+(c.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, c.name + " All Contacts" %><br />
-</div>
-<% end %>
-</p>
-
-
-<!--%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @bnok], ["Spouses", @bspouses], ["Battalion Soldiers Only", @bsoldiers], ["Battalion Soldiers & Spouses", @bsoldierspouse], ["All Battalion Contacts", @ballcontacts], ["All FRG Leaders", @bfrgleaders], ["Senior Spouses", @senior_spouse], ["Attached Company(s) Only", @attached_company]]) %--></h1><br />
-
-<% elsif ["Company Commander","1st Sergeant","FRG Leader"].include?(@position) %>
-<div id="message_receip_main">
-<p>
-<%= check_box_tag (:bcc_email, value = @spouses) %> <%= f.label :bcc_email, "Company Spouses" %><br />
-<%= check_box_tag (:bcc_email, value = @soldiers) %> <%= f.label :bcc_email, "Company Soldiers" %><br />
-<%= check_box_tag (:bcc_email, value = @soldierspouse) %> <%= f.label :bcc_email, "Soldiers & Spouses" %><br />
-<%= check_box_tag (:bcc_email, value = @allcontacts) %> <%= f.label :bcc_email, "All Company Contacts" %><br />
-</p>
-</div>
-
-<% @company = @user.company %>
-<% @platoons = @user.company.platoons.find(:all, :order => "name") %>
-
-<% @platoons.each do |p| %>
-<div id="message_receip_add">
-<p>
-<%= check_box_tag (:bcc_email, value = p.soldiers.collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, p.name + " Soldiers" %><br />
-
-<%= check_box_tag (:bcc_email, value = (p.primaries.find(:all,:conditions => ["relationship = ? AND contacted = ?", 'Spouse', 'Yes'])).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, p.name + " Spouses" %><br />
-
-<%= check_box_tag (:bcc_email, value = ((p.soldiers + p.primaries.find(:all,:conditions => ["relationship = ? AND contacted = ?", 'Spouse', 'Yes'])).collect(&:email).select{|s| !s.blank?}.join(", "))) %> <%= f.label :bcc_email, p.name + " Soldiers & Spouses" %><br />
-
-<%= check_box_tag (:bcc_email, value = (p.soldiers + p.additionals + p.primaries.find(:all,:conditions => ["contacted = ?",'Yes'])).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, p.name + " All Contacts" %><br />
-</p>
-</div>
-<% end %>
-
-<% else ["Admin"].include?(@position) %>
-<%= check_box_tag (:bcc_email, @spouses) %> <%= f.label :bcc_email, "All Users" %><br />
-<!--%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %--></h1>
+<%= f.select(:bcc_email, [["Please Select", ""], ["All Next of Kin (Includes NOK Parents)", @nok], ["Spouses", @spouses], ["Soldiers Only", @soldiers], ["Soldiers & Spouses", @soldierspouse], ["All Company Contacts", @allcontacts]]) %></h1>
 <% end %>
 
 <div id="main_message">
