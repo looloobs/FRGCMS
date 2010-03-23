@@ -80,7 +80,7 @@ Rails::Initializer.run do |config|
   config.action_mailer.smtp_settings = {
     :address => "mail-gw.frgcms.com",
     :port => 25,
-    :domain => frgcms.com,
+    :domain => "frgcms.com",
     }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_url_options = { :host => "frgcms.com" }
