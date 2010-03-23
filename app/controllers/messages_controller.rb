@@ -25,11 +25,12 @@ class MessagesController < ApplicationController
     @to = @user.email
     @position = @user.position
     @battalion = @user.battalion
-    @company = @battalion.companies 
+ 
     @soldier = Soldier.all
     @attached = Company.find(:all, :conditions => ["attached_id = ?", @battalion])
     @attach_soldiers = Soldier.find(:all, :conditions => ["company_id = ?", @attached])
     if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader","Battalion FRG Co-Leader","Rear-D Commander"].include?(@position)
+      @company = @battalion.companies
       @bnok = (@user.battalion.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bspouses = (@user.battalion.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bsoldiers= (@user.battalion.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
@@ -44,8 +45,8 @@ class MessagesController < ApplicationController
       @soldiers= (@user.company.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
       @soldierspouse=((@user.company.soldiers)+(@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")
       @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).select{|s| !s.blank?}.join(", ")
-    else ["Admin"].include?(@position)
-      @allusers = (User.find(:all,:conditions => ["active = '1'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
+    else ["admin"].include?(@position)
+      @allusers = (User.find(:all,:conditions => ["active = ?", "1"])).collect(&:email).select{|s| !s.blank?}.join(", ")
     end 
     
     @message = Message.new
