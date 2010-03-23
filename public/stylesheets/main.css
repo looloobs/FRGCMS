@@ -33,7 +33,7 @@
 	img {
 		margin:3px 0 5px;
 	}
-	.right{
+	.right {
 		float:right;
 	}
 	#indent {
@@ -286,6 +286,25 @@
 		font-family: Arial, "MS Verdana", sans-serif;
 		font-size: 16px;
 		background:#cdfcbf;	
+	}
+	#main_message {
+		clear:both;
+		padding-top:10px;
+	}
+	#message_receip_main {
+		background:#cdfcbf;
+		font-family: Arial, "MS Verdana", sans-serif;
+		font-size: 14px;
+		margin:3px;
+		padding:10px;
+		float:left;
+	}
+	#message_receip_add {
+		margin:3px;
+		padding:10px;
+		font-family: Arial, "MS Verdana", sans-serif;
+		font-size: 12px;
+		float:left;
 	}
 	/* 'widths' sub menu */
 		#layoutdims {

@@ -25,6 +25,7 @@ class MessagesController < ApplicationController
     @to = @user.email
     @position = @user.position
     @battalion = @user.battalion
+    @company = @battalion.companies 
     @soldier = Soldier.all
     @attached = Company.find(:all, :conditions => ["attached_id = ?", @battalion])
     @attach_soldiers = Soldier.find(:all, :conditions => ["company_id = ?", @attached])
@@ -37,12 +38,14 @@ class MessagesController < ApplicationController
       @senior_spouse = (@user.battalion.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"])).collect(&:email).select{|s| !s.blank?}.join(", ")
       @bfrgleaders=(@user.battalion.users.find(:all, :conditions => ["position = ?",'FRG Leader'])+(@user.battalion.users.find(:all, :conditions => ["position = ?",'Battalion FRG Co-Leader']))+(@user.battalion.users.find(:all, :conditions => ["position = ?",'Battalion FRG Leader']))).collect(&:email).select{|s| !s.blank?}.join(", ")
       @attached_company=(@attach_soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
-    else ["Company Commander","1st Sergeant","FRG Leader"].include?(@position)
+    elsif ["Company Commander","1st Sergeant","FRG Leader"].include?(@position)
       @nok = (@user.company.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
       @spouses = (@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
       @soldiers= (@user.company.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
       @soldierspouse=((@user.company.soldiers)+(@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")
       @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).select{|s| !s.blank?}.join(", ")
+    else ["Admin"].include?(@position)
+      @allusers = (User.find(:all,:conditions => ["active = '1'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
     end 
     
     @message = Message.new

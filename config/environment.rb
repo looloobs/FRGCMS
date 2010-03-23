@@ -78,8 +78,9 @@ Rails::Initializer.run do |config|
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    :address => "mail.blueboxgrid.com",
-    :port => 2500,
+    :address => "mail-gw.frgcms.com",
+    :port => 25,
+    :domain => "frgcms.com",
     :authentication => :login,
     :user_name => "admin@frgcms.com",
     :password => "laurenrothlisberger"

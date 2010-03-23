@@ -39,7 +39,7 @@ filter_resource_access
     @fs = @company.users.find_by_position('1st Sergeant')
     @frg = @company.users.find_by_position('FRG Leader')
     @soldiers = @company.soldiers.search(params[:search])
-    @primary = @company.primaries.find(:all,:conditions => ["relationship = 'Spouse'"])
+    @primary = @company.primaries.spouses
     @kid = @company.kids
  
     render :layout => "dashboard"

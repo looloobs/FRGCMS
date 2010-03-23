@@ -31,7 +31,7 @@ class Soldier < ActiveRecord::Base
   
   def self.search(search)
     if search
-      find(:all, :joins => [:primaries, :additionals], :conditions => ['soldiers.email LIKE ? OR primaries.email LIKE ? OR soldiers.firstname LIKE? OR primaries.firstname LIKE? OR soldiers.lastname LIKE? OR primaries.lastname LIKE? OR additionals.email LIKE?', "%#{[search]}%", "%#{[search]}%", "%#{[search]}%", "%#{[search]}%", "%#{[search]}%", "%#{[search]}%", "%#{[search]}%"], :order => 'soldiers.lastname')
+      find(:all, :conditions => ['soldiers.email LIKE ?', "#{[search]}"], :order => 'soldiers.lastname')
     else
       find(:all, :order => 'lastname')
     end

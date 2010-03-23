@@ -3,8 +3,8 @@ class Platoon < ActiveRecord::Base
   belongs_to :battalion
   has_many :soldiers
   has_many :users
-  
-
+  has_many :primaries, :through => :soldiers
+  has_many :additionals, :through => :soldiers
   
   def active?
     active

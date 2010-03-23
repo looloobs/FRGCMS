@@ -9,13 +9,5 @@ class Primary < ActiveRecord::Base
 
   named_scope :spouses, :conditions =>{:relationship => 'Spouse'}
 
-def self.search(search)
-   if search
-     find(:all, :conditions => ['email LIKE ? OR lastname LIKE ? OR firstname LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"])
-   else
-     find(:all, :order => 'lastname')
-   end
- end
-
 
 end

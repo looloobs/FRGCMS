@@ -50,6 +50,7 @@ class SoldiersController < ApplicationController
   def edit
     @soldier = Soldier.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
+    @all_companies = @battalion.companies
     @company = Company.find(params[:company_id])
     @primarys = @soldier.primaries
     @addi = @soldier.additionals
