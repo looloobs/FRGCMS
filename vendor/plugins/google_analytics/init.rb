@@ -1,7 +1,7 @@
-require 'google_analytics'
+#require 'google_analytics'
 
 # mandatory: uncomment this line and fill in your own Google Analytics ID
-GoogleAnalytics.id = "UA-16354882-1"
+#GoogleAnalytics.id = "UA-16354882-1"
 
 # optional: uncomment this line if you want the plugin to be enabled in 
 # development mode
