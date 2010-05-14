@@ -5,7 +5,7 @@ class BattalionsController < ApplicationController
   if RAILS_ENV == 'production' 
   ssl_required :index, :show, :new, :edit, :create, :update
   end
-  filter_resource_access :collection => [:all],
+  filter_access_to :collection => [:all],
   :additional_member => {:senior_leaders => :show}
   
   

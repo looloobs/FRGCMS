@@ -4,6 +4,7 @@ class SoldiersController < ApplicationController
   if RAILS_ENV == 'production' 
   ssl_required :index, :show, :new, :edit, :create, :update, :destroy
   end
+  filter_resource_access
   
   def index
     @soldiers = Soldier.find(:all, :conditions => ['lastname LIKE ?', "%#{params[:search]}%"])
