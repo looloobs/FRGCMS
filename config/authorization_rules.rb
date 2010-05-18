@@ -12,6 +12,7 @@ authorization do
     has_permission_on [:soldiers], :to => [:show, :edit, :update, :new, :create, :destroy] do
       if_attribute :battalion_id => is {user.battalion.id}
     end
+    has_permission_on [:soldiers], :to => [:new, :create]
     has_permission_on [:messages], :to => [:new, :create, :index, :show, :edit, :update]
     has_permission_on [:platoons], :to => [:show, :edit, :update, :new, :create, :destroy]
 
@@ -21,9 +22,10 @@ authorization do
     has_permission_on [:companies], :to => [:show, :edit, :update] do
       if_attribute :id => is {user.company.id}
     end
-    has_permission_on [:soldiers], :to => [:show, :edit, :update, :new, :create, :destroy] do
+    has_permission_on [:soldiers], :to => [:show, :edit, :update, :destroy] do
       if_attribute :company_id => is {user.company.id}
     end
+    has_permission_on [:soldiers], :to => [:new, :create]
     has_permission_on [:platoons], :to => [:show, :edit, :update, :new, :create, :destroy] 
     has_permission_on [:messages], :to => [:new, :index, :show, :edit, :update] 
       
