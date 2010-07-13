@@ -33,9 +33,10 @@ class MessagesController < ApplicationController
     
     @attach_platoon = Platoon.find(:all, :conditions => ["attached_id = ?", @company])
     @attach_platoon.each do |ap|
-    @attached_platoon_soldier = Soldier.find(:all, :conditions => ['platoon_id = ?', ap])
+      @attached_platoon_soldier = Soldier.find(:all, :conditions => ['platoon_id = ?', ap])
+      @attached_platoon_primaries = Soldier.find(:all, :select => 'primaries.*', :joins => :primaries, :conditions => ['platoon_id = ? AND relationship = ? AND contacted = ?','ap', 'Spouse', 'Yes'])
     end
-    @attached_platoon_primaries = Soldier.find(:all, :select => 'primaries.*', :joins => :primaries, :conditions => ['platoon_id = ? AND relationship = ? AND contacted = ?','spouse', 'Yes', @attach_platoon])
+    
     
     
 
