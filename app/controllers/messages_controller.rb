@@ -25,10 +25,18 @@ class MessagesController < ApplicationController
     @to = @user.email
     @position = @user.position
     @battalion = @user.battalion
+    @company = @user.company
  
     @soldier = Soldier.all
     @attached = Company.find(:all, :conditions => ["attached_id = ?", @battalion])
     @attach_soldiers = Soldier.find(:all, :conditions => ["company_id = ?", @attached])
+    
+    @attach_platoon = Platoon.find(:all, :conditions => ["attached_id = ?", @company])
+    @attached_platoon_soldier = Soldier.find(:all, :joins => :primaries, :conditions => ['platoon_id = ?', @attach_platoon])
+    @attached_platoon_primaries = Soldier.find(:all, :select => 'primaries.*', :joins => :primaries, :conditions => ['platoon_id = ? AND relationship = ? AND contacted = ?','spouse', 'Yes', @attach_platoon])
+    
+    
+
     if ["Battalion Commander","Command Sergeant Major","FRSA","Battalion FRG Leader","Battalion FRG Co-Leader","Rear-D Commander"].include?(@position)
       @company = @battalion.companies
       @bnok = (@user.battalion.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
@@ -41,10 +49,10 @@ class MessagesController < ApplicationController
       @attached_company=(@attach_soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
     elsif ["Company Commander","1st Sergeant","FRG Leader"].include?(@position)
       @nok = (@user.company.primaries).collect(&:email).select{|s| !s.blank?}.join(", ")
-      @spouses = (@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])).collect(&:email).select{|s| !s.blank?}.join(", ")
-      @soldiers= (@user.company.soldiers).collect(&:email).select{|s| !s.blank?}.join(", ")
-      @soldierspouse=((@user.company.soldiers)+(@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")
-      @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @spouses = (@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"])+(@attached_platoon_primaries)).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @soldiers= ((@user.company.soldiers)+(@attached_platoon_soldier)).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @soldierspouse=((@user.company.soldiers)+(@user.company.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))+(@attached_platoon_soldier)+(@attached_platoon_primaries)).collect(&:email).select{|s| !s.blank?}.join(", ")
+      @allcontacts=((@user.company.soldiers)+(@user.company.primaries)+(@user.company.additionals)+(@attached_platoon_soldier)+(@attached_platoon_primaries)).collect(&:email).select{|s| !s.blank?}.join(", ")
     else ["admin"].include?(@position)
       @allusers = (User.find(:all,:conditions => ["active = ?", "1"])).collect(&:email).select{|s| !s.blank?}.join(", ")
     end 
