@@ -40,7 +40,8 @@ filter_resource_access
     @frg = @company.users.find_by_position('FRG Leader')
     @soldiers = @company.soldiers.search(params[:search])
     @primary = @company.primaries.spouses
-    @kid = Kid.find(:all, :conditions => ['soldier_id = ?', @soldiers.id]).size
+   
+    @kid = (@company.soldiers.find(:all, :select => 'kids.*', :joins => [:kids]))
  
     render :layout => "dashboard"
   end
