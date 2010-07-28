@@ -5,8 +5,7 @@ class CompaniesController < ApplicationController
 if RAILS_ENV == 'production' 
 ssl_required :index, :show, :new, :edit, :create, :update
 end
-filter_resource_access
-
+filter_access_to :collection => [:all]
 
   def user
     @user = User.find(session[:user_id])
@@ -111,5 +110,19 @@ filter_resource_access
       format.xml  { head :ok }
     end
   end
-  
+  def company_social_roster
+    @company = Company.find(params[:id])
+    #@battalion = Battalion.find(params[:battalion_id])
+    @platoon = @company.platoons.find(:all, :order => "name")
+    @attached = Platoon.all(:conditions => ["attached_id = ?", @company.id]) 
+    @cc = @company.users.find_by_position('Company Commander')
+    @fs = @company.users.find_by_position('1st Sergeant')
+    @frg = @company.users.find_by_position('FRG Leader')
+    @soldiers = @company.soldiers.search(params[:search])
+    @primary = @company.primaries.spouses
+    @kid = (@company.soldiers.find(:all, :select => 'kids.*', :joins => [:kids]))
+    @coffee = (@company.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"]))
+    
+    render :layout => "dashboard"
+  end
 end

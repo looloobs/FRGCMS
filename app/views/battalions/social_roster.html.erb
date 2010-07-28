@@ -1,0 +1,68 @@
+<div id="battalion_show">
+
+<h1><%= @battalion.name %><br /></h1>
+<h2><p><%= @battalion.unit %><br /></p>
+<%= @battalion.installation %> </h2><br />
+<div id="battalion_show_team">
+BC: LTC 
+<% if @profiles.battalion_commander.nil? %>
+Add user below.<br />	
+<% else %>					
+<%= @bc.name %><br />
+<% end %>
+CSM: CSM 
+<% if @profiles.csm.nil? %>
+Add user below.
+<% else %>					
+<%= @csm.name %><br />
+<% end %>
+FRSA:
+<% if @profiles.frsa.nil? %>
+Add user below.
+<% else %>					
+<%= @frsa.name %><br />
+<% end %>
+</div>
+<br />
+
+<% content_for :column do -%>
+<div id="battalion_show_sidebar">
+
+	<% @company_list.each do |c| %>
+	  	<% if c.users.company_commanders.blank? || c.users.first_sg.blank? || c.users.frg.blank? %>
+		<p><%= c.name + " is missing key admin, please register below to access this Company."%></p>
+		<% else %>
+	    <p><%= link_to c.name, battalion_company_path(@battalion, c) %></p>	
+	 	<% end %>
+	<% end %>
+	
+<div class="red">Attached Units: </div>
+	<% @attached.each do |a| %>
+	  
+	    <p><%= link_to a.name, battalion_company_path(a.battalion_id, a) %></p>
+
+	 
+	<% end %>
+
+<br />
+
+
+<% end -%>
+</div>
+<% content_for :dashboard do -%>
+
+<div id="bc_box">
+	<% @coffee.each do |coffee| %>
+	<div id="bc_focus">
+	  <div class="right">
+	   Name: <%=h coffee.firstname %> <%=h coffee.lastname %>
+	   Email: <%=h coffee.email %> <br />
+	   Phone: <%=h coffee.cellphone %><br />
+	  </div>
+	</div>
+	<% end %>
+
+
+<% end -%>
+
+

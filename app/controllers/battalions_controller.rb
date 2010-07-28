@@ -6,7 +6,8 @@ class BattalionsController < ApplicationController
   ssl_required :index, :show, :new, :edit, :create, :update
   end
   filter_access_to :collection => [:all],
-  :additional_member => {:senior_leaders => :show}
+  :additional_member => {:senior_leaders => :show},
+  :additional_member => {:social_roster => :show}
   
   
   def new
@@ -39,6 +40,7 @@ class BattalionsController < ApplicationController
     @frsa= @profiles.find_by_position('FRSA')
     @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
     @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname") 
+    @coffee = (@battalion.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"])).collect(&:email).select{|s| !s.blank?}.join(", ")
     
     render :layout => "dashboard"
 
@@ -116,6 +118,25 @@ class BattalionsController < ApplicationController
     @frsa= @profiles.find_by_position('FRSA')
     @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
     @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname")
+    render :layout => "dashboard"
+  end
+  def social_roster
+    @user = User.new
+    #role = @user.roles.build(:user => @user)
+    @battalion = Battalion.find(params[:id])
+    @company_list = @battalion.companies.find(:all, :order => "name") 
+    @attached = Company.all(:conditions => ["attached_id = ?", @battalion.id]) 
+    @comp = @battalion.companies
+    @profiles = @battalion.users
+    #@position = Position.all
+    #@company_user = @company.users
+    @bc= @profiles.find_by_position('Battalion Commander')
+    @csm= @profiles.find_by_position('Command Sergeant Major')
+    @frsa= @profiles.find_by_position('FRSA')
+    @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
+    @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname")
+    @coffee = (@battalion.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"]))
+    
     render :layout => "dashboard"
   end
 end

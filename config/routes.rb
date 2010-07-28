@@ -30,10 +30,12 @@ ActionController::Routing::Routes.draw do |map|
   #map.resource :profile, :controller => "users" 
   
   map.resources :battalions, :member => { :senior_leaders => :any } do |battalion| 
+  map.resources :battalions, :member => { :social_roster => :any } do |battalion|
     
     battalion.resources :companies
     battalion.resources :soldiers
     battalion.resources :companies do |company|
+      
       company.resources :users
       company.resources :soldiers
       company.resources :primaries
@@ -41,9 +43,14 @@ ActionController::Routing::Routes.draw do |map|
       company.resources :soldiers do |soldier|
           soldier.resources :additionals
         end
-  end
+    end
 end
-
+end
+  map.resources :companies, :member => { :company_social_roster => :any } do |company|
+    company.resources :users
+    company.resources :soldiers
+    company.resources :primaries
+  end
   
   map.connect "logged_exceptions/:action/:id", :controller => "logged_exceptions"
   map.resources :logged_exceptions

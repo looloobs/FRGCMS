@@ -1,7 +1,7 @@
 authorization do
 
   role :admin do
-    has_permission_on [:battalions, :companies, :platoons, :messages], :to => [:index, :show, :new, :create, :edit, :update, :destroy] 
+    has_permission_on [:battalions, :companies, :platoons, :messages,:soldiers], :to => [:index, :show, :new, :create, :edit, :update, :destroy] 
   end
   
   role :battalion do

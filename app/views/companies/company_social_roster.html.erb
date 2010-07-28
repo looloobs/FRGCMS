@@ -1,0 +1,39 @@
+
+<div id="company_show">
+<!--% if current_user.company.id == @company.id or (current_user.company_id == nil and current_user.battalion.id == @battalion.id) %-->
+<h1><%=h @company.nickname %></h1>
+
+<div id="battalion_show_team">
+  <% if @cc.blank? %>
+  CC: User Not Active<br />
+  <% else %>
+  <b>Commander:</b> <%=h @cc.name %><br />
+  <% end %>
+  <% if @fs.blank? %>
+  1SG: User Not Active<br />
+  <% else %>
+  <b>1SG:</b> <%=h @fs.name %><br />
+  <% end %>
+  <% if @frg.blank? %>
+  FRG Leader: User Not Active<br />
+  <% else %>
+  <b>FRG Leader:</b> <%=h @frg.name %><br />
+  <% end %>
+</div>
+</div>
+
+
+
+<% content_for :dashboard do -%>
+
+<div id="bc_box">
+	<% @coffee.each do |coffee| %>
+	<div id="bc_focus">
+	  <div class="right">
+	   Name: <%=h coffee.firstname %> <%=h coffee.lastname %>
+	   Email: <%=h coffee.email %> <br />
+	   Phone: <%=h coffee.cellphone %><br />
+	  </div>
+	</div>
+	<% end %>
+<% end %>

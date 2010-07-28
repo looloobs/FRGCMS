@@ -26,6 +26,11 @@
 	.red {
 		color:red;
 	}
+	.green-highlight a{
+		background:#cdfcbf;
+		text-decoration:none;
+		color:black;
+	}
 	p {
 		margin:.4em 0 .8em 0;
 		padding:0;
@@ -474,6 +479,7 @@
 	}
 	#battalion_show_team {
 		margin-left:10px;
+		margin-bottom:15px;
 		padding:3px;
 		background:#cdfcbf;
 		width:300px;
