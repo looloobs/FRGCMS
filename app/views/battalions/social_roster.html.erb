@@ -50,15 +50,13 @@ Add user below.
 <% end -%>
 </div>
 <% content_for :dashboard do -%>
-
+To send an email to this group go to "Send Messages" and choose "Battalion Senior Spouses" from the green box.
 <div id="bc_box">
 	<% @coffee.each do |coffee| %>
 	<div id="bc_focus">
-	  <div class="right">
-	   Name: <%=h coffee.firstname %> <%=h coffee.lastname %>
+	   Name: <%=h coffee.firstname %> <%=h coffee.lastname %><br />
 	   Email: <%=h coffee.email %> <br />
 	   Phone: <%=h coffee.cellphone %><br />
-	  </div>
 	</div>
 	<% end %>
 
