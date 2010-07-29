@@ -121,7 +121,7 @@ filter_access_to :collection => [:all]
     @soldiers = @company.soldiers.search(params[:search])
     @primary = @company.primaries.spouses
     @kid = (@company.soldiers.find(:all, :select => 'kids.*', :joins => [:kids]))
-    @coffee = (@company.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"]))
+    @coffee = (@company.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["rank IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) and primaries.relationship = ?", 'SFC','MSG','1SG','SGM','CSM', 'WO1','CW2','CW3','CW4','CW5','2LT','1LT','CPT','MAJ','LTC','COL', "Spouse"]))
     
     render :layout => "dashboard"
   end
