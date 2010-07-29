@@ -135,7 +135,7 @@ class BattalionsController < ApplicationController
     @frsa= @profiles.find_by_position('FRSA')
     @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
     @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname")
-    @coffee = (@battalion.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"]))
+    @coffee = (@battalion.soldiers.find(:all, :order =>'primaries.lastname', :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"]))
     
     render :layout => "dashboard"
   end
