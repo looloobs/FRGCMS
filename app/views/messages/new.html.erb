@@ -39,7 +39,7 @@ Click on the box of any group you wish to receive your message. You can choose M
 
 <%= check_box_tag ('message[bcc_email]', value = ((c.soldiers)+(c.additionals)+(c.primaries.find(:all,:conditions => ["relationship = 'Spouse' AND contacted = 'Yes'"]))).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, c.name + " All Contacts" %><br />
 
-<%= check_box_tag ('message[bcc_email]', value = (c.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"])).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, c.name + " Senior Spouses" %><br />
+<%= check_box_tag ('message[bcc_email]', value = (c.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["rank IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) and primaries.relationship = ?", 'SFC','MSG','1SG','SGM','CSM', 'WO1','CW2','CW3','CW4','CW5','2LT','1LT','CPT','MAJ','LTC','COL', "Spouse"])).collect(&:email).select{|s| !s.blank?}.join(", ")) %> <%= f.label :bcc_email, c.name + " Senior Spouses" %><br />
 </div>
 <% end %>
 </p>

@@ -19,8 +19,7 @@ class MessagesController < ApplicationController
   end
   
   def new
-    @user = User.find_by_login(params[:user_id])
-    @signature = @user.signature
+    @user = current_user
     @replyto = @user.email
     @to = @user.email
     @position = @user.position
@@ -66,7 +65,7 @@ class MessagesController < ApplicationController
    end
     
   def create
-    @user = current_user.login
+    @user = current_user
     @message = Message.new(params[:message])
     #@user = User.find_by_login(params[:user_id])
     #@primary= @user.company.primaries
@@ -74,7 +73,7 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
             flash[:notice] = 'Your Message was Sent.'
-            format.html { redirect_to user_messages_path(current_user.login)}
+            format.html { redirect_to user_messages_path(current_user)}
             
           else
             format.html { render :action => "new" }
