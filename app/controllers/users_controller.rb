@@ -58,6 +58,11 @@ class UsersController < ApplicationController
       render :action => :edit
     end
   end
-  
+  def destroy
+    @user = User.find(params[:id])# makes our views "cleaner" and more consistent
+    @user.destroy
+
+    redirect_to :back
+  end
 
 end

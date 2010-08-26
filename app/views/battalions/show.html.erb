@@ -79,7 +79,7 @@ Add user below.<br />
 				Name: <%= h(u.name) %><br />
 				Email:<%= h(u.email)%><br />
 				<%= link_to 'Edit', edit_user_path(u) %>
-				
+				<%= link_to image_tag("../images/buttons/delete.png", :border=>0), user_path(u), :confirm => 'Are you sure?', :method => :delete %> Delete this User.
 	    <% end %>
 	  <% end %>
 	</div>
@@ -108,6 +108,7 @@ Add user below.<br />
 				Name: <%= h(u.name) %><br />
 				Email:<%= h(u.email)%><br />
 				<%= link_to 'Edit', edit_user_path(u) %>
+				<%= link_to image_tag("../images/buttons/delete.png", :border=>0), user_path(u), :confirm => 'Are you sure?', :method => :delete %> Delete this User.
 	    <% end %>
 	  <% end %>
 	</div>

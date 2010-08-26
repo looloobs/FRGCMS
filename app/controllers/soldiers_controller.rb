@@ -85,6 +85,7 @@ class SoldiersController < ApplicationController
     @soldier = Soldier.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
     @company = Company.find(params[:company_id])
+    @all_companies = @battalion.companies
     @frg = @company.users.find_by_position('FRG Leader')
     @platoon = @company.platoons
     respond_to do |format|
@@ -93,7 +94,7 @@ class SoldiersController < ApplicationController
         format.html { redirect_to battalion_company_soldier_path(@battalion, @company, @soldier)}
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to edit_battalion_company_soldier_path(@battalion, @company, @soldier) }
         format.xml  { render :xml => @soldier.errors, :status => :unprocessable_entity }
       end
     end
