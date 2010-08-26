@@ -19,6 +19,7 @@ Click on the box of any group you wish to receive your message. You can choose M
 <div id="message_receip_main">
 <p>
 <%= check_box_tag ('message[bcc_email]', value = @bspouses) %> <%= f.label :bcc_email, "Battalion Spouses" %><br />
+<%= check_box_tag ('message[bcc_email]', value = @bnok) %> <%= f.label :bcc_email, "Battalion Next of Kin" %><br />
 <%= check_box_tag ('message[bcc_email]', value = @bsoldiers) %> <%= f.label :bcc_email, "All Battalion Soldiers" %><br />
 <%= check_box_tag ('message[bcc_email]', value = @bsoldierspouse) %> <%= f.label :bcc_email, "All Battalion Soldiers & Spouses" %><br />
 <%= check_box_tag ('message[bcc_email]', value = @ballcontacts) %> <%= f.label :bcc_email, "All Battalion Contacts" %><br />
@@ -52,6 +53,7 @@ Click on the box of any group you wish to receive your message. You can choose M
 <p>
 <%= check_box_tag ('message[bcc_email]', value = @spouses) %> <%= f.label :bcc_email, "Company Spouses" %><br />
 <%= check_box_tag ('message[bcc_email]', value = @soldiers) %> <%= f.label :bcc_email, "Company Soldiers" %><br />
+<%= check_box_tag ('message[bcc_email]', value = @nok) %> <%= f.label :bcc_email, "Next of Kin" %><br />
 <%= check_box_tag ('message[bcc_email]', value = @soldierspouse) %> <%= f.label :bcc_email, "Soldiers & Spouses" %><br />
 <%= check_box_tag ('message[bcc_email]', value = @allcontacts) %> <%= f.label :bcc_email, "All Company Contacts" %><br />
 </p>
@@ -80,9 +82,6 @@ Click on the box of any group you wish to receive your message. You can choose M
 <% end %>
 
 <div id="main_message">
-<% @attached_platoon_primaries.each do |app| %>
-<%= app.email %>
-<% end %>
 <p>To:<br /><%= f.text_field :cc_mail, :size => 50 %><br /> </p>
 <p>Attachment:<br /><%= f.file_field :attachment %><br /> </p>
 <p>Subject:<br /><%= f.text_field :subject, :size => 90 %><br /> </p>  
