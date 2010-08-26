@@ -8,7 +8,8 @@ class SoldiersController < ApplicationController
   
   def index
     @soldiers = Soldier.find(:all, :conditions => ['lastname LIKE ?', "%#{params[:search]}%"])
-    
+    @battalion = Battalion.find(params[:battalion_id])
+    @joes = Soldier.find(:all, :conditions => ['battalion_id = ?', @battalion.id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @soldiers }

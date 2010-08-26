@@ -7,7 +7,7 @@ xml.Workbook({
   'xmlns:ss'   => "urn:schemas-microsoft-com:office:spreadsheet" 
   }) do
 
-  xml.Worksheet 'ss:Name' => 'IRIS' do
+  xml.Worksheet 'ss:Name' => 'Battalion Roster' do
     xml.Table do
 
       # Header
@@ -41,7 +41,7 @@ xml.Workbook({
       end
 
       # Rows
-      for soldier in @soldiers
+      for soldier in @joes
         xml.Row do
             xml.Cell { xml.Data soldier.firstname, 'ss:Type' => 'String' }
             xml.Cell { xml.Data soldier.lastname, 'ss:Type' => 'String' }

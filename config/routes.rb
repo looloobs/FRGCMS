@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :user_session
   #map.resource :profile, :controller => "users" 
+  map.connect '/battalions/excel', :controller => 'battalions', :action => 'excel'
   
   map.resources :battalions, :member => { :senior_leaders => :any } do |battalion| 
   map.resources :battalions, :member => { :social_roster => :any } do |battalion|

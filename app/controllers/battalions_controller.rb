@@ -41,10 +41,10 @@ class BattalionsController < ApplicationController
     @cc = @profiles.find(:all, :conditions => ["position = ?", "Company Commander"])
     @soldier = @battalion.soldiers.find(:all, :conditions => ["seniorleader = ?", "Yes"], :order => "lastname") 
     @coffee = (@battalion.soldiers.find(:all, :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"])).collect(&:email).select{|s| !s.blank?}.join(", ")
-    
+    @battalion = Battalion.find(params[:id])
+    @joes = @battalion.soldiers
     render :layout => "dashboard"
 
-    
   end
 
   # GET /battalions/new
@@ -138,5 +138,12 @@ class BattalionsController < ApplicationController
     @coffee = (@battalion.soldiers.find(:all, :order =>'primaries.lastname', :select => 'primaries.*', :joins => [:primaries], :conditions => ["seniorleader = ? and primaries.relationship = ?", "Yes", "Spouse"]))
     
     render :layout => "dashboard"
+  end
+  def export
+    @battalion = Battalion.find(params[:id])
+    @joes = @battalion.soldiers
+    respond_to do |format|
+      format.xls  { render :xls => @joes }
+    end
   end
 end
