@@ -94,7 +94,7 @@ class SoldiersController < ApplicationController
         format.html { redirect_to battalion_company_soldier_path(@battalion, @company, @soldier)}
         format.xml  { head :ok }
       else
-        format.html { redirect_to :action => "edit"  }
+        format.html { render :action => "edit"  }
         format.xml  { render :xml => @soldier.errors, :status => :unprocessable_entity }
       end
     end
