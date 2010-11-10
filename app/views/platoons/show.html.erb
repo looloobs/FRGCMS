@@ -44,7 +44,7 @@
 					<%= "- Active "%>
 					<% end %><br />
 				Email: <%= h(@poc.email)%><br />
-				<%= link_to image_tag("../images/buttons/delete.png", :border=>0), user_path(@poc.id), :confirm => 'Are you sure?', :method => :delete %> Delete this User and Add a New One.
+				<%= link_to image_tag("../images/buttons/delete.png", :border=>0), user_path(@poc), :confirm => 'Are you sure?', :method => :delete %> Delete this User and Add a New One.
 	  <% end %></p>
 
 </div>
