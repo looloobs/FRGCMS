@@ -18,14 +18,14 @@ class PlatoonsController < ApplicationController
   # GET /platoons/1
   # GET /platoons/1.xml
   def show
+    @company = Company.find(params[:company_id])
     @platoon = Platoon.find(params[:id])
     @battalion = Battalion.find(params[:battalion_id])
-    @company = Company.find(params[:company_id])
     @poc = @platoon.users.find_by_position('POC')
     @cc = @company.users.find_by_position('Company Commander')
     @fs = @company.users.find_by_position('1st Sergeant')
     @frg = @company.users.find_by_position('FRG Leader')
-    @soldiers = @platoon.soldiers.search params[:search]
+    @soldiers = Soldier.find(:all, :conditions => ["platoon_id = ? and company_id = ?", @platoon.id, @company.id])
     render :layout => "dashboard"
   end
 

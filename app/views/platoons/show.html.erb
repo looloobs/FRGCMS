@@ -44,12 +44,12 @@
 					<%= "- Active "%>
 					<% end %><br />
 				Email: <%= h(@poc.email)%><br />
-				<%= link_to 'Change POC for '+ @platoon.name, edit_user_path(@poc) %>
+				<%= link_to image_tag("../images/buttons/delete.png", :border=>0), user_path(@poc.id), :confirm => 'Are you sure?', :method => :delete %> Delete this User and Add a New One.
 	  <% end %></p>
 
 </div>
 <% end -%>
-<% if current_user.role == 'admin' or 'company' or 'battalion'%>
+<% if current_user.role == 'admin' or 'company' or 'battalion' or 'poc'%>
 <% content_for :dashboard do -%>
 <div id="form">
 	
